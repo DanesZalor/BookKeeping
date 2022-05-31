@@ -19,7 +19,7 @@ const AmountInput = function (initialAmount = 0) {
     let THIS = new Component('td', {
         className: "AmountInput",
         isDebit: oldAmount >= 0,
-        innerHTML: `<input class="AmountInput_input" placeholder="amount" 
+        innerHTML: `<input class="AmountInput_input" placeholder="0" 
         style="text-align:right;" 
         value=${initialAmount}></input>`,
     });
@@ -31,7 +31,9 @@ const AmountInput = function (initialAmount = 0) {
         if (!((event.key >= '0' && event.key <= '9') || event.key == '.')) {
             event.preventDefault();
 
-            if (event.key == '-') THIS.isDebit = !THIS.isDebit; //console.log(THIS.isDebit);
+            if (event.key == '-') {
+                THIS.isDebit = !THIS.isDebit;
+            }
         }
 
         inputChild.update();

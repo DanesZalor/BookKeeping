@@ -16,13 +16,9 @@
     font-weight: 500;
 }
 
-.JournalEntrySummary>*,
-.AccountTitleInput>* {
-    width: 200px;
-}
 
-/*
-.AmountInput>*,
-.JournalEntryTotal {
-    width: 200px;
-}*/
+
+
+td {
+    width: 100px;
+}

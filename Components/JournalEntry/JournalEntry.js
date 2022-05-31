@@ -22,6 +22,8 @@ const JournalEntryRow_ContextMenu = function () {
     }
     THIS.hide = function () {
         THIS.style.visibility = "hidden";
+        THIS.style.top = "2000px";
+        THIS.style.left = "2000px";
         THIS.SelectedJournalEntryRow = null;
     }
 
@@ -70,7 +72,9 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
     let THIS = new Component('table', {
         innerHTML: `<tr class="JournalEntryFooter">
         <td class="JournalEntrySummary"><input placeholder="entry summary"></input></td>
-        <td><input disabled=true class="JournalEntryTotal" style="text-align:right; width:150%; padding-right:10%" value="100"></input></td>
+        <td><button disabled=true class="JournalEntryTotal" style="text-align:right; width:165%;">
+            <span>Total</span>
+        </button></td>
         </tr>`,
         className: "JournalEntry",
         ContextMenu: new JournalEntryRow_ContextMenu(),
@@ -92,8 +96,12 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
         }, false);
 
 
-        jeRow.getElementsByClassName('AmountInput_input')[0].addEventListener('change', () => {
-            THIS.updateTotal();
+        jeRow.getElementsByClassName('AmountInput_input')[0].addEventListener('keypress', function (event) {
+            if (isNaN(event.key) && event.key != '.')
+                event.preventDefault();
+
+            // wait after change has been applied
+            else setTimeout(THIS.validate, 50);
         });
 
         if (pivot != null) THIS.insertBefore(jeRow, before ? pivot : pivot.nextSibling);
@@ -104,21 +112,29 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
         }
     }
 
-    THIS.updateTotal = function () {
-        console.log("----");
+    THIS.validate = function () {
 
         let AMinp = THIS.getElementsByClassName('AmountInput');
         let total = 0;
-        for (let am of AMinp)
-            total += am.getElementsByClassName('AmountInput_input')[0].value * (am.isDebit ? 1 : -1);
+        for (let am of AMinp) {
+            let val = am.getElementsByClassName('AmountInput_input')[0].value;
+            if (val == 0) {
+                total = "0 not allowed";
+                break;
+            }
+            total += val * (am.isDebit ? 1 : -1);
+        }
+
 
         /*assign total display*/{
             let totalLabel = THIS.getElementsByClassName('JournalEntryTotal')[0];
-            totalLabel.value = (total == 0) ? "Balanced" : Math.abs(total);
-            totalLabel.style.width = (total == 0) ? "125%" : (total > 0 ? "100%" : "150%");
-            totalLabel.style.paddingRight = (total == 0) ? "35%" : (total > 0 ? "60%" : "10%");
+            let totalLabelText = totalLabel.children[0];
+            totalLabel.disabled = (total != 0);
+            totalLabelText.innerHTML = (total == 0) ? "Submit" : (isNaN(total) ? total : Math.abs(total));
+            //totalLabel.style.width = (total == 0) ? "125%" : (total > 0 ? "115%" : "165%");
+            totalLabelText.style.paddingRight = (total == 0) ? "16%" : (total > 0 ? "37%" : "5%");
         }
-    }
+    }; setTimeout(THIS.validate, 50);
 
 
     for (let i = 0; i < data.length; i++) // add rows and shit
