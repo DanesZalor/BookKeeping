@@ -7,7 +7,7 @@
 const Component = function (tagName, properties = {}) {
 
     let THIS = document.createElement(tagName, { prototype: HTMLElement.prototype });
-    Object.assign(THIS, properties);
+    Object.assign(THIS, properties, { IS_COMPONENT: true });
     return THIS;
 }
 

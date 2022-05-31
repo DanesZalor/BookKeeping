@@ -23,15 +23,12 @@ const AmountInput = function (initialAmount = 0) {
     let inputChild = THIS.getElementsByTagName('input')[0];
     inputChild.addEventListener('keypress', (event) => {
 
-        if (!(event.key >= '0' && event.key <= '9')) {
+        console.log(event.key == '.');
+        if (!((event.key >= '0' && event.key <= '9') || event.key == '.')) {
             event.preventDefault();
 
-            if (event.key == '-') THIS.isDebit = !THIS.isDebit;
-            console.log(THIS.isDebit);
+            if (event.key == '-') THIS.isDebit = !THIS.isDebit; //console.log(THIS.isDebit);
         }
-
-        if (!isNaN(parseFloat(inputChild.value)))
-            inputChild.value = parseFloat(inputChild.value);
 
         inputChild.style.paddingRight = THIS.isDebit ? "50%" : "10%";
 
