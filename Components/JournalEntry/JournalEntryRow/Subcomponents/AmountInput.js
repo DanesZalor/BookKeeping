@@ -12,15 +12,15 @@ const AmountInput = function (initialAmount = 0) {
     if (isNaN(initialAmount))
         throw "param 1 must be a number";
     let oldAmount = initialAmount;
-    console.log(oldAmount);
+    //console.log(oldAmount);
     initialAmount = Math.abs(initialAmount);
     if (initialAmount == 0) initialAmount = "";
 
     let THIS = new Component('td', {
         className: "AmountInput",
         isDebit: oldAmount >= 0,
-        innerHTML: `<input placeholder="amount" 
-        style="width:100px; text-align:right;" 
+        innerHTML: `<input class="AmountInput_input" placeholder="amount" 
+        style="text-align:right;" 
         value=${initialAmount}></input>`,
     });
 
@@ -28,7 +28,6 @@ const AmountInput = function (initialAmount = 0) {
     let inputChild = THIS.getElementsByTagName('input')[0];
     inputChild.addEventListener('keypress', (event) => {
 
-        console.log(event.key == '.');
         if (!((event.key >= '0' && event.key <= '9') || event.key == '.')) {
             event.preventDefault();
 

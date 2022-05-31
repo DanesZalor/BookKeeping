@@ -69,8 +69,8 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
 
     let THIS = new Component('table', {
         innerHTML: `<tr class="JournalEntryFooter">
-        <td class="JournalEntrySummary"><input></input></td>
-        <td><span class="JournalEntry">100</span></td>
+        <td class="JournalEntrySummary"><input placeholder="entry summary"></input></td>
+        <td><input disabled=true class="JournalEntryTotal" style="text-align:right; width:150%; padding-right:10%" value="100"></input></td>
         </tr>`,
         className: "JournalEntry",
         ContextMenu: new JournalEntryRow_ContextMenu(),
@@ -78,24 +78,46 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
 
     THIS.appendChild(Object.assign(THIS.ContextMenu, { JournalEntryParent: THIS }));
 
+    //THIS.addEventListener('keypress', function (event) { THIS.updateTotal(); });
+
     THIS.addRow = function (jeRow, pivot = null, before = true) {
 
         if (!(jeRow.IS_COMPONENT && jeRow.className == "JournalEntryRow"))
             throw "param 1 must be an instance of JournalEntryRow";
 
         // !!! ...spread does not work. it doesnt pass the Node inheritance
-        let temprow = Object.assign(jeRow);
-        temprow.addEventListener('contextmenu', (event) => {
+        jeRow.addEventListener('contextmenu', (event) => {
             event.preventDefault();
-            THIS.ContextMenu.showAt(event.pageX, event.pageY, temprow);
+            THIS.ContextMenu.showAt(event.pageX, event.pageY, jeRow);
         }, false);
 
-        if (pivot != null) THIS.insertBefore(temprow, before ? pivot : pivot.nextSibling);
+
+        jeRow.getElementsByClassName('AmountInput_input')[0].addEventListener('change', () => {
+            THIS.updateTotal();
+        });
+
+        if (pivot != null) THIS.insertBefore(jeRow, before ? pivot : pivot.nextSibling);
         else {
-            THIS.appendChild(temprow);
+            THIS.appendChild(jeRow);
             THIS.appendChild(THIS.getElementsByClassName('JournalEntryFooter')[0]);
             // add a new row and put the footer row at the bottom
         }
+    }
+
+    THIS.updateTotal = function () {
+        console.log("----");
+
+        let AMinp = THIS.getElementsByClassName('AmountInput');
+        let total = 0;
+        for (let am of AMinp)
+            total += am.getElementsByClassName('AmountInput_input')[0].value * (am.isDebit ? 1 : -1);
+
+        let totalLabel = THIS.getElementsByClassName('JournalEntryTotal')[0];
+
+        totalLabel.value = (total == 0) ? "Balanced" : Math.abs(total);
+
+        totalLabel.style.width = (total == 0) ? "125%" : (total > 0 ? "100%" : "150%");
+        totalLabel.style.paddingRight = (total == 0) ? "35%" : (total > 0 ? "60%" : "10%");
     }
 
 
