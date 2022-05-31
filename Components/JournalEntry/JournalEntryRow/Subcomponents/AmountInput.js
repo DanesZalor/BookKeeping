@@ -11,14 +11,18 @@ const AmountInput = function (initialAmount = 0) {
     initialAmount = parseFloat(initialAmount);
     if (isNaN(initialAmount))
         console.error("param 1 must be a number");
+    let oldAmount = initialAmount;
+    console.log(oldAmount);
+    initialAmount = Math.abs(initialAmount);
 
     let THIS = new Component('td', {
         className: "AmountInput",
-        isDebit: initialAmount >= 0,
+        isDebit: oldAmount >= 0,
         innerHTML: `<input placeholder="amount" 
         style="width:100px; text-align:right;" 
         value=${initialAmount}></input>`,
     });
+
 
     let inputChild = THIS.getElementsByTagName('input')[0];
     inputChild.addEventListener('keypress', (event) => {
