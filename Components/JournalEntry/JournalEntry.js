@@ -11,25 +11,47 @@ const JournalEntryRow_ContextMenu = function () {
         <div class="ContextMenuItem">Add Row Below</div>
         <div class="ContextMenuItem">Delete Row</div>
         <div class="ContextMenuItem">X</div>`,
+        SelectedJournalEntryRow: null,
     });
 
-    THIS.showAt = function (x, y) {
+    THIS.showAt = function (x, y, selectedRow) {
         THIS.style.top = y + "px";
         THIS.style.left = x + "px";
         THIS.style.visibility = "visible";
+        THIS.SelectedJournalEntryRow = selectedRow;
     }
     THIS.hide = function () {
         THIS.style.visibility = "hidden";
-        JournalEntryRow_ContextMenu.SelectedJournalEntryRow = null;
+        THIS.SelectedJournalEntryRow = null;
     }
 
-    for (let item of THIS.children)
-        item.addEventListener('click', THIS.hide);
+    /*Onclick Operations*/{
+
+        // ADD above
+        THIS.children[0].onclick = function () {
+            THIS.JournalEntryParent.addRow(new JournalEntryRow(), THIS.SelectedJournalEntryRow, true);
+        }
+
+        // ADD below
+        THIS.children[1].onclick = function () {
+            THIS.JournalEntryParent.addRow(new JournalEntryRow(), THIS.SelectedJournalEntryRow, false);
+        }
+
+        // DELETE
+        THIS.children[2].onclick = function () {
+            THIS.SelectedJournalEntryRow.remove();
+        }
+
+        for (let item of THIS.children)
+            item.addEventListener('click', THIS.hide);
+    }
+
+
 
     return THIS;
 };
 
-JournalEntryRow_ContextMenu.SelectedJournalEntryRow = null;
+
 
 
 /**
@@ -57,18 +79,24 @@ const JournalEntry = function (data) {
     });
 
     THIS.appendChild(THIS.ContextMenu);
+    THIS.ContextMenu.JournalEntryParent = THIS;
 
+    /**
+     * 
+     * @param {JournalEntryRow} jeRow 
+     * @param {JournalEntryRow} pivot 
+     * @param {boolean} before 
+     */
     THIS.addRow = function (jeRow, pivot = null, before = true) {
 
         if (!(jeRow.IS_COMPONENT && jeRow.className == "JournalEntryRow"))
             console.error("param 1 must be an instance of JournalEntryRow");
 
         // !!! ...spread does not work. it doesnt pass the Node inheritance
-        let temprow = Object.assign(jeRow, { parent: THIS });
+        let temprow = Object.assign(jeRow);
         temprow.addEventListener('contextmenu', (event) => {
             event.preventDefault();
-            THIS.ContextMenu.showAt(event.pageX, event.pageY);
-            JournalEntryRow_ContextMenu.SelectedJournalEntryRow = temprow;
+            THIS.ContextMenu.showAt(event.pageX, event.pageY, temprow);
         }, false);
 
         if (pivot != null)

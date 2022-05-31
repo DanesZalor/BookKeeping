@@ -1,8 +1,9 @@
 .ContextMenu {
     background-color: #f7f8f9;
     border-color: #ecedef;
+
     border-style: solid;
-    border-width: 2px;
+    border-width: 3px;
 }
 
 .ContextMenu>.ContextMenuItem {
