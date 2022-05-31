@@ -12,11 +12,11 @@ const AmountInput = function (initialAmount = 0) {
     if (isNaN(initialAmount))
         console.error("param 1 must be a number");
 
-    let THIS = new Component('tr', {
+    let THIS = new Component('td', {
         className: "AmountInput",
         isDebit: initialAmount >= 0,
         innerHTML: `<input placeholder="amount" 
-        style="width:300px; text-align:right; padding-right:50%" 
+        style="width:100px; text-align:right;" 
         value=${initialAmount}></input>`,
     });
 
@@ -30,9 +30,16 @@ const AmountInput = function (initialAmount = 0) {
             if (event.key == '-') THIS.isDebit = !THIS.isDebit; //console.log(THIS.isDebit);
         }
 
-        inputChild.style.paddingRight = THIS.isDebit ? "50%" : "10%";
-
+        inputChild.update();
     }, false);
+
+
+    inputChild.update = function () {
+        inputChild.style.width = THIS.isDebit ? "100%" : "150%";
+        inputChild.style.paddingRight = THIS.isDebit ? "60%" : "10%";
+
+    }
+    inputChild.update();
 
     return THIS;
 };
