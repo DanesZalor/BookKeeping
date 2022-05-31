@@ -48,5 +48,7 @@ export { InputText };
 So now I can simply import the `InputText.js` Module and add it into the DOM tree like:
 ```javascript
 var root = document.getElementById('root');
-root.appendChild(newInputText("This is a test"));
+root.appendChild(new InputText("This is a test"));
 ```
+
+> NOTE: that i am using Function Constructors since I can't use `extends HTMLElement` or `implements Node`.
