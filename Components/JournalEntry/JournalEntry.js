@@ -97,7 +97,7 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
 
 
         jeRow.getElementsByClassName('AmountInput_input')[0].addEventListener('keypress', function (event) {
-            if (isNaN(event.key) && event.key != '.')
+            if (isNaN(event.key) && event.key != '.' && event.key != '-')
                 event.preventDefault();
 
             // wait after change has been applied

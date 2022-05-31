@@ -16,7 +16,10 @@
     font-weight: 500;
 }
 
-
+.JournalEntry {
+    align-items: center;
+    align-self: center;
+}
 
 
 td {
