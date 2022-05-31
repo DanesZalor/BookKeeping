@@ -4,7 +4,7 @@ import { JournalEntryRow } from "./JournalEntryRow/JournalEntryRow.js";
 
 /**
      * 
-     * @param {Array} data 
+     * @param {Array} data each element must be an object { acount: string, amount: number}
      */
 const JournalEntry = function (data) {
 
