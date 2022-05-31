@@ -10,7 +10,7 @@ const AmountInput = function (initialAmount = 0) {
     // correct the initial amount
     initialAmount = parseFloat(initialAmount);
     if (isNaN(initialAmount))
-        console.error("param 1 must be a number");
+        throw "param 1 must be a number";
     let oldAmount = initialAmount;
     console.log(oldAmount);
     initialAmount = Math.abs(initialAmount);

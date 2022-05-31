@@ -15,3 +15,8 @@
     color: #000000;
     font-weight: 500;
 }
+
+.JournalEntrySummary>*,
+.AccountTitleInput>* {
+    width: 200px;
+}

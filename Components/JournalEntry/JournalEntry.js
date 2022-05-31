@@ -56,44 +56,32 @@ const JournalEntryRow_ContextMenu = function () {
  * 
  * @param {Array} data each element must be an object { acount: string, amount: number}
  */
-const JournalEntry = function (data) {
+const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: "", amount: 0 }]) {
 
     // check data shape, should be [ { account:string amount:int}, ... ]
-    if (data != null)
-        if (Array.isArray(data)) {
-            for (let i = 0; i < data.length; i++) {
-                if (!(
-                    typeof data[i].account === 'string' &&
-                    typeof data[i].amount === 'number'
-                )) throw `JournalEntry.constructor(data) shape mismatch ${data}`;
-            }
+    if (data != null) if (Array.isArray(data)) {
+        for (let i = 0; i < data.length; i++) {
+            if (!(typeof data[i].account === 'string' && typeof data[i].amount === 'number'))
+                throw `JournalEntry.constructor(data) shape mismatch ${data}`;
         }
-        else throw `JournalEntry.constructor(data) shape mismatch ${data}`;
+    } else throw `JournalEntry.constructor(data) shape mismatch ${data}`;
 
 
     let THIS = new Component('table', {
         innerHTML: `<tr class="JournalEntryFooter">
-        <td><input class="JournalEntrySummary"></input></td>
+        <td class="JournalEntrySummary"><input></input></td>
         <td><span class="JournalEntry">100</span></td>
         </tr>`,
         className: "JournalEntry",
         ContextMenu: new JournalEntryRow_ContextMenu(),
     });
 
-    THIS.appendChild(THIS.ContextMenu);
-    THIS.ContextMenu.JournalEntryParent = THIS;
+    THIS.appendChild(Object.assign(THIS.ContextMenu, { JournalEntryParent: THIS }));
 
-
-    /**
-     * 
-     * @param {JournalEntryRow} jeRow 
-     * @param {JournalEntryRow} pivot 
-     * @param {boolean} before 
-     */
     THIS.addRow = function (jeRow, pivot = null, before = true) {
 
         if (!(jeRow.IS_COMPONENT && jeRow.className == "JournalEntryRow"))
-            console.error("param 1 must be an instance of JournalEntryRow");
+            throw "param 1 must be an instance of JournalEntryRow";
 
         // !!! ...spread does not work. it doesnt pass the Node inheritance
         let temprow = Object.assign(jeRow);
@@ -102,21 +90,18 @@ const JournalEntry = function (data) {
             THIS.ContextMenu.showAt(event.pageX, event.pageY, temprow);
         }, false);
 
-        if (pivot != null)
-            THIS.insertBefore(temprow, before ? pivot : pivot.nextSibling);
+        if (pivot != null) THIS.insertBefore(temprow, before ? pivot : pivot.nextSibling);
         else {
             THIS.appendChild(temprow);
             THIS.appendChild(THIS.getElementsByClassName('JournalEntryFooter')[0]);
+            // add a new row and put the footer row at the bottom
         }
     }
 
-    if (data != null && data.length > 0)
 
-        for (let i = 0; i < data.length; i++) // add rows and shit
-            THIS.addRow(new JournalEntryRow(data[i].account, data[i].amount));
-    else {
-        THIS.addRow(new JournalEntryRow());
-    }
+    for (let i = 0; i < data.length; i++) // add rows and shit
+        THIS.addRow(new JournalEntryRow(data[i].account, data[i].amount));
+
 
     return THIS;
 };
