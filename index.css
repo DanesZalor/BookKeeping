@@ -1,0 +1,16 @@
+.ContextMenu {
+    background-color: #f7f8f9;
+    border-color: #ecedef;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.ContextMenu>.ContextMenuItem {
+    margin: 7px;
+    color: #606060;
+}
+
+.ContextMenu>.ContextMenuItem:hover {
+    color: #000000;
+    font-weight: 500;
+}
