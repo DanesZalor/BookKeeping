@@ -1,6 +1,6 @@
-import { Component } from "./Component.js";
-import { AccountTitleInput } from "./AccountTitleInput.js";
-import { AmountInput } from "./AmountInput.js";
+import { Component } from "../../Component.js";
+import { AccountTitleInput } from "./Subcomponents/AccountTitleInput.js";
+import { AmountInput } from "./Subcomponents/AmountInput.js";
 
 const JournalEntryRow = function (accountTitle, amount) {
 

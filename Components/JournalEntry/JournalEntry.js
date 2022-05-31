@@ -1,5 +1,5 @@
-import { Component } from "./Component.js";
-import { JournalEntryRow } from "./JournalEntryRow.js";
+import { Component } from "../Component.js";
+import { JournalEntryRow } from "./JournalEntryRow/JournalEntryRow.js";
 
 const JournalEntry = function () {
     let THIS = new Component('table', {
