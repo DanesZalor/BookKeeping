@@ -52,8 +52,6 @@ const JournalEntryRow_ContextMenu = function () {
 };
 
 
-
-
 /**
  * 
  * @param {Array} data each element must be an object { acount: string, amount: number}
@@ -74,12 +72,17 @@ const JournalEntry = function (data) {
 
 
     let THIS = new Component('table', {
+        innerHTML: `<tr class="JournalEntryFooter">
+        <td><input class="JournalEntrySummary"></input></td>
+        <td><span class="JournalEntry">100</span></td>
+        </tr>`,
         className: "JournalEntry",
         ContextMenu: new JournalEntryRow_ContextMenu(),
     });
 
     THIS.appendChild(THIS.ContextMenu);
     THIS.ContextMenu.JournalEntryParent = THIS;
+
 
     /**
      * 
@@ -101,7 +104,10 @@ const JournalEntry = function (data) {
 
         if (pivot != null)
             THIS.insertBefore(temprow, before ? pivot : pivot.nextSibling);
-        else THIS.appendChild(temprow);
+        else {
+            THIS.appendChild(temprow);
+            THIS.appendChild(THIS.getElementsByClassName('JournalEntryFooter')[0]);
+        }
     }
 
     if (data != null && data.length > 0)
