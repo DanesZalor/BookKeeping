@@ -45,7 +45,12 @@ const JournalEntryRow_ContextMenu = function () {
         }
 
         for (let item of THIS.children)
-            item.addEventListener('click', function () { THIS.hide(); setTimeout(THIS.JournalEntryParent.validate, 50) });
+            item.addEventListener('click',
+                function () {
+                    THIS.hide();
+                    setTimeout(THIS.JournalEntryParent.validate, 50)
+                }
+            );
     }
 
 
@@ -96,13 +101,21 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
         }, false);
 
 
-        jeRow.getElementsByClassName('AmountInput_input')[0].addEventListener('keypress', function (event) {
-            if (isNaN(event.key) && event.key != '.' && event.key != '-')
-                event.preventDefault();
+        /*add events signals*/{
+            const handlerFunc = function (event) {
+                if (isNaN(event.key) && event.key != '.' && event.key != '-')
+                    event.preventDefault();
 
-            // wait after change has been applied
-            else setTimeout(THIS.validate, 50);
-        });
+                // wait after change has been applied
+                else setTimeout(THIS.validate, 50);
+            }
+
+            jeRow.getElementsByClassName('AmountInput_input')[0].addEventListener('keypress', handlerFunc);
+            jeRow.getElementsByClassName('AmountInput_input')[0].addEventListener('blur', THIS.validate);
+            jeRow.getElementsByClassName('AmountInput_input')[0].addEventListener('change', THIS.validate);
+        }
+
+
 
         if (pivot != null) THIS.insertBefore(jeRow, before ? pivot : pivot.nextSibling);
         else {
@@ -118,7 +131,7 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
         let total = 0;
         for (let am of AMinp) {
             let val = am.getElementsByClassName('AmountInput_input')[0].value;
-            if (val == 0) {
+            if (val == 0 || val == '') {
                 total = "0 not allowed";
                 break;
             }

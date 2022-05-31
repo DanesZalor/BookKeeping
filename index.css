@@ -19,9 +19,10 @@
 .JournalEntry {
     align-items: center;
     align-self: center;
+    text-align: center;
 }
 
 
-td {
-    width: 100px;
+td.AmountInput {
+    width: 70px;
 }
