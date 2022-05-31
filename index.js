@@ -1,11 +1,11 @@
-import { Component } from "./jsClass/Component.js";
-import { AmountInput } from "./jsClass/AmountInput.js";
+import { AmountInput } from "./Components/AmountInput.js";
+import { AccountTitleInput } from "./Components/AccountTitleInput.js";
 
 const root = document.getElementById('root');
 
-var dn = new Component('p', { innerHTML: 'sex', onclick: () => { alert('DO NOT CLICK'); } });
 
 var ain = new AmountInput();
+var acin = new AccountTitleInput("Big money");
 
-root.appendChild(dn);
+root.appendChild(acin);
 root.appendChild(ain);

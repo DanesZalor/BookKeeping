@@ -13,7 +13,7 @@ const AmountInput = function (initialAmount = 0) {
         console.error("param 1 must be a number");
 
     let THIS = new Component('tr', {
-        class: "col-0",
+        className: "AmountInput",
         isDebit: initialAmount >= 0,
         innerHTML: `<input placeholder="amount" 
         style="width:300px; text-align:right; padding-right:50%" 
