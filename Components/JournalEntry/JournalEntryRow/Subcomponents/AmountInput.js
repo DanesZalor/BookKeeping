@@ -14,6 +14,7 @@ const AmountInput = function (initialAmount = 0) {
     let oldAmount = initialAmount;
     console.log(oldAmount);
     initialAmount = Math.abs(initialAmount);
+    if (initialAmount == 0) initialAmount = "";
 
     let THIS = new Component('td', {
         className: "AmountInput",
