@@ -45,7 +45,7 @@ const JournalEntryRow_ContextMenu = function () {
         }
 
         for (let item of THIS.children)
-            item.addEventListener('click', THIS.hide);
+            item.addEventListener('click', function () { THIS.hide(); setTimeout(THIS.JournalEntryParent.validate, 50) });
     }
 
 
