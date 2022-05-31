@@ -76,10 +76,12 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
 
     let THIS = new Component('table', {
         innerHTML: `<tr class="JournalEntryFooter">
-        <td class="JournalEntrySummary"><input placeholder="entry summary"></input></td>
-        <td><button disabled=true class="JournalEntryTotal" style="text-align:right; width:165%;">
+        <td class="JournalEntrySummary"><textarea placeholder="entry summary"></textarea></td>
+        <td style="vertical-align: top;">
+            <button disabled=true class="JournalEntryTotal" style="text-align:right; width:165%;">
             <span>Total</span>
-        </button></td>
+        </button>
+        </td>
         </tr>`,
         className: "JournalEntry",
         ContextMenu: new JournalEntryRow_ContextMenu(),

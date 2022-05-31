@@ -16,13 +16,17 @@
     font-weight: 500;
 }
 
-.JournalEntry {
-    align-items: center;
-    align-self: center;
-    text-align: center;
-}
-
 
 td.AmountInput {
     width: 70px;
+}
+
+td.JournalEntrySummary>textarea,
+td.AccountTitleInput>input {
+    width: 200px;
+    resize: none;
+}
+
+div.HorizontalSeparator {
+    background-color: #000000;
 }
