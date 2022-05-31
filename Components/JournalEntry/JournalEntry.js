@@ -112,12 +112,12 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
         for (let am of AMinp)
             total += am.getElementsByClassName('AmountInput_input')[0].value * (am.isDebit ? 1 : -1);
 
-        let totalLabel = THIS.getElementsByClassName('JournalEntryTotal')[0];
-
-        totalLabel.value = (total == 0) ? "Balanced" : Math.abs(total);
-
-        totalLabel.style.width = (total == 0) ? "125%" : (total > 0 ? "100%" : "150%");
-        totalLabel.style.paddingRight = (total == 0) ? "35%" : (total > 0 ? "60%" : "10%");
+        /*assign total display*/{
+            let totalLabel = THIS.getElementsByClassName('JournalEntryTotal')[0];
+            totalLabel.value = (total == 0) ? "Balanced" : Math.abs(total);
+            totalLabel.style.width = (total == 0) ? "125%" : (total > 0 ? "100%" : "150%");
+            totalLabel.style.paddingRight = (total == 0) ? "35%" : (total > 0 ? "60%" : "10%");
+        }
     }
 
 
