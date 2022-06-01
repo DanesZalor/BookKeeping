@@ -23,11 +23,15 @@ const AccountInput = function (value) {
 
     THIS.validate = () => THIS.getValue() != "";
 
+    THIS.setFormat = (isDebit) => THIS.inputChild.style.paddingLeft = isDebit ? "10%" : "20%";
+
+
     return THIS;
 }
 
 const AmountInput = function (value) {
-    let THIS = new JEInput("0", value, { className: "AmountInput" });
+
+    let THIS = new JEInput("0", Math.abs(value), { className: "AmountInput" });
 
     THIS.inputChild.style.textAlign = "right";
 
@@ -45,26 +49,47 @@ const AmountInput = function (value) {
 
     THIS.validate = () => !isNaN(parseFloat(THIS.getValue()));
 
+    THIS.setFormat = (isDebit) => THIS.inputChild.style.paddingRight = isDebit ? "70%" : "20%";
+
     return THIS;
 }
 
+/**
+ * 
+ * @param {string} accountTitle 
+ * @param {number} amount 
+ * @returns 
+ */
 const JournalEntryRow = function (accountTitle, amount) {
 
     let THIS = new Component('tr', {
         className: "JournalEntryRow",
+        isDebit: amount > 0,
     });
 
     let accountInp = new AccountInput(accountTitle);
     let amountInp = new AmountInput(amount);
 
     THIS.addEventListener("keypress", (event) => {
-        if (event.key = '-') {
+        if (event.key == '-') {
+            THIS.isDebit = !THIS.isDebit;
+            event.preventDefault();
+            //console.log(THIS.isDebit);
 
+            accountInp.setFormat(THIS.isDebit);
+            amountInp.setFormat(THIS.isDebit);
         }
-    });
+    }, false);
+
+    THIS.update = function () {
+        accountInp.setFormat(THIS.isDebit);
+        amountInp.setFormat(THIS.isDebit);
+    }
 
     THIS.appendChild(accountInp);
     THIS.appendChild(amountInp);
+
+    THIS.update();
 
     return THIS;
 };

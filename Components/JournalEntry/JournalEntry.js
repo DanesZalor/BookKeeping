@@ -76,15 +76,15 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
 
     let THIS = new Component('table', {
         innerHTML: `
-        <thead>
+        <thead class="TableHeader">
             <tr>
-                <td>Account Titles</td>
+                <td style="text-align:center;">Account Titles</td>
                 <td>
+                    <div style="text-align:center;">(Php)</div>
                     <table>
                     <tr>
-                        <td>  </td>
-                        <td> Debit </td>
-                        <td> Credit </td>
+                        <td style="text-align:center;"> Debit </td>
+                        <td style="text-align:center;"> Crebit </td>
                     </tr>
                     </table>
                 </td>

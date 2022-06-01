@@ -18,16 +18,19 @@
 }
 
 tr {
-    background-color: red;
+    background-color: #ecedef;
 }
 
-tr>td>button {
+/* Journal EntryTable */
+.TableFooter>tr>td>button {
     width: 100%;
 }
 
 
-tr>td>* {
+.TableBody>tr>td>*,
+.TableFooter>tr>td>* {
     width: inherit;
+    box-sizing: border-box;
 }
 
 
