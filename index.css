@@ -33,8 +33,9 @@ button {
     background-color: #e2e3e5;
 }
 
-button:hover {
-    background-color: #cccdcf;
+button:disabled {
+    background-color: transparent;
+    box-shadow: 1px 1px 5px #00000000;
 }
 
 button:active {
