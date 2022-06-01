@@ -5,16 +5,28 @@ const JEInput = function (placeholder, value = "", properties = {}) {
     let THIS = new Component('td', {
         className: "JEInput",
         innerHTML: `<input placeholder="${placeholder}" value="${value}" 
-            style="
-            ">
+            style="">
+            <span class="InputErrorMsg" style="
+                color:#ff0000;
+                font-size: 12px;
+            "></span>
         </input>`,
         ...properties
     });
 
     THIS.inputChild = THIS.children[0];
+    THIS.errorBox = THIS.children[1];
+
     // value getter setter
     THIS.getValue = () => THIS.inputChild.value;
     THIS.setValue = (val) => THIS.inputChild.value = val;
+
+    THIS.setErrorMsg = function (msg) {
+        THIS.errorBox.innerHTML = msg;
+        THIS.errorBox.style.paddingLeft = msg.length == 0 ? "0px" : "20px";
+        THIS.errorBox.style.visibility = msg.length == 0 ? "hidden" : "visible"
+        THIS.inputChild.style.boxShadow = msg.length == 0 ? "1px 1px 5px #00000022" : "1px 1px 5px #ff000099";
+    }
 
     return THIS;
 }
@@ -23,10 +35,13 @@ const AccountInput = function (value) {
     let THIS = new JEInput("", value, { className: "AccountInput" });
 
     THIS.validate = () => {
+        let msgreturn = "";
         if (THIS.getValue() == "") {
-            return "Input cannot be empty";
+            msgreturn = "Input cannot be empty";
         }
-        else return "";
+
+        THIS.setErrorMsg(msgreturn);
+        return msgreturn;
     };
 
     THIS.setFormat = (isDebit) => THIS.inputChild.style.paddingLeft = isDebit ? "10%" : "20%";
@@ -57,12 +72,16 @@ const AmountInput = function (value) {
     });
 
     THIS.validate = () => {
-        if (THIS.getValue() == "" || parseFloat(THIS.getValue()) == 0) {
-            return "Input can't be 0";
-        }
+
+        let msgreturn = ""
+        if (THIS.getValue() == "" || parseFloat(THIS.getValue()) == 0)
+            msgreturn = "Input can't be 0";
+
         else if (isNaN(parseFloat(THIS.getValue())))
-            return "Input should be a number";
-        else return "";
+            msgreturn = "Input should be a number";
+
+        THIS.setErrorMsg(msgreturn);
+        return msgreturn;
     }
 
     THIS.setFormat = (isDebit) => THIS.inputChild.style.paddingRight = isDebit ? "70%" : "20%";
@@ -79,18 +98,6 @@ const AmountInput = function (value) {
 const JournalEntryRow = function (accountTitle, amount) {
 
     let THIS = new Component('tr', {
-        innerHTML: `<div class="JournalEntryRow_ErrorMsg" style="
-            position:absolute;
-            display: none;
-            background-color:#f7fcc9;
-            color:#383838;
-            box-shadow: 2px 2px 10px #000000aa;
-            
-            padding:10px;
-            margin-left: 2px;
-
-            font-size: 14px;
-        "/>`,
         className: "JournalEntryRow",
         isDebit: amount > 0,
     });
@@ -116,17 +123,11 @@ const JournalEntryRow = function (accountTitle, amount) {
 
     THIS.validityCheck = function () {
 
-        let inputProblem = accountInp.validate();
-
-        if (inputProblem.length == 0)
-            inputProblem = amountInp.validate();
-
-        let errorMsgBox = THIS.getElementsByClassName('JournalEntryRow_ErrorMsg')[0];
-        errorMsgBox.innerHTML = inputProblem;
-        errorMsgBox.style.display = inputProblem.length > 0 ? "block" : "none";
+        let accountInputError = accountInp.validate();
+        let amountInputError = amountInp.validate();
 
         return {
-            problem: inputProblem,
+            problem: accountInputError + "," + amountInputError,
             amount: isNaN(amountInp.getValue()) ? 0 : amountInp.getValue() * (THIS.isDebit ? 1 : -1),
         };
     }
