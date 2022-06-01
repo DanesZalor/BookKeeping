@@ -121,7 +121,9 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
                         <button disabled=true class="JournalEntryTotal" 
                         style="
                             text-align:right;
-                            font-size: 15px;
+                            font-size: 14px;
+                            padding: 10px 0px 10px 0px;
+                            margin: -1px;
                         ">
                             <span>Total</span>
                         </button>

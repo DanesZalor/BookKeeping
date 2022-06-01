@@ -7,15 +7,9 @@ thead {
     color: #8c8d8f;
 }
 
-input,
-textarea {
-    border-style: none;
-
-    margin: 0px 5px 1px 5px;
-}
-
 textarea {
     padding: 10px;
+    margin-left: 5px;
 }
 
 /*CONTEXT MENU STUFF*/
@@ -32,7 +26,20 @@ textarea {
 }
 
 
+/*Button stuff*/
+button {
+    border-style: none;
+    box-shadow: 1px 1px 5px #00000088;
+    background-color: #e2e3e5;
+}
 
+button:hover {
+    background-color: #cccdcf;
+}
+
+button:active {
+    background-color: #acadaf;
+}
 
 /* Journal EntryTable */
 .TableFooter>tr>td>button {
