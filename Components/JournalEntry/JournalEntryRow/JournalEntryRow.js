@@ -132,9 +132,13 @@ const JournalEntryRow = function (accountTitle, amount) {
 
         let accountInputError = accountInp.validate();
         let amountInputError = amountInp.validate();
+        let errorMsgs = [];
+
+        if (accountInputError.length > 0) errorMsgs.push(accountInputError);
+        if (amountInputError.length > 0) errorMsgs.push(amountInputError);
 
         return {
-            problem: accountInputError + "," + amountInputError,
+            problem: errorMsgs,
             amount: isNaN(amountInp.getValue()) ? 0 : amountInp.getValue() * (THIS.isDebit ? 1 : -1),
         };
     }

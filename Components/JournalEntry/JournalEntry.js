@@ -118,7 +118,11 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
                         <textarea placeholder="entry summary" style="resize:none;"></textarea>
                     </td>
                     <td class="JournalEntryTotalTD" style="vertical-align: top;">
-                        <button disabled=true class="JournalEntryTotal" style="text-align:right;">
+                        <button disabled=true class="JournalEntryTotal" 
+                        style="
+                            text-align:right;
+                            font-size: 15px;
+                        ">
                             <span>Total</span>
                         </button>
                     </td>
@@ -171,6 +175,7 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
         let total = 0;
         for (let row of rows) {
             let rowvalidityres = row.validityCheck();
+            console.log(rowvalidityres);
 
             errors += rowvalidityres.problem.length > 0 ? 1 : 0;
             total += rowvalidityres.amount;
