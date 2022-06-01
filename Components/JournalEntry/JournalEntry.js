@@ -49,7 +49,7 @@ const JournalEntryRow_ContextMenu = function () {
 
         // DELETE
         THIS.children[2].onclick = function () {
-            THIS.SelectedJournalEntryRow.remove();
+            THIS.JournalEntryParent.removeRow(THIS.SelectedJournalEntryRow);
         }
 
         for (let item of THIS.children)
@@ -86,10 +86,10 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
         innerHTML: `
         <table style="
             border-collapse: collapse; 
-            box-shadow: 1px 1px 5px #00000088;
             background:#ecedef;
             
-            margin:auto;
+            margin-left:auto;
+            margin-right:auto;
         ">
             <thead class="TableHeader">
                 <tr>
@@ -165,6 +165,17 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
             tableBody.insertBefore(jeRow, before ? pivot : pivot.nextSibling);
         else
             tableBody.appendChild(jeRow);
+    }
+
+    THIS.removeRow = function (jeRow) {
+        console.log("removeRow");
+        let tableBody = THIS.getElementsByClassName('TableBody')[0];
+        jeRow.remove();
+
+        if (THIS.getElementsByClassName('TableBody')[0].children.length <= 1) {
+            console.log("oh no");
+            THIS.addRow(new JournalEntryRow());
+        }
 
     }
 
@@ -177,7 +188,6 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
         let total = 0;
         for (let row of rows) {
             let rowvalidityres = row.validityCheck();
-            console.log(rowvalidityres);
 
             errors += rowvalidityres.problem.length > 0 ? 1 : 0;
             total += rowvalidityres.amount;

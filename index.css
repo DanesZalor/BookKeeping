@@ -1,5 +1,7 @@
 /*MAIN STUFF*/
-
+body {
+    background-color: #ecedef;
+}
 
 thead {
     font-weight: 700;
@@ -51,8 +53,9 @@ button:active {
 .TableBody>tr>td>*,
 .TableFooter>tr>td>*,
 .TableFooter>tr>td>*>* {
-    width: inherit;
+
     box-sizing: border-box;
+    width: inherit;
 }
 
 
@@ -72,5 +75,5 @@ tr {
 
 td {
     padding: 2px;
-    width: 400px;
+    width: 250px;
 }
