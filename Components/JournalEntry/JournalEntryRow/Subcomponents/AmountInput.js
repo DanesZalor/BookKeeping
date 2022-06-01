@@ -41,8 +41,10 @@ const AmountInput = function (initialAmount = 0) {
 
 
     inputChild.update = function () {
-        inputChild.style.width = THIS.isDebit ? "100%" : "150%";
-        inputChild.style.paddingRight = THIS.isDebit ? "60%" : "10%";
+
+        // keep the total to 97% idk why
+        inputChild.style.width = THIS.isDebit ? "37%" : "92%";
+        inputChild.style.paddingRight = THIS.isDebit ? "60%" : "5%";
 
     }
     inputChild.update();

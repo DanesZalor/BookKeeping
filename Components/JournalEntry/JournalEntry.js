@@ -77,8 +77,8 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
     let THIS = new Component('table', {
         innerHTML: `<tr class="JournalEntryFooter">
         <td class="JournalEntrySummary"><textarea placeholder="entry summary"></textarea></td>
-        <td style="vertical-align: top;">
-            <button disabled=true class="JournalEntryTotal" style="text-align:right; width:165%;">
+        <td class="JournalEntryTotalTD" style="vertical-align: top;">
+            <button disabled=true class="JournalEntryTotal" style="text-align:right; width:100%;">
             <span>Total</span>
         </button>
         </td>

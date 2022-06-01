@@ -17,16 +17,24 @@
 }
 
 
-td.AmountInput {
-    width: 70px;
-}
-
+/*
 td.JournalEntrySummary>textarea,
-td.AccountTitleInput>input {
+td.JournalEntrySummary,
+td.AccountTitleInput>input,
+td.AccountTitleInput {
     width: 200px;
     resize: none;
 }
 
+td.AmountInput,
+td.AmountInput>input,
+td.JournalEntryTotalTD,
+td.JournalEntryTotalTD>button {
+    width: 200px;
+    resize: none;
+}*/
+
+td.AmountInput,
 div.HorizontalSeparator {
     background-color: #000000;
 }
