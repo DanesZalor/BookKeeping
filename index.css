@@ -1,7 +1,6 @@
 .ContextMenu {
     background-color: #f7f8f9;
     border-color: #ecedef;
-
     border-style: solid;
     border-width: 3px;
 }
@@ -9,32 +8,30 @@
 .ContextMenu>.ContextMenuItem {
     margin: 7px;
     color: #606060;
+
 }
 
 .ContextMenu>.ContextMenuItem:hover {
     color: #000000;
     font-weight: 500;
+
+}
+
+tr {
+    background-color: red;
+}
+
+tr>td>button {
+    width: 100%;
 }
 
 
-/*
-td.JournalEntrySummary>textarea,
-td.JournalEntrySummary,
-td.AccountTitleInput>input,
-td.AccountTitleInput {
-    width: 200px;
-    resize: none;
+tr>td>* {
+    width: inherit;
 }
 
-td.AmountInput,
-td.AmountInput>input,
-td.JournalEntryTotalTD,
-td.JournalEntryTotalTD>button {
-    width: 200px;
-    resize: none;
-}*/
 
-td.AmountInput,
-div.HorizontalSeparator {
-    background-color: #000000;
+
+td {
+    width: 300px;
 }

@@ -75,21 +75,39 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
 
 
     let THIS = new Component('table', {
-        innerHTML: `<tr class="JournalEntryFooter">
-        <td class="JournalEntrySummary"><textarea placeholder="entry summary"></textarea></td>
-        <td class="JournalEntryTotalTD" style="vertical-align: top;">
-            <button disabled=true class="JournalEntryTotal" style="text-align:right; width:100%;">
-            <span>Total</span>
-        </button>
-        </td>
-        </tr>`,
+        innerHTML: `
+        <thead>
+            <tr>
+                <td>Account Titles</td>
+                <td>
+                    <table>
+                    <tr>
+                        <td>  </td>
+                        <td> Debit </td>
+                        <td> Credit </td>
+                    </tr>
+                    </table>
+                </td>
+            </tr>
+        </thead>
+        <tbody class="TableBody">
+            <tr class="JournalEntryFooter">
+                <td class="JournalEntrySummary">
+                    <textarea placeholder="entry summary" style="resize:none;"></textarea>
+                </td>
+                <td class="JournalEntryTotalTD" style="vertical-align: top;">
+                    <button disabled=true class="JournalEntryTotal" style="text-align:right;">
+                        <span>Total</span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>`,
         className: "JournalEntry",
         ContextMenu: new JournalEntryRow_ContextMenu(),
     });
 
     THIS.appendChild(Object.assign(THIS.ContextMenu, { JournalEntryParent: THIS }));
 
-    //THIS.addEventListener('keypress', function (event) { THIS.updateTotal(); });
 
     THIS.addRow = function (jeRow, pivot = null, before = true) {
 
@@ -112,43 +130,24 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
                 else setTimeout(THIS.validate, 50);
             }
 
+            /*
             jeRow.getElementsByClassName('AmountInput_input')[0].addEventListener('keypress', handlerFunc);
             jeRow.getElementsByClassName('AmountInput_input')[0].addEventListener('blur', THIS.validate);
             jeRow.getElementsByClassName('AmountInput_input')[0].addEventListener('change', THIS.validate);
+            */
         }
 
-
-
-        if (pivot != null) THIS.insertBefore(jeRow, before ? pivot : pivot.nextSibling);
+        let tableBody = THIS.getElementsByClassName('TableBody')[0];
+        if (pivot != null) tableBody.insertBefore(jeRow, before ? pivot : pivot.nextSibling);
         else {
-            THIS.appendChild(jeRow);
-            THIS.appendChild(THIS.getElementsByClassName('JournalEntryFooter')[0]);
+            tableBody.appendChild(jeRow);
+            tableBody.appendChild(THIS.getElementsByClassName('JournalEntryFooter')[0]);
             // add a new row and put the footer row at the bottom
         }
     }
 
     THIS.validate = function () {
 
-        let AMinp = THIS.getElementsByClassName('AmountInput');
-        let total = 0;
-        for (let am of AMinp) {
-            let val = am.getElementsByClassName('AmountInput_input')[0].value;
-            if (val == 0 || val == '') {
-                total = "0 not allowed";
-                break;
-            }
-            total += val * (am.isDebit ? 1 : -1);
-        }
-
-
-        /*assign total display*/{
-            let totalLabel = THIS.getElementsByClassName('JournalEntryTotal')[0];
-            let totalLabelText = totalLabel.children[0];
-            totalLabel.disabled = (total != 0);
-            totalLabelText.innerHTML = (total == 0) ? "Submit" : (isNaN(total) ? total : Math.abs(total));
-            //totalLabel.style.width = (total == 0) ? "125%" : (total > 0 ? "115%" : "165%");
-            totalLabelText.style.paddingRight = (total == 0) ? "16%" : (total > 0 ? "37%" : "5%");
-        }
     }; setTimeout(THIS.validate, 50);
 
 
