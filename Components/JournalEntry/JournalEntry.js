@@ -138,20 +138,31 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
 
     THIS.validate = function () {
 
-        console.log("validate call");
-        let validityResult = true;
         let rows = THIS.getElementsByClassName('JournalEntryRow');
         let btnRes = THIS.getElementsByClassName('JournalEntryTotal')[0].children[0];
+        let errors = 0;
 
         let total = 0;
         for (let row of rows) {
             let rowvalidityres = row.validityCheck();
+
+            errors += rowvalidityres.problem.length > 0 ? 1 : 0;
             total += rowvalidityres.amount;
         }
 
-        btnRes.style.paddingRight = total == 0 ? "45%" : (total > 0 ? "70%" : "20%");
-        btnRes.innerHTML = total == 0 ? "Submit" : total;
-        btnRes.parentElement.disabled = total != 0;
+
+
+        if (errors > 0) {
+            btnRes.style.paddingRight = "45%";
+            btnRes.innerHTML = "Invalid";
+            btnRes.parentElement.disabled = true;
+        } else {
+            btnRes.style.paddingRight = total == 0 ? "45%" : (total > 0 ? "70%" : "20%");
+            btnRes.innerHTML = total == 0 ? "Submit" : total;
+            btnRes.parentElement.disabled = total != 0;
+        }
+
+
 
     }; setTimeout(THIS.validate, 50);
 
