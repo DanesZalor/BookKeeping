@@ -106,10 +106,10 @@ const JournalEntryRow = function (accountTitle, amount) {
 
     let THIS = new Component('tr', {
         className: "JournalEntryRow",
-        isDebit: amount > 0,
+        isDebit: amount >= 0,
     });
 
-    let accountInp = new AccountInput(accountTitle);
+    let accountInp = new AccountInput(accountTitle)
     let amountInp = new AmountInput(amount);
 
     THIS.addEventListener("keypress", (event) => {

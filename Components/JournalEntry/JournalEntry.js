@@ -1,10 +1,17 @@
 import { Component } from "../Component.js";
 import { JournalEntryRow } from "./JournalEntryRow/JournalEntryRow.js";
 
+const JournalEntryContextMenuItem = function (text, onClick) {
+    let THIS = new Component('div', {
+        className: "ContextMenuItem",
+        style: ``,
+        innerHTML: text,
+        onclick: function () { onClick(); }
+    });
+    return THIS;
+}
 
 const JournalEntryRow_ContextMenu = function () {
-
-
     let THIS = new Component('div', {
         className: "ContextMenu",
         style: `
@@ -14,11 +21,6 @@ const JournalEntryRow_ContextMenu = function () {
             padding:10px;
             box-shadow: 1px 1px 5px #00000088;
             `,
-        innerHTML: `
-        <div class="ContextMenuItem">Add Row Above</div>
-        <div class="ContextMenuItem">Add Row Below</div>
-        <div class="ContextMenuItem">Delete Row</div>
-        <div class="ContextMenuItem">X</div>`,
         SelectedJournalEntryRow: null,
     });
 
@@ -35,32 +37,22 @@ const JournalEntryRow_ContextMenu = function () {
         THIS.SelectedJournalEntryRow = null;
     }
 
-    /*Onclick Operations*/{
+    THIS.appendChild(new JournalEntryContextMenuItem("insert row above", function () {
+        THIS.JournalEntryParent.addRow(new JournalEntryRow(), THIS.SelectedJournalEntryRow, true);
+    }));
 
-        // ADD above
-        THIS.children[0].onclick = function () {
-            THIS.JournalEntryParent.addRow(new JournalEntryRow(), THIS.SelectedJournalEntryRow, true);
-        }
+    THIS.appendChild(new JournalEntryContextMenuItem("insert row below", function () {
+        THIS.JournalEntryParent.addRow(new JournalEntryRow(), THIS.SelectedJournalEntryRow, false);
+    }));
 
-        // ADD below
-        THIS.children[1].onclick = function () {
-            THIS.JournalEntryParent.addRow(new JournalEntryRow(), THIS.SelectedJournalEntryRow, false);
-        }
+    THIS.appendChild(new JournalEntryContextMenuItem("delete this row", function () {
+        THIS.JournalEntryParent.removeRow(THIS.SelectedJournalEntryRow);
+    }));
 
-        // DELETE
-        THIS.children[2].onclick = function () {
-            THIS.JournalEntryParent.removeRow(THIS.SelectedJournalEntryRow);
-        }
-
-        for (let item of THIS.children)
-            item.addEventListener('click',
-                function () {
-                    THIS.hide();
-                    setTimeout(THIS.JournalEntryParent.validate, 50)
-                }
-            );
-    }
-
+    THIS.addEventListener('click', function () {
+        THIS.hide();
+        setTimeout(THIS.JournalEntryParent.validate, 50)
+    });
 
 
     return THIS;
