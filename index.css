@@ -28,7 +28,8 @@ tr {
 
 
 .TableBody>tr>td>*,
-.TableFooter>tr>td>* {
+.TableFooter>tr>td>*,
+.TableFooter>tr>td>*>* {
     width: inherit;
     box-sizing: border-box;
 }

@@ -112,7 +112,7 @@ const JournalEntryRow = function (accountTitle, amount) {
 
         return {
             problem: inputProblem,
-            amount: inputProblem.length > 0 ? 0 : amountInp.getValue()
+            amount: isNaN(amountInp.getValue()) ? 0 : amountInp.getValue() * (THIS.isDebit ? 1 : -1),
         };
     }
 

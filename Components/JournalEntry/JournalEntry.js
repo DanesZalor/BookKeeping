@@ -124,20 +124,8 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
 
 
         /*add events signals*/{
-            const handlerFunc = function (event) {
-                if (isNaN(event.key) && event.key != '.' && event.key != '-')
-                    event.preventDefault();
-
-                // wait after change has been applied
-                else setTimeout(THIS.validate, 50);
-            }
-
-            //jeRow.addEventListener('keypress', handlerFunc);
-            /*
-            jeRow.getElementsByClassName('AmountInput_input')[0].addEventListener('keypress', handlerFunc);
-            jeRow.getElementsByClassName('AmountInput_input')[0].addEventListener('blur', THIS.validate);
-            jeRow.getElementsByClassName('AmountInput_input')[0].addEventListener('change', THIS.validate);
-            */
+            jeRow.addEventListener('keyup', THIS.validate);
+            jeRow.addEventListener('change', THIS.validate);
         }
 
         let tableBody = THIS.getElementsByClassName('TableBody')[0];
@@ -150,14 +138,20 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
 
     THIS.validate = function () {
 
+        console.log("validate call");
         let validityResult = true;
         let rows = THIS.getElementsByClassName('JournalEntryRow');
-        let btnRes = THIS.getElementsByClassName('JournalEntryTotal')[0];
+        let btnRes = THIS.getElementsByClassName('JournalEntryTotal')[0].children[0];
 
         let total = 0;
         for (let row of rows) {
-
+            let rowvalidityres = row.validityCheck();
+            total += rowvalidityres.amount;
         }
+
+        btnRes.style.paddingRight = total == 0 ? "45%" : (total > 0 ? "70%" : "20%");
+        btnRes.innerHTML = total == 0 ? "Submit" : total;
+        btnRes.parentElement.disabled = total != 0;
 
     }; setTimeout(THIS.validate, 50);
 
