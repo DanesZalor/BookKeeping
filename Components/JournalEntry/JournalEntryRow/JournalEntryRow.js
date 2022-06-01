@@ -76,15 +76,15 @@ const JournalEntryRow = function (accountTitle, amount) {
 
     let THIS = new Component('tr', {
         innerHTML: `<div class="JournalEntryRow_ErrorMsg" style="
-            display: none;
             position:absolute;
+            display: none;
             background-color:#FFF5B9;
             vertical-align: center;
 
             border-width:2px;
             border-color:#EFE5A9;
             border-style:outset;
-        ">E</div>`,
+        "/>`,
         className: "JournalEntryRow",
         isDebit: amount > 0,
     });
@@ -117,7 +117,7 @@ const JournalEntryRow = function (accountTitle, amount) {
 
         let errorMsgBox = THIS.getElementsByClassName('JournalEntryRow_ErrorMsg')[0];
         errorMsgBox.innerHTML = inputProblem;
-        errorMsgBox.style.display = inputProblem.length > 0 ? "block" : "none";
+        errorMsgBox.style.display = inputProblem.length > 0 ? "inline-table" : "none";
 
         return {
             problem: inputProblem,
