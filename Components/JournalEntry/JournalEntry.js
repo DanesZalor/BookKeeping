@@ -91,6 +91,8 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
             </tr>
         </thead>
         <tbody class="TableBody">
+        </tbody>
+        <tbody class="TableFooter">
             <tr class="JournalEntryFooter">
                 <td class="JournalEntrySummary">
                     <textarea placeholder="entry summary" style="resize:none;"></textarea>
@@ -138,12 +140,11 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
         }
 
         let tableBody = THIS.getElementsByClassName('TableBody')[0];
-        if (pivot != null) tableBody.insertBefore(jeRow, before ? pivot : pivot.nextSibling);
-        else {
+        if (pivot != null)
+            tableBody.insertBefore(jeRow, before ? pivot : pivot.nextSibling);
+        else
             tableBody.appendChild(jeRow);
-            tableBody.appendChild(THIS.getElementsByClassName('JournalEntryFooter')[0]);
-            // add a new row and put the footer row at the bottom
-        }
+
     }
 
     THIS.validate = function () {
