@@ -17,9 +17,7 @@
 }
 
 
-tr {
-    background-color: #ecedef;
-}
+
 
 /* Journal EntryTable */
 .TableFooter>tr>td>button {
@@ -35,7 +33,21 @@ tr {
 }
 
 
+.TableBody>*>* {
+    padding: 0px 2px 6px 2px;
+}
+
+.TableFooter>tr>td {
+    padding-top: 5px;
+
+}
+
+tr {
+    background-color: #ecedef;
+}
+
 
 td {
-    width: 300px;
+    padding: 2px;
+    width: 250px;
 }

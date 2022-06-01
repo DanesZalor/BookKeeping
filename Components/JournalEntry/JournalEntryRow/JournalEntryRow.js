@@ -75,7 +75,7 @@ const AmountInput = function (value) {
 const JournalEntryRow = function (accountTitle, amount) {
 
     let THIS = new Component('tr', {
-        innerHTML: `<span class="JournalEntryRow_ErrorMsg" style="display: none;">E</span>`,
+        innerHTML: `<div class="JournalEntryRow_ErrorMsg" style="display: none;">E</div>`,
         className: "JournalEntryRow",
         isDebit: amount > 0,
     });

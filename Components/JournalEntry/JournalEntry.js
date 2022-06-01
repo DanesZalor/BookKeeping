@@ -74,36 +74,49 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
     } else throw `JournalEntry.constructor(data) shape mismatch ${data}`;
 
 
-    let THIS = new Component('table', {
+    let THIS = new Component('div', {
         innerHTML: `
-        <thead class="TableHeader">
-            <tr>
-                <td style="text-align:center;">Account Titles</td>
-                <td>
-                    <div style="text-align:center;">(Php)</div>
-                    <table>
-                    <tr>
-                        <td style="text-align:center;"> Debit </td>
-                        <td style="text-align:center;"> Crebit </td>
-                    </tr>
-                    </table>
-                </td>
-            </tr>
-        </thead>
-        <tbody class="TableBody">
-        </tbody>
-        <tbody class="TableFooter">
-            <tr class="JournalEntryFooter">
-                <td class="JournalEntrySummary">
-                    <textarea placeholder="entry summary" style="resize:none;"></textarea>
-                </td>
-                <td class="JournalEntryTotalTD" style="vertical-align: top;">
-                    <button disabled=true class="JournalEntryTotal" style="text-align:right;">
-                        <span>Total</span>
-                    </button>
-                </td>
-            </tr>
-        </tbody>`,
+        <table style="
+            border-collapse: collapse; 
+            border-style: outset; 
+            border-width:2px;
+            border-color: #dcdddf;
+            background:#ecedef
+        ">
+            <thead class="TableHeader">
+                <tr>
+                    <td style="text-align:center;">Account Titles</td>
+                    <td>
+                        <div style="text-align:center;">(Php)</div>
+                        <table>
+                        <tr>
+                            <td style="text-align:center;"> Debit </td>
+                            <td style="text-align:center;"> Crebit </td>
+                        </tr>
+                        </table>
+                    </td>
+                </tr>
+            </thead>
+            <tbody class="TableBody">
+                <!-- add rows here -->
+            </tbody>
+            <tbody class="TableFooter" style="
+                border-top-width: 2px; 
+                border-top-style: inset; 
+                border-top-color: #dcdddf;
+            ">
+                <tr class="JournalEntryFooter">
+                    <td class="JournalEntrySummary">
+                        <textarea placeholder="entry summary" style="resize:none;"></textarea>
+                    </td>
+                    <td class="JournalEntryTotalTD" style="vertical-align: top;">
+                        <button disabled=true class="JournalEntryTotal" style="text-align:right;">
+                            <span>Total</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>`,
         className: "JournalEntry",
         ContextMenu: new JournalEntryRow_ContextMenu(),
     });
