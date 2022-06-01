@@ -5,7 +5,14 @@ const JEInput = function (placeholder, value = "", properties = {}) {
     let THIS = new Component('td', {
         className: "JEInput",
         innerHTML: `<input placeholder="${placeholder}" value="${value}" 
-            style="">
+            style="
+                font-size: 15px;
+                font-weight: 400;
+                color: #1c1d1f;
+                padding: 8px;
+                border-style:none;
+                margin: 0px 5px 1px 5px;
+            ">
             <span class="InputErrorMsg" style="
                 color:#ff0000;
                 font-size: 12px;

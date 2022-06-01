@@ -7,17 +7,6 @@ thead {
     color: #8c8d8f;
 }
 
-.AccountInput>input,
-.AmountInput>input {
-    font-size: 15px;
-    font-weight: 400;
-    color: #1c1d1f;
-    padding: 8px;
-
-
-
-}
-
 input,
 textarea {
     border-style: none;
