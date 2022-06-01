@@ -4,10 +4,18 @@ import { JournalEntryRow } from "./JournalEntryRow/JournalEntryRow.js";
 
 const JournalEntryRow_ContextMenu = function () {
 
+
     let THIS = new Component('div', {
         className: "ContextMenu",
-        style: "visibility: hidden; position:absolute;",
-        innerHTML: `<div class="ContextMenuItem">Add Row Above</div>
+        style: `
+            visibility: hidden; 
+            position:absolute; 
+            background-color: #f6f7f9;
+            padding:10px;
+            box-shadow: 1px 1px 5px #00000088;
+            `,
+        innerHTML: `
+        <div class="ContextMenuItem">Add Row Above</div>
         <div class="ContextMenuItem">Add Row Below</div>
         <div class="ContextMenuItem">Delete Row</div>
         <div class="ContextMenuItem">X</div>`,
@@ -22,8 +30,8 @@ const JournalEntryRow_ContextMenu = function () {
     }
     THIS.hide = function () {
         THIS.style.visibility = "hidden";
-        THIS.style.top = "2000px";
-        THIS.style.left = "2000px";
+        THIS.style.top = "0px";
+        THIS.style.left = "0px";
         THIS.SelectedJournalEntryRow = null;
     }
 
@@ -78,10 +86,9 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
         innerHTML: `
         <table style="
             border-collapse: collapse; 
-            border-style: outset; 
-            border-width:2px;
-            border-color: #dcdddf;
+            box-shadow: 1px 1px 5px #00000088;
             background:#ecedef;
+            
             margin:auto;
         ">
             <thead class="TableHeader">
@@ -102,9 +109,9 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
                 <!-- add rows here -->
             </tbody>
             <tbody class="TableFooter" style="
-                border-top-width: 2px; 
-                border-top-style: inset; 
-                border-top-color: #dcdddf;
+                border-top-width: 1px; 
+                border-top-style: solid; 
+                border-top-color: #cccdcf;
             ">
                 <tr class="JournalEntryFooter">
                     <td class="JournalEntrySummary">

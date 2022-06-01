@@ -5,7 +5,8 @@ const JEInput = function (placeholder, value = "", properties = {}) {
     let THIS = new Component('td', {
         className: "JEInput",
         innerHTML: `<input placeholder="${placeholder}" value="${value}" 
-            style="">
+            style="
+            ">
         </input>`,
         ...properties
     });
@@ -83,15 +84,12 @@ const JournalEntryRow = function (accountTitle, amount) {
             display: none;
             background-color:#f7fcc9;
             color:#383838;
-            box-shadow: 2px 2px 10px #00000088;
+            box-shadow: 2px 2px 10px #000000aa;
             
             padding:10px;
             margin-left: 2px;
 
             font-size: 14px;
-            border-width:2px;
-            border-color:#FFF5c9;
-            border-style:solid;
         "/>`,
         className: "JournalEntryRow",
         isDebit: amount > 0,

@@ -12,10 +12,17 @@ thead {
     font-size: 15px;
     font-weight: 400;
     color: #1c1d1f;
-    background-color: #f7f8fa;
-    border-color: #ecedef;
-    border-style: groove;
     padding: 8px;
+
+
+
+}
+
+input,
+textarea {
+    border-style: none;
+    box-shadow: 1px 1px 5px #00000022;
+    margin: 0px 5px 1px 5px;
 }
 
 textarea {
@@ -23,12 +30,6 @@ textarea {
 }
 
 /*CONTEXT MENU STUFF*/
-.ContextMenu {
-    background-color: #f7f8f9;
-    border-color: #ecedef;
-    border-style: solid;
-    border-width: 3px;
-}
 
 .ContextMenu>.ContextMenuItem {
     margin: 7px;
