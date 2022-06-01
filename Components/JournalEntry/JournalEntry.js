@@ -81,7 +81,8 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
             border-style: outset; 
             border-width:2px;
             border-color: #dcdddf;
-            background:#ecedef
+            background:#ecedef;
+            margin:auto;
         ">
             <thead class="TableHeader">
                 <tr>
@@ -130,10 +131,15 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
             throw "param 1 must be an instance of JournalEntryRow";
 
         // !!! ...spread does not work. it doesnt pass the Node inheritance
-        jeRow.addEventListener('contextmenu', (event) => {
-            event.preventDefault();
-            THIS.ContextMenu.showAt(event.pageX, event.pageY, jeRow);
-        }, false);
+        {
+            let contextMenuFunc = (event) => {
+                event.preventDefault();
+                THIS.ContextMenu.showAt(event.pageX, event.pageY, jeRow);
+            }
+            jeRow.children[0].addEventListener('contextmenu', contextMenuFunc, false);
+            jeRow.children[1].addEventListener('contextmenu', contextMenuFunc, false);
+        }
+
 
 
         /*add events signals*/{

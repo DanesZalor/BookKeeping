@@ -36,7 +36,10 @@ const AccountInput = function (value) {
 
 const AmountInput = function (value) {
 
-    let THIS = new JEInput("0", Math.abs(value), { className: "AmountInput" });
+    value = parseFloat(value);
+    if (isNaN(value)) value = "";
+
+    let THIS = new JEInput("0", Math.abs(value) == 0 ? "" : Math.abs(value), { className: "AmountInput" });
 
     THIS.inputChild.style.textAlign = "right";
 
@@ -78,12 +81,17 @@ const JournalEntryRow = function (accountTitle, amount) {
         innerHTML: `<div class="JournalEntryRow_ErrorMsg" style="
             position:absolute;
             display: none;
-            background-color:#FFF5B9;
-            vertical-align: center;
+            background-color:#f7fcc9;
+            color:#383838;
+            box-shadow: 2px 2px 10px #00000088;
+            
+            padding:10px;
+            margin-left: 2px;
 
+            font-size: 14px;
             border-width:2px;
-            border-color:#EFE5A9;
-            border-style:outset;
+            border-color:#FFF5c9;
+            border-style:solid;
         "/>`,
         className: "JournalEntryRow",
         isDebit: amount > 0,
@@ -117,7 +125,7 @@ const JournalEntryRow = function (accountTitle, amount) {
 
         let errorMsgBox = THIS.getElementsByClassName('JournalEntryRow_ErrorMsg')[0];
         errorMsgBox.innerHTML = inputProblem;
-        errorMsgBox.style.display = inputProblem.length > 0 ? "inline-table" : "none";
+        errorMsgBox.style.display = inputProblem.length > 0 ? "block" : "none";
 
         return {
             problem: inputProblem,

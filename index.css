@@ -1,3 +1,28 @@
+/*MAIN STUFF*/
+
+
+thead {
+    font-weight: 700;
+    font-size: 22px;
+    color: #8c8d8f;
+}
+
+.AccountInput>input,
+.AmountInput>input {
+    font-size: 15px;
+    font-weight: 400;
+    color: #1c1d1f;
+    background-color: #f7f8fa;
+    border-color: #ecedef;
+    border-style: groove;
+    padding: 8px;
+}
+
+textarea {
+    padding: 10px;
+}
+
+/*CONTEXT MENU STUFF*/
 .ContextMenu {
     background-color: #f7f8f9;
     border-color: #ecedef;
@@ -49,5 +74,5 @@ tr {
 
 td {
     padding: 2px;
-    width: 250px;
+    width: 400px;
 }
