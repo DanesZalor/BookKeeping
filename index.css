@@ -1,21 +1,7 @@
 /*MAIN STUFF*/
-body {
-    background-color: #ecedef;
-}
 
-thead {
-    font-weight: 700;
-    font-size: 22px;
-    color: #8c8d8f;
-}
-
-textarea {
-    padding: 10px;
-    margin-left: 5px;
-}
 
 /*CONTEXT MENU STUFF*/
-
 .ContextMenu>.ContextMenuItem {
     margin: 7px;
     color: #606060;
@@ -27,6 +13,55 @@ textarea {
     font-weight: 500;
 }
 
+/*Table Content Styles*/
+
+thead {
+    font-weight: 700;
+    font-size: 22px;
+    color: #8c8d8f;
+}
+
+thead>tr>td {
+    border-color: #00000033;
+    border-style: solid;
+    border-bottom-width: 1px;
+}
+
+td {
+    width: 250px;
+    border-style: none;
+    border-width: 0px 0px 0px 0px;
+    border-color: transparent
+}
+
+.TableBody>.JournalEntryRow>td:first-child {
+    border-color: #00000033;
+    border-right-width: 1px;
+    border-style: solid;
+    width: 300px;
+}
+
+.JournalEntrySummary {
+    width: 300px;
+    padding: 10px;
+    margin-left: 5px;
+}
+
+.AccountInput>input,
+.AmountInput>input {
+    outline-style: none;
+    border-width: 0px;
+    color: #606060;
+}
+
+.AccountInput>input:focus,
+.AmountInput>input:focus {
+    outline-style: none;
+    border-bottom-width: 1px;
+    border-bottom-color: #000000;
+    color: #202020;
+    font-weight: 600;
+}
 
 /*Button stuff*/
 button {
@@ -66,14 +101,4 @@ button:active {
 .TableFooter>tr>td {
     padding-top: 5px;
 
-}
-
-tr {
-    background-color: #ecedef;
-}
-
-
-td {
-    padding: 2px;
-    width: 250px;
 }

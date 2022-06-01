@@ -6,7 +6,7 @@ const JournalEntryContextMenuItem = function (text, onClick) {
         className: "ContextMenuItem",
         style: ``,
         innerHTML: text,
-        onclick: function () { onClick(); }
+        onclick: function () { if (onClick != null) onClick(); }
     });
     return THIS;
 }
@@ -37,23 +37,26 @@ const JournalEntryRow_ContextMenu = function () {
         THIS.SelectedJournalEntryRow = null;
     }
 
-    THIS.appendChild(new JournalEntryContextMenuItem("insert row above", function () {
-        THIS.JournalEntryParent.addRow(new JournalEntryRow(), THIS.SelectedJournalEntryRow, true);
-    }));
+    /* Add JournalEntryContextMenuItems*/{
+        THIS.appendChild(new JournalEntryContextMenuItem("insert row above", function () {
+            THIS.JournalEntryParent.addRow(new JournalEntryRow(), THIS.SelectedJournalEntryRow, true);
+        }));
 
-    THIS.appendChild(new JournalEntryContextMenuItem("insert row below", function () {
-        THIS.JournalEntryParent.addRow(new JournalEntryRow(), THIS.SelectedJournalEntryRow, false);
-    }));
+        THIS.appendChild(new JournalEntryContextMenuItem("insert row below", function () {
+            THIS.JournalEntryParent.addRow(new JournalEntryRow(), THIS.SelectedJournalEntryRow, false);
+        }));
 
-    THIS.appendChild(new JournalEntryContextMenuItem("delete this row", function () {
-        THIS.JournalEntryParent.removeRow(THIS.SelectedJournalEntryRow);
-    }));
+        THIS.appendChild(new JournalEntryContextMenuItem("delete this row", function () {
+            THIS.JournalEntryParent.removeRow(THIS.SelectedJournalEntryRow);
+        }));
+
+        THIS.appendChild(new JournalEntryContextMenuItem("cancel"));
+    }
 
     THIS.addEventListener('click', function () {
         THIS.hide();
         setTimeout(THIS.JournalEntryParent.validate, 50)
     });
-
 
     return THIS;
 };
@@ -78,8 +81,6 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
         innerHTML: `
         <table style="
             border-collapse: collapse; 
-            background:#ecedef;
-            
             margin-left:auto;
             margin-right:auto;
         ">
