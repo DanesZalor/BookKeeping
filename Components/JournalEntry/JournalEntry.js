@@ -132,6 +132,7 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
                 else setTimeout(THIS.validate, 50);
             }
 
+            //jeRow.addEventListener('keypress', handlerFunc);
             /*
             jeRow.getElementsByClassName('AmountInput_input')[0].addEventListener('keypress', handlerFunc);
             jeRow.getElementsByClassName('AmountInput_input')[0].addEventListener('blur', THIS.validate);
@@ -148,6 +149,15 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
     }
 
     THIS.validate = function () {
+
+        let validityResult = true;
+        let rows = THIS.getElementsByClassName('JournalEntryRow');
+        let btnRes = THIS.getElementsByClassName('JournalEntryTotal')[0];
+
+        let total = 0;
+        for (let row of rows) {
+
+        }
 
     }; setTimeout(THIS.validate, 50);
 

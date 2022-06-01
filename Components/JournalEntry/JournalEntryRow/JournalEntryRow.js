@@ -21,7 +21,12 @@ const JEInput = function (placeholder, value = "", properties = {}) {
 const AccountInput = function (value) {
     let THIS = new JEInput("", value, { className: "AccountInput" });
 
-    THIS.validate = () => THIS.getValue() != "";
+    THIS.validate = () => {
+        if (THIS.getValue() == "") {
+            return "Input cannot be empty";
+        }
+        else return "";
+    };
 
     THIS.setFormat = (isDebit) => THIS.inputChild.style.paddingLeft = isDebit ? "10%" : "20%";
 
@@ -47,7 +52,14 @@ const AmountInput = function (value) {
 
     });
 
-    THIS.validate = () => !isNaN(parseFloat(THIS.getValue()));
+    THIS.validate = () => {
+        if (THIS.getValue() == "" || parseFloat(THIS.getValue()) == 0) {
+            return "Input can't be 0";
+        }
+        else if (isNaN(parseFloat(THIS.getValue())))
+            return "Input should be a number";
+        else return "";
+    }
 
     THIS.setFormat = (isDebit) => THIS.inputChild.style.paddingRight = isDebit ? "70%" : "20%";
 
@@ -63,6 +75,7 @@ const AmountInput = function (value) {
 const JournalEntryRow = function (accountTitle, amount) {
 
     let THIS = new Component('tr', {
+        innerHTML: `<span class="JournalEntryRow_ErrorMsg" style="display: none;">E</span>`,
         className: "JournalEntryRow",
         isDebit: amount > 0,
     });
@@ -79,15 +92,33 @@ const JournalEntryRow = function (accountTitle, amount) {
             accountInp.setFormat(THIS.isDebit);
             amountInp.setFormat(THIS.isDebit);
         }
-    }, false);
+    }, true);
 
     THIS.update = function () {
         accountInp.setFormat(THIS.isDebit);
         amountInp.setFormat(THIS.isDebit);
     }
 
-    THIS.appendChild(accountInp);
-    THIS.appendChild(amountInp);
+    THIS.validityCheck = function () {
+
+        let inputProblem = accountInp.validate();
+
+        if (inputProblem.length == 0)
+            inputProblem = amountInp.validate();
+
+        let errorMsgBox = THIS.getElementsByClassName('JournalEntryRow_ErrorMsg')[0];
+        errorMsgBox.innerHTML = inputProblem;
+        errorMsgBox.style.display = inputProblem.length > 0 ? "inline" : "none";
+
+        return {
+            problem: inputProblem,
+            amount: inputProblem.length > 0 ? 0 : amountInp.getValue()
+        };
+    }
+
+
+    THIS.insertBefore(amountInp, THIS.children[0]);
+    THIS.insertBefore(accountInp, THIS.children[0]);
 
     THIS.update();
 
