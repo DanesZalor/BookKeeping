@@ -51,17 +51,27 @@ td {
 .AmountInput>input {
     outline-style: none;
     border-width: 0px;
+    border-bottom-color: #000000;
     color: #606060;
+}
+
+.AccountInput>input.invalid,
+.AmountInput>input.invalid {
+    border-bottom-color: red;
+    border-bottom-width: 1px;
 }
 
 .AccountInput>input:focus,
 .AmountInput>input:focus {
     outline-style: none;
     border-bottom-width: 1px;
-    border-bottom-color: #000000;
     color: #202020;
-    font-weight: 600;
+    font-weight: 800;
 }
+
+
+
+
 
 /*Button stuff*/
 button {

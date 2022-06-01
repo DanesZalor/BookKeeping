@@ -12,6 +12,7 @@ const JEInput = function (placeholder, value = "", properties = {}) {
                 margin: 0px 5px 1px 5px;
             ">
             <span class="InputErrorMsg" style="
+                width:100%;
                 color:#ff0000;
                 font-size: 10px;
             "></span>
@@ -30,7 +31,7 @@ const JEInput = function (placeholder, value = "", properties = {}) {
         THIS.errorBox.innerHTML = msg;
         THIS.errorBox.style.paddingLeft = msg.length == 0 ? "0px" : "20px";
         THIS.errorBox.style.visibility = msg.length == 0 ? "hidden" : "visible"
-        //THIS.inputChild.style.borderBottomColor = msg.length == 0 ? "#00000000" : "#ff0000";
+        THIS.inputChild.className = msg.length == 0 ? "normal" : "invalid";
     }
 
     return THIS;
