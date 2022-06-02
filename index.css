@@ -56,7 +56,6 @@ td {
 .TableBody>tr>td>*,
 .TableFooter>tr>td>*,
 .TableFooter>tr>td>*>* {
-
     box-sizing: border-box;
     width: inherit;
 }

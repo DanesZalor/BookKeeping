@@ -133,8 +133,9 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
 
     THIS.addRow = function (jeRow, pivot = null, before = true) {
 
-        if (!(jeRow.IS_COMPONENT && jeRow.className == "JournalEntryRow"))
-            throw "param 1 must be an instance of JournalEntryRow";
+
+        if (!(jeRow.IS_COMPONENT && jeRow.className.indexOf("JournalEntryRow") >= 0))
+            throw "addRow() param 1 must be an instance of JournalEntryRow";
 
         // !!! ...spread does not work. it doesnt pass the Node inheritance
         {

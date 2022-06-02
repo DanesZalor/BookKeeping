@@ -1,0 +1,64 @@
+/* Input box */
+.JEInput>input {
+    outline-style: none;
+    border-width: 0px;
+    border-bottom-color: #606060;
+    border-style: solid;
+    color: #606060;
+    font-size: 15px;
+    padding: 8px;
+    margin: 5px 5px 0px 5px;
+}
+
+.JEInput>input:hover {
+    background-color: #00000006;
+}
+
+.JEInput>input:focus {
+    outline-style: none;
+    border-bottom-width: 1px;
+    color: #202020;
+    font-weight: 300;
+    background-color: #00000009;
+}
+
+.JEInput.Error>input {
+    background-color: #ffecec;
+    border-bottom-color: red;
+    border-bottom-width: 1px;
+}
+
+/*Error Box*/
+.JEInput>span {
+    width: 100%;
+    color: #ff0000;
+    font-size: 10px;
+    padding-left: 20%;
+    display: none;
+}
+
+.JEInput.Error>span.InputErrorMsg {
+    display: inline;
+}
+
+/*Amount Input*/
+.AmountInput>input {
+    text-align: right;
+}
+
+/* DEBIT|CREDIT padding */
+.JournalEntryRow.Debit>.AccountInput>input {
+    padding-left: 10%;
+}
+
+.JournalEntryRow.Credit>.AccountInput>input {
+    padding-left: 20%;
+}
+
+.JournalEntryRow.Debit>.AmountInput>input {
+    padding-right: 70%;
+}
+
+.JournalEntryRow.Credit>.AmountInput>input {
+    padding-right: 20%;
+}

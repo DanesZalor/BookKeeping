@@ -1,21 +1,12 @@
 import { Component } from "../../Component.js";
 
+Component.addCSS('./Components/JournalEntry/JournalEntryRow/JEInput.css');
 
 const JEInput = function (placeholder, value = "", properties = {}) {
     let THIS = new Component('td', {
         className: "JEInput",
-        innerHTML: `<input placeholder="${placeholder}" value="${value}" 
-            style="
-                font-size: 15px;
-                font-weight: 400;
-                padding: 8px;
-                margin: 0px 5px 1px 5px;
-            ">
-            <span class="InputErrorMsg" style="
-                width:100%;
-                color:#ff0000;
-                font-size: 10px;
-            "></span>
+        innerHTML: `<input placeholder="${placeholder}" value="${value}">
+            <span class="InputErrorMsg"></span>
         </input>`,
         ...properties
     });
@@ -29,16 +20,20 @@ const JEInput = function (placeholder, value = "", properties = {}) {
 
     THIS.setErrorMsg = function (msg) {
         THIS.errorBox.innerHTML = msg;
-        THIS.errorBox.style.paddingLeft = msg.length == 0 ? "0px" : "20px";
-        THIS.errorBox.style.visibility = msg.length == 0 ? "hidden" : "visible"
-        THIS.inputChild.className = msg.length == 0 ? "Input-normal" : "Input-invalid";
+
+        if (msg.length == 0) {
+            THIS.className = THIS.className.replace(" Error", "");
+        } else {
+            if (THIS.className.indexOf("Error") < 0)
+                THIS.className = THIS.className + " Error";
+        }
     }
 
     return THIS;
 }
 
 const AccountInput = function (value) {
-    let THIS = new JEInput("", value, { className: "AccountInput" });
+    let THIS = new JEInput("", value, { className: "JEInput AccountInput" });
 
     THIS.validate = () => {
         let msgreturn = "";
@@ -50,9 +45,6 @@ const AccountInput = function (value) {
         return msgreturn;
     };
 
-    THIS.setFormat = (isDebit) => THIS.inputChild.style.paddingLeft = isDebit ? "10%" : "20%";
-
-
     return THIS;
 }
 
@@ -61,9 +53,7 @@ const AmountInput = function (value) {
     value = parseFloat(value);
     if (isNaN(value)) value = "";
 
-    let THIS = new JEInput("0", Math.abs(value) == 0 ? "" : Math.abs(value), { className: "AmountInput" });
-
-    THIS.inputChild.style.textAlign = "right";
+    let THIS = new JEInput("0", Math.abs(value) == 0 ? "" : Math.abs(value), { className: "JEInput AmountInput" });
 
     THIS.addEventListener("keypress", (event) => {
 
@@ -90,8 +80,6 @@ const AmountInput = function (value) {
         return msgreturn;
     }
 
-    THIS.setFormat = (isDebit) => THIS.inputChild.style.paddingRight = isDebit ? "70%" : "20%";
-
     return THIS;
 }
 
@@ -104,9 +92,10 @@ const AmountInput = function (value) {
 const JournalEntryRow = function (accountTitle, amount) {
 
     let THIS = new Component('tr', {
-        className: "JournalEntryRow",
-        isDebit: amount >= 0,
+        className: amount >= 0 ? "JournalEntryRow Debit" : "JournalEntryRow Credit",
+        isDebit: (amount >= 0),
     });
+
 
     let accountInp = new AccountInput(accountTitle)
     let amountInp = new AmountInput(amount);
@@ -117,15 +106,13 @@ const JournalEntryRow = function (accountTitle, amount) {
             event.preventDefault();
             //console.log(THIS.isDebit);
 
-            accountInp.setFormat(THIS.isDebit);
-            amountInp.setFormat(THIS.isDebit);
+            THIS.updateTabs();
         }
     }, true);
 
-    THIS.update = function () {
-        accountInp.setFormat(THIS.isDebit);
-        amountInp.setFormat(THIS.isDebit);
-    }
+    THIS.updateTabs = () => {
+        THIS.className = THIS.isDebit ? "JournalEntryRow Debit" : "JournalEntryRow Credit";
+    };
 
     THIS.validityCheck = function () {
 
@@ -146,11 +133,9 @@ const JournalEntryRow = function (accountTitle, amount) {
     THIS.insertBefore(amountInp, THIS.children[0]);
     THIS.insertBefore(accountInp, THIS.children[0]);
 
-    THIS.update();
-
     return THIS;
 };
 
-Component.addCSS('./Components/JournalEntry/JournalEntryRow/JournalEntryRow.css');
+
 
 export { JournalEntryRow };
