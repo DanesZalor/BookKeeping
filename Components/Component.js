@@ -8,7 +8,20 @@ const Component = function (tagName, properties = {}) {
 
     let THIS = document.createElement(tagName, { prototype: HTMLElement.prototype });
     Object.assign(THIS, properties, { IS_COMPONENT: true });
+
     return THIS;
 }
+
+Component.addCSS = function (filename) {
+    let style = document.createElement('link');
+
+    Object.assign(style, {
+        href: filename,
+        type: 'text/css',
+        rel: 'stylesheet'
+    });
+
+    document.getElementsByTagName('head')[0].append(style);
+};
 
 export { Component };

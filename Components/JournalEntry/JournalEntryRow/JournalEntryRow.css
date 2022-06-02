@@ -1,0 +1,21 @@
+.AccountInput>input,
+.AmountInput>input {
+    outline-style: none;
+    border-width: 0px;
+    border-bottom-color: #000000;
+    color: #606060;
+}
+
+.AccountInput>.Input-invalid,
+.AmountInput>.Input-invalid {
+    border-bottom-color: red;
+    border-bottom-width: 1px;
+}
+
+.AccountInput>input:focus,
+.AmountInput>input:focus {
+    outline-style: none;
+    border-bottom-width: 1px;
+    color: #202020;
+    font-weight: 800;
+}

@@ -47,48 +47,6 @@ td {
     margin-left: 5px;
 }
 
-.AccountInput>input,
-.AmountInput>input {
-    outline-style: none;
-    border-width: 0px;
-    border-bottom-color: #000000;
-    color: #606060;
-}
-
-.AccountInput>input.invalid,
-.AmountInput>input.invalid {
-    border-bottom-color: red;
-    border-bottom-width: 1px;
-}
-
-.AccountInput>input:focus,
-.AmountInput>input:focus {
-    outline-style: none;
-    border-bottom-width: 1px;
-    color: #202020;
-    font-weight: 800;
-}
-
-
-
-
-
-/*Button stuff*/
-button {
-    border-style: none;
-    box-shadow: 1px 1px 5px #00000088;
-    background-color: #e2e3e5;
-}
-
-button:disabled {
-    background-color: transparent;
-    box-shadow: 1px 1px 5px #00000000;
-}
-
-button:active {
-    background-color: #acadaf;
-}
-
 /* Journal EntryTable */
 .TableFooter>tr>td>button {
     width: 100%;

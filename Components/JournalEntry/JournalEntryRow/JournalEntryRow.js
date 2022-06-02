@@ -31,7 +31,7 @@ const JEInput = function (placeholder, value = "", properties = {}) {
         THIS.errorBox.innerHTML = msg;
         THIS.errorBox.style.paddingLeft = msg.length == 0 ? "0px" : "20px";
         THIS.errorBox.style.visibility = msg.length == 0 ? "hidden" : "visible"
-        THIS.inputChild.className = msg.length == 0 ? "normal" : "invalid";
+        THIS.inputChild.className = msg.length == 0 ? "Input-normal" : "Input-invalid";
     }
 
     return THIS;
@@ -150,5 +150,7 @@ const JournalEntryRow = function (accountTitle, amount) {
 
     return THIS;
 };
+
+Component.addCSS('./Components/JournalEntry/JournalEntryRow/JournalEntryRow.css');
 
 export { JournalEntryRow };
