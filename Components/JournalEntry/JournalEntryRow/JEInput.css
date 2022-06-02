@@ -46,6 +46,7 @@
     text-align: right;
 }
 
+
 /* DEBIT|CREDIT padding */
 .JournalEntryRow.Debit>.AccountInput>input {
     padding-left: 10%;
