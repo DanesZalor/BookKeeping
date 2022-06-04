@@ -2,6 +2,7 @@ import { Component } from "../Component.js";
 import { ContextMenu } from "../ContextMenu/ContextMenu.js";
 import { JournalEntryRow } from "./JournalEntryRow/JournalEntryRow.js";
 
+Component.addCSS('./Components/JournalEntry/JEHeader.css');
 
 const JournalEntryRow_ContextMenu = function (xpos, ypos, selectedRow, journalEntryParent) {
 
@@ -69,13 +70,12 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
         ">
             <thead class="TableHeader">
                 <tr>
-                    <td style="text-align:center;">Account Titles</td>
+                    <td>Account Titles</td>
                     <td>
-                        <div style="text-align:center;">(Php)</div>
                         <table>
                         <tr>
-                            <td style="text-align:center;"> Debit </td>
-                            <td style="text-align:center;"> Crebit </td>
+                            <td> Debit </td>
+                            <td> Credit </td>
                         </tr>
                         </table>
                     </td>

@@ -1,23 +1,5 @@
 /*Table Content Styles*/
 
-thead {
-    font-weight: 700;
-    font-size: 22px;
-    color: #8c8d8f;
-}
-
-thead>tr>td {
-    border-color: #00000033;
-    border-style: solid;
-    border-bottom-width: 1px;
-}
-
-td {
-    width: 250px;
-    border-style: none;
-    border-width: 0px 0px 0px 0px;
-    border-color: transparent
-}
 
 .JournalEntrySummary {
     width: 300px;
@@ -31,9 +13,8 @@ td {
 }
 
 
-.TableBody>tr>td>*,
-.TableFooter>tr>td>*,
-.TableFooter>tr>td>*>* {
+.TableBody td>*,
+.TableFooter td>* {
     box-sizing: border-box;
     width: inherit;
 }
@@ -43,7 +24,7 @@ td {
     padding: 0px 2px 6px 2px;
 }
 
-.TableFooter>tr>td {
+.TableFooter td {
     padding-top: 5px;
 
 }

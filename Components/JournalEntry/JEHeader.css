@@ -1,0 +1,14 @@
+thead.TableHeader {
+    font-weight: 700;
+    font-size: 22px;
+    color: #6c6d6f;
+}
+
+thead.TableHeader * {
+    text-align: center;
+    width: 200px;
+}
+
+thead.TableHeader>tr>td {
+    border-bottom: 1px solid #00000033;
+}

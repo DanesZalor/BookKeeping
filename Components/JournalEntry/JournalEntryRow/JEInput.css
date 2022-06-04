@@ -1,9 +1,21 @@
+td.JEInput {
+    width: 200px;
+    border-style: none;
+}
+
+td.JEInput.AccountInput {
+    width: 300px;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: #00000033;
+}
+
 /* Input box */
 .JEInput>input {
     outline-style: none;
     border-width: 0px;
     border-bottom-color: #808080;
-    border-style: solid;
+    border-bottom-style: solid;
     color: #606060;
     font-size: 15px;
     padding: 8px 2px 2px 2px;
