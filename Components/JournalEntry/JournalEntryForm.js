@@ -5,6 +5,7 @@ import { JournalEntryRow } from "./JournalEntryRow/JournalEntryRow.js";
 Component.addCSS('./Components/JournalEntry/JEHeader.css');
 Component.addCSS('./Components/JournalEntry/JEFooter.css');
 Component.addCSS('./Components/JournalEntry/JEButton.css');
+Component.addCSS('./Components/JournalEntry/JournalEntryForm.css');
 
 const JournalEntryRow_ContextMenu = function (xpos, ypos, selectedRow, journalEntryParent) {
 
@@ -97,11 +98,7 @@ const JournalEntryForm = function (data = [{ account: "", amount: 0 }, { account
 
     let THIS = new Component('div', {
         innerHTML: `
-        <table style="
-            border-collapse: collapse; 
-            margin-left:auto;
-            margin-right:auto;
-        ">
+        <table>
             <thead class="TableHeader">
                 <tr>
                     <td>Account Titles</td>
@@ -128,7 +125,7 @@ const JournalEntryForm = function (data = [{ account: "", amount: 0 }, { account
                 </tr>
             </tbody>
         </table>`,
-        className: "JournalEntry",
+        className: "JournalEntryForm",
         ContextMenu: null,
     });
 
@@ -212,6 +209,7 @@ const JournalEntryForm = function (data = [{ account: "", amount: 0 }, { account
 
 
     }; setTimeout(THIS.validate, 50);
+
 
 
     for (let i = 0; i < data.length; i++) // add rows and shit
