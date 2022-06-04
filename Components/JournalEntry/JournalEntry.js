@@ -1,4 +1,5 @@
 import { Component } from "../Component.js";
+import { ContextMenu } from "../ContextMenu/ContextMenu.js";
 import { JournalEntryRow } from "./JournalEntryRow/JournalEntryRow.js";
 
 const JournalEntryContextMenuItem = function (text, onClick) {
@@ -11,7 +12,7 @@ const JournalEntryContextMenuItem = function (text, onClick) {
     return THIS;
 }
 
-const JournalEntryRow_ContextMenu = function () {
+const JournalEntryRow_ContextMenu2 = function () {
     let THIS = new Component('div', {
         className: "ContextMenu",
         style: `
@@ -61,6 +62,30 @@ const JournalEntryRow_ContextMenu = function () {
     return THIS;
 };
 
+const JournalEntryRow_ContextMenu = function () {
+
+    let THIS = new ContextMenu([
+        {
+            text: "insert row above", onClick: function () {
+                THIS.JournalEntryParent.addRow(
+                    new JournalEntryRow(), THIS.SelectedJournalEntryRow, true
+                );
+            }
+        }, {
+            text: "insert row below", onClick: function () {
+                THIS.JournalEntryParent.addRow(
+                    new JournalEntryRow(), THIS.SelectedJournalEntryRow, false
+                );
+            }
+        }, {
+            text: "delete this row", onClick: function () {
+                THIS.JournalEntryParent.removeRow(THIS.SelectedJournalEntryRow);
+            }
+        },
+    ]);
+
+    THIS.addEventListener('click', function () { setTimeout(THIS.JournalEntryParent.validate, 50); })
+}
 
 /**
  * 

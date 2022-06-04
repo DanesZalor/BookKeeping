@@ -12,14 +12,14 @@ const ContextMenuItem = function (text, onClick) {
 
 /**
  * 
- * @param {Object} itemsAndFunction object with function values. The key names will be used as the text
+ * @param {Array} data array of objects {text and functions} 
  */
-const ContextMenu = function (data = {}) {
+const ContextMenu = function (data) {
 
     // check param shape
-    for (let key in data) {
-        if (typeof data[key] != "function")
-            throw "ContextMenu.constructor(data): shape mismatch.${data}";
+    for (let obj of data) {
+        if (!(typeof obj.text == 'string' && typeof obj.onClick == 'function'))
+            throw `ContextMenu.constructor(data) shape mismatch ${obj} should be {text:string, onClick: function}`;
     }
 
     let THIS = new Component('div', {
@@ -46,8 +46,8 @@ const ContextMenu = function (data = {}) {
         THIS.SelectedJournalEntryRow = null;
     }
 
-    for (let key in data)
-        THIS.appendChild(new ContextMenuItem(key, data[key]));
+    for (let obj of data)
+        THIS.appendChild(new ContextMenuItem(obj.text, obj.onClick));
 
     // when clicking any of the contextMenuItem, hide();
     THIS.addEventListener('click', function () {
