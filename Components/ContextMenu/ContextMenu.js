@@ -8,6 +8,9 @@ const ContextMenuItem = function (text, onClick) {
         innerHTML: text,
         onclick: function () { if (onClick != null) onClick(); }
     });
+
+    THIS.setText = function (t) { THIS.innerHTML = t; };
+
     return THIS;
 }
 

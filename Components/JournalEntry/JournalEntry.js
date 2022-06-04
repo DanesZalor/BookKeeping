@@ -39,10 +39,10 @@ const JournalEntryRow_ContextMenu = function () {
         },
     ]);
 
-    let showAt_baseFunc = THIS.showAt;
-    THIS.showAt = function (x, y, selectedRow) {
+    let showAt_baseFunc = THIS.showAt; THIS.showAt = function (x, y, selectedRow) {
         showAt_baseFunc(x, y, selectedRow);
-        console.log("new showAt(x, y, selectedRow)");
+        //THIS.children[0].innerHTML = THIS.SelectedJournalEntryRow.isDebit ? "set to credit" : "set to debit";
+        THIS.children[0].setText(THIS.SelectedJournalEntryRow.isDebit ? "set to credit" : "set to debit");
     }
 
     // when clicking anywhere in the ContextMenu, validate
