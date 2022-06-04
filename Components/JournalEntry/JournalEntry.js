@@ -19,11 +19,21 @@ const JournalEntryRow_ContextMenu = function () {
                 );
             }
         }, {
-            text: "delete this row", onClick: function () {
+            text: "delete row", onClick: function () {
                 THIS.JournalEntryParent.removeRow(THIS.SelectedJournalEntryRow);
+            }
+        }, {
+            text: "duplicate row", onClick: function () {
+                let rowData = THIS.SelectedJournalEntryRow.getData();
+                THIS.JournalEntryParent.addRow(
+                    new JournalEntryRow(rowData.accountTitle, rowData.amount),
+                    THIS.SelectedJournalEntryRow, true
+                );
             }
         },
     ]);
+
+    // Object.assign(THIS, { className: "JournalEntryRow_ContextMenu" })
 
     THIS.addEventListener('click', function () { setTimeout(THIS.JournalEntryParent.validate, 50); })
     return THIS;

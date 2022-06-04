@@ -46,13 +46,14 @@ const ContextMenu = function (data) {
         THIS.SelectedJournalEntryRow = null;
     }
 
+    THIS.visible = () => THIS.style.visibility == "visible";
+
     for (let obj of data)
         THIS.appendChild(new ContextMenuItem(obj.text, obj.onClick));
 
-    // when clicking any of the contextMenuItem, hide();
-    THIS.addEventListener('click', function () {
-        THIS.hide();
-    });
+
+    THIS.addEventListener('click', THIS.hide); // when clicking any of the contextMenuItem, hide();
+    window.addEventListener('click', THIS.hide); // when clicking anywhere on the page, hide();
 
     return THIS;
 }

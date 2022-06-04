@@ -101,6 +101,13 @@ const JournalEntryRow = function (accountTitle, amount) {
     let accountInp = new AccountInput(accountTitle)
     let amountInp = new AmountInput(amount);
 
+    THIS.getData = function () {
+        return {
+            accountTitle: accountInp.getValue(),
+            amount: amountInp.getValue()
+        };
+    };
+
     THIS.addEventListener("keypress", (event) => {
         if (event.key == '-') {
             THIS.isDebit = !THIS.isDebit;
