@@ -72,7 +72,7 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
     if (data != null) if (Array.isArray(data)) {
         for (let i = 0; i < data.length; i++) {
             if (!(typeof data[i].account === 'string' && typeof data[i].amount === 'number'))
-                throw `JournalEntry.constructor(data) shape mismatch ${data}`;
+                throw `JournalEntry.constructor(data): shape mismatch ${data}`;
         }
     } else throw `JournalEntry.constructor(data) shape mismatch ${data}`;
 
