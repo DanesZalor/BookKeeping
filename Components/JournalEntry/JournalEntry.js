@@ -3,46 +3,44 @@ import { ContextMenu } from "../ContextMenu/ContextMenu.js";
 import { JournalEntryRow } from "./JournalEntryRow/JournalEntryRow.js";
 
 
-const JournalEntryRow_ContextMenu = function (xpos, ypos, selectedRow, rowCount) {
+const JournalEntryRow_ContextMenu = function (xpos, ypos, selectedRow, journalEntryParent) {
 
     let THIS = new ContextMenu([
         {
             text: selectedRow.getData().isDebit ? "set to credit" : "set to debit", onClick: function () {
-                THIS.SelectedJournalEntryRow.setDebit(!THIS.SelectedJournalEntryRow.isDebit);
+                selectedRow.setDebit(!selectedRow.isDebit);
             }
         }, {
             text: "insert row above", onClick: function () {
-                THIS.JournalEntryParent.addRow(
-                    new JournalEntryRow(), THIS.SelectedJournalEntryRow, true
+                journalEntryParent.addRow(
+                    new JournalEntryRow(), selectedRow, true
                 );
             }
         }, {
             text: "insert row below", onClick: function () {
-                THIS.JournalEntryParent.addRow(
-                    new JournalEntryRow(), THIS.SelectedJournalEntryRow, false
+                journalEntryParent.addRow(
+                    new JournalEntryRow(), selectedRow, false
                 );
             }
         }, (
-            rowCount > 2 ? {
+            journalEntryParent.getRowCount() > 2 ? {
                 text: "delete row", onClick: function () {
-                    THIS.JournalEntryParent.removeRow(THIS.SelectedJournalEntryRow);
+                    journalEntryParent.removeRow(selectedRow);
                 }
             } : null
         ), {
             text: "duplicate row", onClick: function () {
-                let rowData = THIS.SelectedJournalEntryRow.getData();
-                THIS.JournalEntryParent.addRow(
+                let rowData = selectedRow.getData();
+                journalEntryParent.addRow(
                     new JournalEntryRow(rowData.accountTitle, rowData.amount * (rowData.isDebit ? 1 : -1)),
-                    THIS.SelectedJournalEntryRow, true
+                    selectedRow, true
                 );
             }
         },
     ], xpos, ypos);
 
-    THIS.SelectedJournalEntryRow = selectedRow;
-
     // when clicking anywhere in the ContextMenu, validate
-    THIS.addEventListener('click', function () { setTimeout(THIS.JournalEntryParent.validate, 50); })
+    THIS.addEventListener('click', function () { setTimeout(journalEntryParent.validate, 50); })
 
     return THIS;
 }
@@ -122,9 +120,9 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
             event.preventDefault();
             if (THIS.ContextMenu != null) THIS.ContextMenu.remove();
 
-            THIS.ContextMenu = new JournalEntryRow_ContextMenu(event.pageX, event.pageY, jeRow, THIS.getRowCount());
+            THIS.ContextMenu = new JournalEntryRow_ContextMenu(event.pageX, event.pageY, jeRow, THIS);
 
-            THIS.appendChild(Object.assign(THIS.ContextMenu, { JournalEntryParent: THIS }));
+            THIS.appendChild(THIS.ContextMenu);
         }, false);
 
 
@@ -147,12 +145,6 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
     THIS.removeRow = function (jeRow) {
         console.log("removeRow");
         jeRow.remove();
-
-        if (THIS.getElementsByClassName('TableBody')[0].children.length <= 1) {
-            console.log("oh no");
-            THIS.addRow(new JournalEntryRow());
-        }
-
     }
 
     THIS.validate = function () {
