@@ -2,65 +2,6 @@ import { Component } from "../Component.js";
 import { ContextMenu } from "../ContextMenu/ContextMenu.js";
 import { JournalEntryRow } from "./JournalEntryRow/JournalEntryRow.js";
 
-const JournalEntryContextMenuItem = function (text, onClick) {
-    let THIS = new Component('div', {
-        className: "ContextMenuItem",
-        style: ``,
-        innerHTML: text,
-        onclick: function () { if (onClick != null) onClick(); }
-    });
-    return THIS;
-}
-
-const JournalEntryRow_ContextMenu2 = function () {
-    let THIS = new Component('div', {
-        className: "ContextMenu",
-        style: `
-            visibility: hidden; 
-            position:absolute; 
-            background-color: #f6f7f9;
-            padding:10px;
-            box-shadow: 1px 1px 5px #00000088;
-            `,
-        SelectedJournalEntryRow: null,
-    });
-
-    THIS.showAt = function (x, y, selectedRow) {
-        THIS.style.top = y + "px";
-        THIS.style.left = x + "px";
-        THIS.style.visibility = "visible";
-        THIS.SelectedJournalEntryRow = selectedRow;
-    }
-    THIS.hide = function () {
-        THIS.style.visibility = "hidden";
-        THIS.style.top = "0px";
-        THIS.style.left = "0px";
-        THIS.SelectedJournalEntryRow = null;
-    }
-
-    /* Add JournalEntryContextMenuItems*/{
-        THIS.appendChild(new JournalEntryContextMenuItem("insert row above", function () {
-            THIS.JournalEntryParent.addRow(new JournalEntryRow(), THIS.SelectedJournalEntryRow, true);
-        }));
-
-        THIS.appendChild(new JournalEntryContextMenuItem("insert row below", function () {
-            THIS.JournalEntryParent.addRow(new JournalEntryRow(), THIS.SelectedJournalEntryRow, false);
-        }));
-
-        THIS.appendChild(new JournalEntryContextMenuItem("delete this row", function () {
-            THIS.JournalEntryParent.removeRow(THIS.SelectedJournalEntryRow);
-        }));
-
-        THIS.appendChild(new JournalEntryContextMenuItem("cancel"));
-    }
-
-    THIS.addEventListener('click', function () {
-        THIS.hide();
-        setTimeout(THIS.JournalEntryParent.validate, 50)
-    });
-
-    return THIS;
-};
 
 const JournalEntryRow_ContextMenu = function () {
 
@@ -85,6 +26,7 @@ const JournalEntryRow_ContextMenu = function () {
     ]);
 
     THIS.addEventListener('click', function () { setTimeout(THIS.JournalEntryParent.validate, 50); })
+    return THIS;
 }
 
 /**

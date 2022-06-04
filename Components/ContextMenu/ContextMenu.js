@@ -53,6 +53,8 @@ const ContextMenu = function (data) {
     THIS.addEventListener('click', function () {
         THIS.hide();
     });
+
+    return THIS;
 }
 
 export { ContextMenu };
