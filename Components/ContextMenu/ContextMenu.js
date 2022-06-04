@@ -18,7 +18,7 @@ const ContextMenuItem = function (text, onClick) {
  * 
  * @param {Array} data array of objects {text and functions} 
  */
-const ContextMenu = function (data) {
+const ContextMenu = function (data, xpos, ypos) {
 
     // check param shape
     for (let obj of data) {
@@ -30,27 +30,16 @@ const ContextMenu = function (data) {
         className: "ContextMenu"
     });
 
-    THIS.showAt = function (x, y, selectedRow) {
-        THIS.style.top = y + "px";
-        THIS.style.left = x + "px";
-        THIS.style.visibility = "visible";
-        THIS.SelectedJournalEntryRow = selectedRow;
-    }
-    THIS.hide = function () {
-        THIS.style.visibility = "hidden";
-        THIS.style.top = "0px";
-        THIS.style.left = "0px";
-        THIS.SelectedJournalEntryRow = null;
-    }
-
-    THIS.visible = () => THIS.style.visibility == "visible";
+    THIS.style.top = ypos + "px";
+    THIS.style.left = xpos + "px";
+    THIS.style.visibility = "visible";
 
     for (let obj of data)
         THIS.appendChild(new ContextMenuItem(obj.text, obj.onClick));
 
 
-    THIS.addEventListener('click', THIS.hide); // when clicking any of the contextMenuItem, hide();
-    window.addEventListener('click', THIS.hide); // when clicking anywhere on the page, hide();
+    THIS.addEventListener('click', THIS.remove);
+    window.addEventListener('click', function () { THIS.remove(); });
 
     return THIS;
 }

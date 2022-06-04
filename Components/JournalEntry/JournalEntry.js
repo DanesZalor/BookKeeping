@@ -3,13 +3,13 @@ import { ContextMenu } from "../ContextMenu/ContextMenu.js";
 import { JournalEntryRow } from "./JournalEntryRow/JournalEntryRow.js";
 
 
-const JournalEntryRow_ContextMenu = function () {
+const JournalEntryRow_ContextMenu = function (xpos, ypos, selectedRow) {
 
 
 
     let THIS = new ContextMenu([
         {
-            text: "alter debit/credit", onClick: function () {
+            text: selectedRow.getData().isDebit ? "set to credit" : "set to debit", onClick: function () {
                 THIS.SelectedJournalEntryRow.setDebit(!THIS.SelectedJournalEntryRow.isDebit);
             }
         }, {
@@ -37,13 +37,9 @@ const JournalEntryRow_ContextMenu = function () {
                 );
             }
         },
-    ]);
+    ], xpos, ypos);
 
-    let showAt_baseFunc = THIS.showAt; THIS.showAt = function (x, y, selectedRow) {
-        showAt_baseFunc(x, y, selectedRow);
-        //THIS.children[0].innerHTML = THIS.SelectedJournalEntryRow.isDebit ? "set to credit" : "set to debit";
-        THIS.children[0].setText(THIS.SelectedJournalEntryRow.isDebit ? "set to credit" : "set to debit");
-    }
+    THIS.SelectedJournalEntryRow = selectedRow;
 
     // when clicking anywhere in the ContextMenu, validate
     THIS.addEventListener('click', function () { setTimeout(THIS.JournalEntryParent.validate, 50); })
@@ -114,11 +110,8 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
             </tbody>
         </table>`,
         className: "JournalEntry",
-        ContextMenu: new JournalEntryRow_ContextMenu(),
+        ContextMenu: null,
     });
-
-    THIS.appendChild(Object.assign(THIS.ContextMenu, { JournalEntryParent: THIS }));
-
 
     THIS.addRow = function (jeRow, pivot = null, before = true) {
 
@@ -128,12 +121,21 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
 
         // !!! ...spread does not work. it doesnt pass the Node inheritance
         {
+
+
+
             let contextMenuFunc = (event) => {
                 event.preventDefault();
-                THIS.ContextMenu.showAt(event.pageX, event.pageY, jeRow);
+                if (THIS.ContextMenu != null) THIS.ContextMenu.remove();
+
+                THIS.ContextMenu = new JournalEntryRow_ContextMenu(event.pageX, event.pageY, jeRow);
+
+                THIS.appendChild(Object.assign(THIS.ContextMenu, { JournalEntryParent: THIS }));
             }
             jeRow.children[0].addEventListener('contextmenu', contextMenuFunc, false);
             jeRow.children[1].addEventListener('contextmenu', contextMenuFunc, false);
+
+
         }
 
 
