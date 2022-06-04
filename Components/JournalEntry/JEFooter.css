@@ -4,12 +4,7 @@ tbody.TableFooter {
     border-top-color: #00000033;
 }
 
-tbody.TableFooter button {
-    text-align: right;
-    font-size: 14px;
-    padding: 10px 0px 10px 0px;
-    width: 100%;
-}
+
 
 .TableFooter td {
     padding-top: 10px;
@@ -29,4 +24,48 @@ tbody.TableFooter textarea {
 
 tbody.TableFooter textarea:focus {
     outline-style: none !important;
+}
+
+
+/** Button stuff */
+
+tbody.TableFooter button {
+    font-size: 14px;
+    padding: 10px 0px 10px 0px;
+    width: 100%;
+
+    outline-style: solid;
+    outline-width: 1px;
+    border-style: none;
+}
+
+tbody.TableFooter button.JournalEntryTotal.DebitLeaning {
+    padding-right: 70%;
+    text-align: right;
+}
+
+tbody.TableFooter button.JournalEntryTotal.CreditLeaning {
+    padding-right: 20%;
+    text-align: right;
+}
+
+tbody.TableFooter button.JournalEntryTotal.HasErrors {
+    background-color: #ffecec;
+    outline: #cc8c8c solid 1px;
+    color: #cc4c4c;
+}
+
+tbody.TableFooter button.JournalEntryTotal.Valid {
+    background-color: #ecffec;
+    outline: #4c884c solid 1px;
+    color: #4c884c;
+}
+
+tbody.TableFooter button.JournalEntryTotal.Valid:hover {
+    background-color: #bceebc;
+    color: #2c662c;
+}
+
+tbody.TableFooter button.JournalEntryTotal.Valid:active {
+    background-color: #acddac;
 }

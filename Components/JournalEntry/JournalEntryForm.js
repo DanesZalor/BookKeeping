@@ -141,7 +141,7 @@ const JournalEntryForm = function (data = [{ account: "", amount: 0 }, { account
     THIS.validate = function () {
 
         let rows = THIS.getElementsByClassName('JournalEntryRow');
-        let btnRes = THIS.getElementsByClassName('JournalEntryTotal')[0].children[0];
+        let btnRes = THIS.getElementsByClassName('JournalEntryTotal')[0];
         let errors = 0;
 
         let total = 0;
@@ -152,16 +152,24 @@ const JournalEntryForm = function (data = [{ account: "", amount: 0 }, { account
             total += rowvalidityres.amount;
         }
 
-
+        btnRes.className = "JournalEntryTotal";
 
         if (errors > 0) {
-            btnRes.style.paddingRight = "45%";
-            btnRes.innerHTML = "Invalid";
-            btnRes.parentElement.disabled = true;
+            btnRes.className = "JournalEntryTotal HasErrors";
+            btnRes.children[0].innerHTML = "Invalid";
+            btnRes.disabled = true;
+
         } else {
-            btnRes.style.paddingRight = total == 0 ? "45%" : (total > 0 ? "70%" : "20%");
-            btnRes.innerHTML = total == 0 ? "Submit" : total;
-            btnRes.parentElement.disabled = total != 0;
+            if (total > 0)
+                btnRes.className = "JournalEntryTotal DebitLeaning";
+            else if (total < 0)
+                btnRes.className = "JournalEntryTotal CreditLeaning";
+            else if (total == 0)
+                btnRes.className = "JournalEntryTotal Valid";
+
+            btnRes.children[0].innerHTML = total == 0 ? "Submit" : Math.abs(total);
+            btnRes.disabled = total != 0;
+
         }
 
 
