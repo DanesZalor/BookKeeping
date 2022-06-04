@@ -33,7 +33,6 @@ const ContextMenu = function (data, xpos, ypos) {
 
     THIS.style.top = ypos + "px";
     THIS.style.left = xpos + "px";
-    THIS.style.visibility = "visible";
 
     for (let obj of data) {
         if (obj == null) continue;
