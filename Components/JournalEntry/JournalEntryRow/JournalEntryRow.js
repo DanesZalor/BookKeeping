@@ -104,7 +104,8 @@ const JournalEntryRow = function (accountTitle, amount) {
     THIS.getData = function () {
         return {
             accountTitle: accountInp.getValue(),
-            amount: amountInp.getValue()
+            amount: amountInp.getValue(),
+            isDebit: THIS.isDebit,
         };
     };
 
@@ -118,9 +119,14 @@ const JournalEntryRow = function (accountTitle, amount) {
         }
     }, true);
 
-    THIS.updateTabs = () => {
+    THIS.updateTabs = function () {
         THIS.className = THIS.isDebit ? "JournalEntryRow Debit" : "JournalEntryRow Credit";
     };
+
+    THIS.setDebit = function (b) {
+        THIS.isDebit = b;
+        THIS.updateTabs();
+    }
 
     THIS.validityCheck = function () {
 

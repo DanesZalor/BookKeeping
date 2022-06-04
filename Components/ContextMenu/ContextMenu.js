@@ -1,9 +1,10 @@
 import { Component } from "../Component.js";
 
+Component.addCSS('./Components/ContextMenu/ContextMenu.css');
+
 const ContextMenuItem = function (text, onClick) {
     let THIS = new Component('div', {
         className: "ContextMenuItem",
-        style: ``,
         innerHTML: text,
         onclick: function () { if (onClick != null) onClick(); }
     });
@@ -23,14 +24,7 @@ const ContextMenu = function (data) {
     }
 
     let THIS = new Component('div', {
-        className: "ContextMenu",
-        style: `
-            visibility: hidden; 
-            position:absolute; 
-            background-color: #f6f7f9;
-            padding:10px;
-            box-shadow: 1px 1px 5px #00000088;
-            `,
+        className: "ContextMenu"
     });
 
     THIS.showAt = function (x, y, selectedRow) {

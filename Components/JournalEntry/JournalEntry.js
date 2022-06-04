@@ -5,8 +5,14 @@ import { JournalEntryRow } from "./JournalEntryRow/JournalEntryRow.js";
 
 const JournalEntryRow_ContextMenu = function () {
 
+
+
     let THIS = new ContextMenu([
         {
+            text: "alter debit/credit", onClick: function () {
+                THIS.SelectedJournalEntryRow.setDebit(!THIS.SelectedJournalEntryRow.isDebit);
+            }
+        }, {
             text: "insert row above", onClick: function () {
                 THIS.JournalEntryParent.addRow(
                     new JournalEntryRow(), THIS.SelectedJournalEntryRow, true
@@ -26,16 +32,22 @@ const JournalEntryRow_ContextMenu = function () {
             text: "duplicate row", onClick: function () {
                 let rowData = THIS.SelectedJournalEntryRow.getData();
                 THIS.JournalEntryParent.addRow(
-                    new JournalEntryRow(rowData.accountTitle, rowData.amount),
+                    new JournalEntryRow(rowData.accountTitle, rowData.amount * (rowData.isDebit ? 1 : -1)),
                     THIS.SelectedJournalEntryRow, true
                 );
             }
         },
     ]);
 
-    // Object.assign(THIS, { className: "JournalEntryRow_ContextMenu" })
+    let showAt_baseFunc = THIS.showAt;
+    THIS.showAt = function (x, y, selectedRow) {
+        showAt_baseFunc(x, y, selectedRow);
+        console.log("new showAt(x, y, selectedRow)");
+    }
 
+    // when clicking anywhere in the ContextMenu, validate
     THIS.addEventListener('click', function () { setTimeout(THIS.JournalEntryParent.validate, 50); })
+
     return THIS;
 }
 

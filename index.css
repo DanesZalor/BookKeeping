@@ -1,18 +1,3 @@
-/*MAIN STUFF*/
-
-
-/*CONTEXT MENU STUFF*/
-.ContextMenu>.ContextMenuItem {
-    margin: 7px;
-    color: #606060;
-
-}
-
-.ContextMenu>.ContextMenuItem:hover {
-    color: #000000;
-    font-weight: 500;
-}
-
 /*Table Content Styles*/
 
 thead {

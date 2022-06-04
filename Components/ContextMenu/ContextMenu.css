@@ -1,0 +1,20 @@
+/*CONTEXT MENU STUFF*/
+
+.ContextMenu {
+    visibility: hidden;
+    position: absolute;
+    background-color: #f6f7f9;
+    padding: 10px;
+    box-shadow: 1px 1px 5px #00000088;
+}
+
+.ContextMenu>.ContextMenuItem {
+    margin: 7px;
+    color: #606060;
+
+}
+
+.ContextMenu>.ContextMenuItem:hover {
+    color: #000000;
+    font-weight: 500;
+}
