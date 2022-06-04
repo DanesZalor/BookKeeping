@@ -27,11 +27,9 @@ tbody.TableFooter .JournalEntrySummary {
 }
 
 .JournalEntrySummary.HasErrors>textarea {
-    background-color: #ececec;
+    background-color: #ffecec;
     border-style: solid;
-    border-color: #acacac;
-    color: #8c8c8c;
-
+    border-color: #cc8c8c;
 }
 
 tbody.TableFooter textarea:focus {
@@ -40,4 +38,16 @@ tbody.TableFooter textarea:focus {
 
 tbody.TableFooter>* {
     vertical-align: top;
+}
+
+.JournalEntrySummary>span.InputErrorMsg {
+    width: 100%;
+    color: #ff0000;
+    font-size: 10px;
+    padding-left: 20%;
+    display: none;
+}
+
+.JournalEntrySummary.HasErrors>span.InputErrorMsg {
+    display: inline;
 }

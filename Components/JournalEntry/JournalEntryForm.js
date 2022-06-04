@@ -51,16 +51,29 @@ const JournalEntryRow_ContextMenu = function (xpos, ypos, selectedRow, journalEn
 const JournalEntrySummary = function (value = "") {
     let THIS = new Component('td', {
         className: 'JournalEntrySummary',
-        innerHTML: `<textarea placeholder="entry summary cannot be empty" value=${value}></textarea>`,
+        innerHTML: `
+        <textarea placeholder="transaction summary">${value}</textarea>
+        <span class="InputErrorMsg">entry summary cannot be empty</span>
+        `,
     });
 
 
     THIS.validate = function () {
         let textarea = THIS.getElementsByTagName('textarea')[0];
 
-        THIS.className = (textarea.value.length == 0) ? "JournalEntrySummary HasErrors" : "JournalEntrySummary";
+        let errorMsg = "";
+        if (textarea.value.length == 0)
+            errorMsg = "entry summary cannot be empty";
+        else if (textarea.value.indexOf('fuck') >= 0)
+            errorMsg = "please no bad words >:(";
+        else errorMsg = "";
 
-        return (textarea.value.length > 0);
+
+        THIS.getElementsByClassName('InputErrorMsg')[0].innerHTML = errorMsg;
+
+        THIS.className = (errorMsg.length == 0) ? "JournalEntrySummary" : "JournalEntrySummary HasErrors";
+
+        return (errorMsg.length == 0);
     };
 
     return THIS;
@@ -69,8 +82,9 @@ const JournalEntrySummary = function (value = "") {
 /**
  * 
  * @param {Array} data each element must be an object { acount: string, amount: number}
+ * @param {string} summary summary of transaction
  */
-const JournalEntryForm = function (data = [{ account: "", amount: 0 }, { account: "", amount: 0 }]) {
+const JournalEntryForm = function (data = [{ account: "", amount: 0 }, { account: "", amount: 0 }], summary = "") {
 
     // check data shape, should be [ { account:string amount:int}, ... ]
     if (data != null) if (Array.isArray(data)) {
@@ -119,7 +133,7 @@ const JournalEntryForm = function (data = [{ account: "", amount: 0 }, { account
     });
 
     // Adding journalEntrySummary component
-    let journalEntrySummary = new JournalEntrySummary();
+    let journalEntrySummary = new JournalEntrySummary(summary);
     journalEntrySummary.addEventListener('keyup', function () { setTimeout(THIS.validate, 50); });
     THIS.getElementsByClassName('JournalEntryFooter')[0].prepend(journalEntrySummary);
 
