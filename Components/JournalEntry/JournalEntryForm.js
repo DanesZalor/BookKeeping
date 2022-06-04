@@ -3,6 +3,7 @@ import { ContextMenu } from "../ContextMenu/ContextMenu.js";
 import { JournalEntryRow } from "./JournalEntryRow/JournalEntryRow.js";
 
 Component.addCSS('./Components/JournalEntry/JEHeader.css');
+Component.addCSS('./Components/JournalEntry/JEFooter.css');
 
 const JournalEntryRow_ContextMenu = function (xpos, ypos, selectedRow, journalEntryParent) {
 
@@ -50,7 +51,7 @@ const JournalEntryRow_ContextMenu = function (xpos, ypos, selectedRow, journalEn
  * 
  * @param {Array} data each element must be an object { acount: string, amount: number}
  */
-const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: "", amount: 0 }]) {
+const JournalEntryForm = function (data = [{ account: "", amount: 0 }, { account: "", amount: 0 }]) {
 
     // check data shape, should be [ { account:string amount:int}, ... ]
     if (data != null) if (Array.isArray(data)) {
@@ -84,23 +85,13 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
             <tbody class="TableBody">
                 <!-- add rows here -->
             </tbody>
-            <tbody class="TableFooter" style="
-                border-top-width: 1px; 
-                border-top-style: solid; 
-                border-top-color: #cccdcf;
-            ">
+            <tbody class="TableFooter">
                 <tr class="JournalEntryFooter">
                     <td class="JournalEntrySummary">
                         <textarea placeholder="entry summary" style="resize:none;"></textarea>
                     </td>
                     <td class="JournalEntryTotalTD" style="vertical-align: top;">
-                        <button disabled=true class="JournalEntryTotal" 
-                        style="
-                            text-align:right;
-                            font-size: 14px;
-                            padding: 10px 0px 10px 0px;
-                            margin: -1px;
-                        ">
+                        <button disabled=true class="JournalEntryTotal">
                             <span>Total</span>
                         </button>
                     </td>
@@ -188,4 +179,4 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
 
 
 
-export { JournalEntry };
+export { JournalEntryForm };

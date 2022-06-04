@@ -1,0 +1,32 @@
+tbody.TableFooter {
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #00000033;
+}
+
+tbody.TableFooter button {
+    text-align: right;
+    font-size: 14px;
+    padding: 10px 0px 10px 0px;
+    width: 100%;
+}
+
+.TableFooter td {
+    padding-top: 10px;
+}
+
+tbody.TableFooter .JournalEntrySummary {
+    width: 300px;
+    padding: 10px;
+    margin-left: 5px;
+}
+
+tbody.TableFooter textarea {
+    border-style: dashed;
+    border-width: 2px;
+    padding: 10px 10px 10px 20px;
+}
+
+tbody.TableFooter textarea:focus {
+    outline-style: none !important;
+}

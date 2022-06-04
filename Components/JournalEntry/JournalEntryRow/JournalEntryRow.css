@@ -1,0 +1,11 @@
+td.JEInput {
+    width: 200px;
+    border-style: none;
+}
+
+td.JEInput.AccountInput {
+    width: 300px;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: #00000033;
+}
