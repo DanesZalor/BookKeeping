@@ -22,6 +22,7 @@ const ContextMenu = function (data, xpos, ypos) {
 
     // check param shape
     for (let obj of data) {
+        if (obj == null) continue;
         if (!(typeof obj.text == 'string' && typeof obj.onClick == 'function'))
             throw `ContextMenu.constructor(data) shape mismatch ${obj} should be {text:string, onClick: function}`;
     }
@@ -34,9 +35,10 @@ const ContextMenu = function (data, xpos, ypos) {
     THIS.style.left = xpos + "px";
     THIS.style.visibility = "visible";
 
-    for (let obj of data)
+    for (let obj of data) {
+        if (obj == null) continue;
         THIS.appendChild(new ContextMenuItem(obj.text, obj.onClick));
-
+    }
 
     THIS.addEventListener('click', THIS.remove);
     window.addEventListener('click', function () { THIS.remove(); });

@@ -3,9 +3,7 @@ import { ContextMenu } from "../ContextMenu/ContextMenu.js";
 import { JournalEntryRow } from "./JournalEntryRow/JournalEntryRow.js";
 
 
-const JournalEntryRow_ContextMenu = function (xpos, ypos, selectedRow) {
-
-
+const JournalEntryRow_ContextMenu = function (xpos, ypos, selectedRow, rowCount) {
 
     let THIS = new ContextMenu([
         {
@@ -24,11 +22,13 @@ const JournalEntryRow_ContextMenu = function (xpos, ypos, selectedRow) {
                     new JournalEntryRow(), THIS.SelectedJournalEntryRow, false
                 );
             }
-        }, {
-            text: "delete row", onClick: function () {
-                THIS.JournalEntryParent.removeRow(THIS.SelectedJournalEntryRow);
-            }
-        }, {
+        }, (
+            rowCount > 2 ? {
+                text: "delete row", onClick: function () {
+                    THIS.JournalEntryParent.removeRow(THIS.SelectedJournalEntryRow);
+                }
+            } : null
+        ), {
             text: "duplicate row", onClick: function () {
                 let rowData = THIS.SelectedJournalEntryRow.getData();
                 THIS.JournalEntryParent.addRow(
@@ -115,29 +115,17 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
 
     THIS.addRow = function (jeRow, pivot = null, before = true) {
 
-
         if (!(jeRow.IS_COMPONENT && jeRow.className.indexOf("JournalEntryRow") >= 0))
             throw "addRow() param 1 must be an instance of JournalEntryRow";
 
-        // !!! ...spread does not work. it doesnt pass the Node inheritance
-        {
+        jeRow.addEventListener('contextmenu', (event) => {
+            event.preventDefault();
+            if (THIS.ContextMenu != null) THIS.ContextMenu.remove();
 
+            THIS.ContextMenu = new JournalEntryRow_ContextMenu(event.pageX, event.pageY, jeRow, THIS.getRowCount());
 
-
-            let contextMenuFunc = (event) => {
-                event.preventDefault();
-                if (THIS.ContextMenu != null) THIS.ContextMenu.remove();
-
-                THIS.ContextMenu = new JournalEntryRow_ContextMenu(event.pageX, event.pageY, jeRow);
-
-                THIS.appendChild(Object.assign(THIS.ContextMenu, { JournalEntryParent: THIS }));
-            }
-            jeRow.children[0].addEventListener('contextmenu', contextMenuFunc, false);
-            jeRow.children[1].addEventListener('contextmenu', contextMenuFunc, false);
-
-
-        }
-
+            THIS.appendChild(Object.assign(THIS.ContextMenu, { JournalEntryParent: THIS }));
+        }, false);
 
 
         /*add events signals*/{
@@ -152,9 +140,12 @@ const JournalEntry = function (data = [{ account: "", amount: 0 }, { account: ""
             tableBody.appendChild(jeRow);
     }
 
+    THIS.getRowCount = function () {
+        return THIS.getElementsByClassName('TableBody')[0].children.length;
+    }
+
     THIS.removeRow = function (jeRow) {
         console.log("removeRow");
-        let tableBody = THIS.getElementsByClassName('TableBody')[0];
         jeRow.remove();
 
         if (THIS.getElementsByClassName('TableBody')[0].children.length <= 1) {
