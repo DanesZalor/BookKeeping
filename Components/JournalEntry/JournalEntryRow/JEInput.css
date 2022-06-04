@@ -2,12 +2,12 @@
 .JEInput>input {
     outline-style: none;
     border-width: 0px;
-    border-bottom-color: #606060;
+    border-bottom-color: #808080;
     border-style: solid;
     color: #606060;
     font-size: 15px;
-    padding: 8px;
-    margin: 5px 5px 0px 5px;
+    padding: 8px 2px 2px 2px;
+    margin: 2px;
 }
 
 .JEInput>input:hover {
@@ -28,7 +28,7 @@
     border-bottom-width: 1px;
 }
 
-/*Error Box*/
+/*Error Box will have class of .InputErrorMsg if the JEInput has an error*/
 .JEInput>span {
     width: 100%;
     color: #ff0000;
@@ -42,7 +42,7 @@
 }
 
 /*Amount Input*/
-.AmountInput>input {
+.JEInput.AmountInput>input {
     text-align: right;
 }
 
