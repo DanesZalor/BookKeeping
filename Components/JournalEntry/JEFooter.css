@@ -16,56 +16,28 @@ tbody.TableFooter .JournalEntrySummary {
     margin-left: 5px;
 }
 
-tbody.TableFooter textarea {
+.JournalEntrySummary>textarea {
+    background-color: #f6f6f6;
+    border-width: 1px;
+    border-color: #8c8c8c;
+    color: #4c4c4c;
     border-style: dashed;
-    border-width: 2px;
     padding: 10px 10px 10px 20px;
+    resize: none;
+}
+
+.JournalEntrySummary.HasErrors>textarea {
+    background-color: #ececec;
+    border-style: solid;
+    border-color: #acacac;
+    color: #8c8c8c;
+
 }
 
 tbody.TableFooter textarea:focus {
     outline-style: none !important;
 }
 
-
-/** Button stuff */
-
-tbody.TableFooter button {
-    font-size: 14px;
-    padding: 10px 0px 10px 0px;
-    width: 100%;
-
-    outline-style: solid;
-    outline-width: 1px;
-    border-style: none;
-}
-
-tbody.TableFooter button.JournalEntryTotal.DebitLeaning {
-    padding-right: 70%;
-    text-align: right;
-}
-
-tbody.TableFooter button.JournalEntryTotal.CreditLeaning {
-    padding-right: 20%;
-    text-align: right;
-}
-
-tbody.TableFooter button.JournalEntryTotal.HasErrors {
-    background-color: #ffecec;
-    outline: #cc8c8c solid 1px;
-    color: #cc4c4c;
-}
-
-tbody.TableFooter button.JournalEntryTotal.Valid {
-    background-color: #ecffec;
-    outline: #4c884c solid 1px;
-    color: #4c884c;
-}
-
-tbody.TableFooter button.JournalEntryTotal.Valid:hover {
-    background-color: #bceebc;
-    color: #2c662c;
-}
-
-tbody.TableFooter button.JournalEntryTotal.Valid:active {
-    background-color: #acddac;
+tbody.TableFooter>* {
+    vertical-align: top;
 }

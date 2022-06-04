@@ -4,6 +4,7 @@ import { JournalEntryRow } from "./JournalEntryRow/JournalEntryRow.js";
 
 Component.addCSS('./Components/JournalEntry/JEHeader.css');
 Component.addCSS('./Components/JournalEntry/JEFooter.css');
+Component.addCSS('./Components/JournalEntry/JEButton.css');
 
 const JournalEntryRow_ContextMenu = function (xpos, ypos, selectedRow, journalEntryParent) {
 
@@ -43,6 +44,24 @@ const JournalEntryRow_ContextMenu = function (xpos, ypos, selectedRow, journalEn
 
     // when clicking anywhere in the ContextMenu, validate
     THIS.addEventListener('click', function () { setTimeout(journalEntryParent.validate, 50); })
+
+    return THIS;
+}
+
+const JournalEntrySummary = function (value = "") {
+    let THIS = new Component('td', {
+        className: 'JournalEntrySummary',
+        innerHTML: `<textarea placeholder="entry summary cannot be empty" value=${value}></textarea>`,
+    });
+
+
+    THIS.validate = function () {
+        let textarea = THIS.getElementsByTagName('textarea')[0];
+
+        THIS.className = (textarea.value.length == 0) ? "JournalEntrySummary HasErrors" : "JournalEntrySummary";
+
+        return (textarea.value.length > 0);
+    };
 
     return THIS;
 }
@@ -87,10 +106,7 @@ const JournalEntryForm = function (data = [{ account: "", amount: 0 }, { account
             </tbody>
             <tbody class="TableFooter">
                 <tr class="JournalEntryFooter">
-                    <td class="JournalEntrySummary">
-                        <textarea placeholder="entry summary" style="resize:none;"></textarea>
-                    </td>
-                    <td class="JournalEntryTotalTD" style="vertical-align: top;">
+                    <td class="JournalEntryTotalTD">
                         <button disabled=true class="JournalEntryTotal">
                             <span>Total</span>
                         </button>
@@ -101,6 +117,11 @@ const JournalEntryForm = function (data = [{ account: "", amount: 0 }, { account
         className: "JournalEntry",
         ContextMenu: null,
     });
+
+    // Adding journalEntrySummary component
+    let journalEntrySummary = new JournalEntrySummary();
+    journalEntrySummary.addEventListener('keyup', function () { setTimeout(THIS.validate, 50); });
+    THIS.getElementsByClassName('JournalEntryFooter')[0].prepend(journalEntrySummary);
 
     THIS.addRow = function (jeRow, pivot = null, before = true) {
 
@@ -152,6 +173,8 @@ const JournalEntryForm = function (data = [{ account: "", amount: 0 }, { account
             total += rowvalidityres.amount;
         }
 
+        if (!journalEntrySummary.validate()) errors += 1;
+
         btnRes.className = "JournalEntryTotal";
 
         if (errors > 0) {
@@ -179,7 +202,6 @@ const JournalEntryForm = function (data = [{ account: "", amount: 0 }, { account
 
     for (let i = 0; i < data.length; i++) // add rows and shit
         THIS.addRow(new JournalEntryRow(data[i].account, data[i].amount));
-
 
     return THIS;
 };
