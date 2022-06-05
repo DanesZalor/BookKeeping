@@ -1,9 +1,6 @@
-/*
-.JournalEntryForm {
+.JournalEntryForm>* {
     border-collapse: collapse;
-    margin-left: auto;
-    margin-right: auto;
-}*/
+}
 
 /* Journal EntryTable */
 

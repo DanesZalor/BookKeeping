@@ -4,6 +4,7 @@ td.JEInput {
 }
 
 td.JEInput.AccountInput {
+    margin: 0px;
     width: 300px;
     border-right-width: 1px;
     border-right-style: solid;

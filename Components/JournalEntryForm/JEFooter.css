@@ -13,7 +13,7 @@ tbody.TableFooter {
 tbody.TableFooter .JournalEntrySummary {
     width: 300px;
     padding: 10px;
-    margin-left: 5px;
+
 }
 
 .JournalEntrySummary>textarea {
