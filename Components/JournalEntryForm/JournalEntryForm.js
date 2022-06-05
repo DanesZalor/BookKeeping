@@ -80,6 +80,12 @@ const JournalEntrySummary = function (value = "") {
     return THIS;
 }
 
+function validate() {
+    console.log("validate call");
+    return false;
+}
+
+
 /**
  * 
  * @param {Array} data each element must be an object { acount: string, amount: number}
@@ -100,7 +106,19 @@ const JournalEntryForm = function (data = [{ account: "", amount: 0 }, { account
         innerHTML: `
         <table>
             <thead class="TableHeader">
-                
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>Journal Entry Form</td>
+                                <td>Jun 5, 2020</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        PHP
+                    </td>
+                </tr>
                 <tr>
                     <td>Account Titles</td>
                     <td>
@@ -119,7 +137,7 @@ const JournalEntryForm = function (data = [{ account: "", amount: 0 }, { account
             <tbody class="TableFooter">
                 <tr class="JournalEntryFooter">
                     <td class="JournalEntryTotalTD">
-                        <button disabled=true class="JournalEntryTotal">
+                        <button disabled=true class="JournalEntryTotal" type="submit">
                             <span>Total</span>
                         </button>
                     </td>
@@ -128,6 +146,8 @@ const JournalEntryForm = function (data = [{ account: "", amount: 0 }, { account
         </table>`,
         className: "JournalEntryForm",
         ContextMenu: null,
+        onSubmit: "return validate()",
+        method: "post",
     });
 
     // Adding journalEntrySummary component
@@ -212,13 +232,11 @@ const JournalEntryForm = function (data = [{ account: "", amount: 0 }, { account
     }; setTimeout(THIS.validate, 50);
 
 
-
     for (let i = 0; i < data.length; i++) // add rows and shit
         THIS.addRow(new JournalEntryRow(data[i].account, data[i].amount));
 
     return THIS;
 };
-
 
 
 
