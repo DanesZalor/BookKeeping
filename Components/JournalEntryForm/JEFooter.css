@@ -11,9 +11,9 @@ tbody.TableFooter {
 }
 
 tbody.TableFooter .JournalEntrySummary {
-    width: 300px;
-    padding: 10px;
-
+    width: 280px;
+    vertical-align: center;
+    text-align: center;
 }
 
 .JournalEntrySummary>textarea {

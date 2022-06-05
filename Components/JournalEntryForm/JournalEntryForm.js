@@ -91,7 +91,10 @@ function validate() {
  * @param {Array} data each element must be an object { acount: string, amount: number}
  * @param {string} summary summary of transaction
  */
-const JournalEntryForm = function (data = [{ account: "", amount: 0 }, { account: "", amount: 0 }], summary = "") {
+const JournalEntryForm = function (
+    data = [{ account: "", amount: 0 }, { account: "", amount: 0 }],
+    summary = "", currency = "Php"
+) {
 
     // check data shape, should be [ { account:string amount:int}, ... ]
     if (data != null) if (Array.isArray(data)) {
@@ -106,20 +109,13 @@ const JournalEntryForm = function (data = [{ account: "", amount: 0 }, { account
         innerHTML: `
         <table>
             <thead class="TableHeader">
-                <tr>
-                    <td>
-                        <table>
-                            <tr>
-                                <td>Journal Entry Form</td>
-                                <td>Jun 5, 2020</td>
-                            </tr>
-                        </table>
+                <tr class="header1">
+                    <td class="DateDisplay">
+                        ${new Date().toLocaleString().split(',')[0]}
                     </td>
-                    <td>
-                        PHP
-                    </td>
+                    <td class="CurrencyDisplay">${currency}</td>
                 </tr>
-                <tr>
+                <tr class="header2">
                     <td>Account Titles</td>
                     <td>
                         <table>

@@ -9,8 +9,3 @@
     box-sizing: border-box;
     width: inherit;
 }
-
-
-.TableBody * {
-    padding: 0px 2px 6px 2px;
-}
