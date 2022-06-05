@@ -145,7 +145,7 @@ const JournalEntryForm = function (
         </table>`,
         className: "JournalEntryForm",
         ContextMenu: null,
-        onSubmit: "return validate()",
+        onsubmit: function () { return THIS.validate(); },
         method: "post",
     });
 
@@ -226,7 +226,7 @@ const JournalEntryForm = function (
 
         }
 
-
+        return (errors == 0 && total == 0);
 
     }; setTimeout(THIS.validate, 50);
 
