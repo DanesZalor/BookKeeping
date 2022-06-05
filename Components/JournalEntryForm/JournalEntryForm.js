@@ -96,10 +96,11 @@ const JournalEntryForm = function (data = [{ account: "", amount: 0 }, { account
     } else throw `JournalEntry.constructor(data) shape mismatch ${data}`;
 
 
-    let THIS = new Component('div', {
+    let THIS = new Component('form', {
         innerHTML: `
         <table>
             <thead class="TableHeader">
+                
                 <tr>
                     <td>Account Titles</td>
                     <td>
