@@ -19,6 +19,6 @@
         }
     }
 
-    
+    echo "<!-- Recusive CSS -->";
     searchForCSS('.');
 ?>
