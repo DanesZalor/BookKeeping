@@ -16,7 +16,7 @@ const Component = function (tagName, properties = {}) {
  * 
  * @param {string} filename file location of css file relative to the server root 
  */
-Component.addCSS = function (filename) {
+const importCSS = function (filename) {
     let style = document.createElement('link');
 
     Object.assign(style, {
@@ -28,4 +28,4 @@ Component.addCSS = function (filename) {
     document.getElementsByTagName('head')[0].append(style);
 };
 
-export { Component };
+export { Component, importCSS };

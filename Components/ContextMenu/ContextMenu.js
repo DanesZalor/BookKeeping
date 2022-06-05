@@ -1,6 +1,6 @@
-import { Component } from "../Component.js";
+import { Component, importCSS } from "../Component.js";
 
-Component.addCSS('./Components/ContextMenu/ContextMenu.css');
+importCSS('./Components/ContextMenu/ContextMenu.css');
 
 const ContextMenuItem = function (text, onClick) {
     let THIS = new Component('div', {

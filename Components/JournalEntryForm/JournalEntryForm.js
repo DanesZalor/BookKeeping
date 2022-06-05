@@ -1,11 +1,11 @@
-import { Component } from "../Component.js";
+import { Component, importCSS } from "../Component.js";
 import { ContextMenu } from "../ContextMenu/ContextMenu.js";
 import { JournalEntryRow } from "./JournalEntryRow/JournalEntryRow.js";
 
-Component.addCSS('./Components/JournalEntryForm/JEHeader.css');
-Component.addCSS('./Components/JournalEntryForm/JEFooter.css');
-Component.addCSS('./Components/JournalEntryForm/JEButton.css');
-Component.addCSS('./Components/JournalEntryForm/JournalEntryForm.css');
+importCSS('./Components/JournalEntryForm/JEHeader.css');
+importCSS('./Components/JournalEntryForm/JEFooter.css');
+importCSS('./Components/JournalEntryForm/JEButton.css');
+importCSS('./Components/JournalEntryForm/JournalEntryForm.css');
 
 const JournalEntryRow_ContextMenu = function (xpos, ypos, selectedRow, journalEntryParent) {
 
