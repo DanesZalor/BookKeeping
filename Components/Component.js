@@ -12,20 +12,5 @@ const Component = function (tagName, properties = {}) {
     return THIS;
 }
 
-/**
- * 
- * @param {string} filename file location of css file relative to the server root 
- */
-const importCSS = function (filename) {
-    let style = document.createElement('link');
 
-    Object.assign(style, {
-        href: filename,
-        type: 'text/css',
-        rel: 'stylesheet'
-    });
-
-    document.getElementsByTagName('head')[0].append(style);
-};
-
-export { Component, importCSS };
+export { Component };

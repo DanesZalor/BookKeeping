@@ -1,4 +1,4 @@
-import { Component, importCSS } from "../Component.js";
+import { Component } from "../Component.js";
 import { ContextMenu } from "../ContextMenu/ContextMenu.js";
 import { JournalEntryRow } from "./JournalEntryRow/JournalEntryRow.js";
 

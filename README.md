@@ -2,7 +2,7 @@
 
 Doing this project to learn vanilla javascript because React is so confusing atm.
 
-### Component-based programming
+## Component-based programming
 ##### `Component.js`
 ```javascript
 /**
@@ -52,3 +52,52 @@ root.appendChild(new InputText("This is a test"));
 ```
 
 > NOTE: that i am using Function Constructors since I can't use `extends HTMLElement` or `implements Node`.
+
+## Project Arrangement 
+Arrange the directory like this; Each **Component** will have their own respective folder. A component folder should contain subfolders of components that they **comprise**. 
+
+```
+├── Components
+│   ├── Component.js
+│   ├── ContextMenu
+│   │   ├── ContextMenu.css
+│   │   └── ContextMenu.js
+│   └── JournalEntryForm
+│       ├── JEButton.css
+│       ├── JournalEntryForm.css
+│       ├── JournalEntryForm.js
+│       └── JournalEntryRow
+│           ├── JEInput.css
+│           ├── JournalEntryRow.css
+│           └── JournalEntryRow.js
+├── includeCSS.php
+├── index.js
+└── index.php
+```
+
+`JournalEntryForm/` contains `JournalEntryRow/` and that's because **JournalEntryRow** component is a *composition* of **JournalEntryForm**.
+
+## Including CSS
+
+As seen in the project directory above, the `.css` files are located to their respective component. We can then use a php function that recursively searches the server directory for css files and includes it. 
+
+
+```php
+function searchForCSS($directory){
+    
+    foreach (new DirectoryIterator($directory) as $file){
+
+        $relpath = $directory.'/'.$file->getFilename();
+        
+        // file is css
+        if( str_ends_with($file->getFilename(), '.css'))
+            echo "<link rel=\"stylesheet\" href=\"${relpath}\">";
+        
+        else if( // file is directory and does not start with .
+            $file->isDir() && !$file->isDot() &&
+            !str_starts_with($file->getFilename(), '.')
+        )
+            searchForCSS($relpath);
+    }
+}
+```

@@ -1,4 +1,4 @@
-import { Component, importCSS } from "../../Component.js";
+import { Component } from "../../Component.js";
 
 const JEInput = function (placeholder, value = "", properties = {}) {
     let THIS = new Component('td', {
