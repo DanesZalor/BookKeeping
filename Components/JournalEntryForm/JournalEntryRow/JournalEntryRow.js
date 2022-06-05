@@ -1,9 +1,5 @@
 import { Component, importCSS } from "../../Component.js";
 
-const base_path = "./Components/JournalEntryForm/JournalEntryRow/";
-importCSS(base_path + 'JEInput.css');
-importCSS(base_path + 'JournalEntryRow.css');
-
 const JEInput = function (placeholder, value = "", properties = {}) {
     let THIS = new Component('td', {
         className: "JEInput",

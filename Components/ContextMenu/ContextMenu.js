@@ -1,8 +1,5 @@
 import { Component, importCSS } from "../Component.js";
 
-const base_path = "./Components/ContextMenu/";
-importCSS(base_path + 'ContextMenu.css');
-
 const ContextMenuItem = function (text, onClick) {
     let THIS = new Component('div', {
         className: "ContextMenuItem",

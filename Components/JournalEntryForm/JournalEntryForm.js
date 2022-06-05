@@ -2,12 +2,6 @@ import { Component, importCSS } from "../Component.js";
 import { ContextMenu } from "../ContextMenu/ContextMenu.js";
 import { JournalEntryRow } from "./JournalEntryRow/JournalEntryRow.js";
 
-const base_path = './Components/JournalEntryForm/';
-importCSS(base_path + 'JEHeader.css');
-importCSS(base_path + 'JEFooter.css');
-importCSS(base_path + 'JEButton.css');
-importCSS(base_path + 'JournalEntryForm.css');
-
 const JournalEntryRow_ContextMenu = function (xpos, ypos, selectedRow, journalEntryParent) {
 
     let THIS = new ContextMenu([
