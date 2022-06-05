@@ -12,6 +12,10 @@ const Component = function (tagName, properties = {}) {
     return THIS;
 }
 
+/**
+ * 
+ * @param {string} filename file location of css file relative to the server root 
+ */
 Component.addCSS = function (filename) {
     let style = document.createElement('link');
 
