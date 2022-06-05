@@ -1,4 +1,4 @@
-import { JournalEntryForm } from "./Components/JournalEntry/JournalEntryForm.js";
+import { JournalEntryForm } from "./Components/JournalEntryForm/JournalEntryForm.js";
 
 const root = document.getElementById('root');
 
