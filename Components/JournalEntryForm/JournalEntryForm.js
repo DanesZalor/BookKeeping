@@ -58,6 +58,9 @@ const JournalEntrySummary = function (value = "") {
         `,
     });
 
+    THIS.getValue = function () {
+        return THIS.children[0].value;
+    }
 
     THIS.validate = function () {
         let textarea = THIS.getElementsByTagName('textarea')[0];
@@ -111,7 +114,7 @@ const JournalEntryForm = function (
             <thead class="TableHeader">
                 <tr class="header1">
                     <td class="DateDisplay">
-                        ${new Date().toLocaleString().split(',')[0]}
+                        ${new Date().toLocaleString()}
                     </td>
                     <td class="CurrencyDisplay">${currency}</td>
                 </tr>
@@ -176,16 +179,16 @@ const JournalEntryForm = function (
             tableBody.insertBefore(jeRow, before ? pivot : pivot.nextSibling);
         else
             tableBody.appendChild(jeRow);
-    }
+    };
 
     THIS.getRowCount = function () {
         return THIS.getElementsByClassName('TableBody')[0].children.length;
-    }
+    };
 
     THIS.removeRow = function (jeRow) {
         console.log("removeRow");
         jeRow.remove();
-    }
+    };
 
     THIS.validate = function () {
 
@@ -227,6 +230,46 @@ const JournalEntryForm = function (
 
     }; setTimeout(THIS.validate, 50);
 
+    THIS.updateTime = function () {
+        let timedisplay = THIS.getElementsByClassName('DateDisplay')[0];
+        timedisplay.innerHTML = new Date().toLocaleString();
+
+    }; setInterval(THIS.updateTime, 1000);
+
+
+    THIS.getElementsByClassName("JournalEntryTotal")[0].addEventListener('click', function () {
+
+        let dateString = ''; { // set date string YYYY-MM-DD HH:MM:SS      ex: "2022-05-26 02:00:27"
+
+            let currDate = new Date();
+
+            let date = {
+                y: currDate.getFullYear(), m: currDate.getMonth() + 1,
+                d: currDate.getDate(), hr: currDate.getHours(),
+                mn: currDate.getMinutes(), ss: currDate.getSeconds(),
+            };
+
+            date.m = date.m < 10 ? "0" + date.m : date.m;
+            date.d = date.d < 10 ? "0" + date.d : date.d;
+
+            dateString = `${date.y}-${date.m}-${date.d} ${date.hr}:${date.mn}:${date.ss}`;
+        }
+
+        let rowsData = []; { // get rows and their data
+            let rows = document.getElementsByClassName('JournalEntryRow');
+            for (let row of rows) {
+                let rd = row.getData();
+                rowsData.push({
+                    account: rd.accountTitle,
+                    amount: rd.amount * (rd.isDebit ? 1 : -1)
+                });
+            }
+        }
+
+        let entrySummary = THIS.getElementsByClassName('JournalEntrySummary')[0].getValue();
+
+        // use dateString, rowsData, entrySummary to enter into the database
+    });
 
     for (let i = 0; i < data.length; i++) // add rows and shit
         THIS.addRow(new JournalEntryRow(data[i].account, data[i].amount));
