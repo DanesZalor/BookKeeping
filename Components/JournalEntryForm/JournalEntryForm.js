@@ -78,12 +78,6 @@ const JournalEntrySummary = function (value = "") {
     return THIS;
 }
 
-function validate() {
-    console.log("validate call");
-    return false;
-}
-
-
 /**
  * 
  * @param {Array} data each element must be an object { acount: string, amount: number}
