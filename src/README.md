@@ -101,3 +101,6 @@ function searchForCSS($directory){
     }
 }
 ```
+
+### Reference
+- https://www.accountancyknowledge.com/wp-content/uploads/2020/09/Problem-1.-Journal-Entry-min.jpg.webp
