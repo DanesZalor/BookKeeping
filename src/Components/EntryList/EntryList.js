@@ -64,10 +64,41 @@ const EntryList = function (data = []) {
         `,
     });
 
-    for (let dt of data) {
+    for (let dt of data)
         THIS.appendChild(new Entry(
             dt.rows, dt.date, dt.summary
         ));
+
+    /*Add Footer*/{
+        let totalDbt = 0;
+        let totalCdt = 0;
+
+        let colDbt = THIS.getElementsByClassName('col-dbt');
+        let colCdt = THIS.getElementsByClassName('col-cdt');
+
+        for (let cd of colDbt) {
+
+            if (!isNaN(parseFloat(cd.innerHTML)))
+                totalDbt += parseFloat(cd.innerHTML);
+        }
+
+        for (let cc of colCdt) {
+
+            if (!isNaN(parseFloat(cc.innerHTML)))
+                totalCdt += parseFloat(cc.innerHTML);
+        }
+
+
+        THIS.appendChild(new Component('tbody', {
+            className: 'EntryFooter',
+            innerHTML: `
+            <tr>
+                <td colspan="2">Total</td>
+                <td class="col-dbt">${totalDbt}</td>
+                <td class="col-cdt">${totalCdt}</td>
+            </tr>
+        `,
+        }));
     }
 
     return THIS;

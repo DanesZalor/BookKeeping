@@ -22,8 +22,9 @@ root.appendChild(new EntryList(
     [
         {
             rows: [
-                { accountTitle: "Cash", amount: 1000 },
-                { accountTitle: "Accounts Payable - Bob", amount: -1000 },
+                { accountTitle: "Cash", amount: 11000 },
+                { accountTitle: "Assets", amount: 1000 },
+                { accountTitle: "Accounts Payable - Bob", amount: -12000 },
             ],
             date: "2001-09-11",
             summary: "Borrowed Money from Bob"
