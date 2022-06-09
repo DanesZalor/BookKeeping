@@ -87,7 +87,7 @@ const EntryList = function (data = []) {
         }
 
         THIS.appendChild(new Component('tbody', {
-            className: 'EntryFooter',
+            className: (sums.dbt == sums.cdt ? 'EntryFooter' : 'EntryFooter HasError'),
             innerHTML: `
             <tr>
                 <td colspan="2">Total</td>
