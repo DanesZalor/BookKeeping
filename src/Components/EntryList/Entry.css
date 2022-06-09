@@ -1,0 +1,10 @@
+.Entry thead.TableHeader {
+    font-weight: 700;
+    font-size: 15px;
+    color: #6c6d6f;
+}
+
+.Entry thead.TableHeader * {
+    text-align: center;
+    width: 100px;
+}

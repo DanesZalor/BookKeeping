@@ -1,19 +1,19 @@
-thead.TableHeader {
+.JournalEntryForm thead.TableHeader {
     font-weight: 700;
     font-size: 15px;
     color: #6c6d6f;
 }
 
-thead.TableHeader * {
+.JournalEntryForm thead.TableHeader * {
     text-align: center;
     width: 200px;
 }
 
-thead.TableHeader>tr.header2>td {
+.JournalEntryForm thead.TableHeader>tr.header2>td {
     border-bottom: 1px solid #00000033;
 }
 
-thead.TableHeader>tr.header1 {
+.JournalEntryForm thead.TableHeader>tr.header1 {
     font-weight: 300;
     width: max-content;
     font-size: 12px;

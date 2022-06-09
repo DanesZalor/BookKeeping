@@ -25,19 +25,27 @@ const Entry = function (rows = [], date, summary) {
     for (let row of rows)
         THIS.appendChild(new EntryRow(row.accountTitle, row.amount));
 
+    THIS.getElementsByClassName('EntryRow')[0].getElementsByTagName('td')[0].innerHTML = date;
+
     THIS.appendChild(new Component('tr', {
+        className: "EntrySummary",
         innerHTML: `<td></td><td>${summary}</td><td></td>`,
     }));
 
     return THIS;
 }
 
+/**
+ * 
+ * @param {Array} data array of objects [{ rows : [{accountTitle:string amount:number}, ...], date:string, summary:string }, ...] 
+ * @returns 
+ */
 const EntryList = function (data = []) {
 
     let THIS = new Component('table', {
         className: 'EntryList',
         innerHTML: `
-            <thead>
+            <thead class='TableHeader'>
                 <tr>
                 <td>Date</td>
                 <td>Account Title and Explanations</td>

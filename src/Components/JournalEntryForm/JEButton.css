@@ -1,6 +1,6 @@
 /** Button stuff */
 
-tbody.TableFooter button {
+.JournalEntryForm tbody.TableFooter button {
     font-size: 14px;
     padding: 10px 0px 10px 0px;
     width: 95%;
@@ -10,33 +10,33 @@ tbody.TableFooter button {
     border-style: none;
 }
 
-tbody.TableFooter button.JournalEntryTotal.DebitLeaning {
+.JournalEntryForm tbody.TableFooter button.JournalEntryTotal.DebitLeaning {
     padding-right: 70%;
     text-align: right;
 }
 
-tbody.TableFooter button.JournalEntryTotal.CreditLeaning {
+.JournalEntryForm tbody.TableFooter button.JournalEntryTotal.CreditLeaning {
     padding-right: 20%;
     text-align: right;
 }
 
-tbody.TableFooter button.JournalEntryTotal.HasErrors {
+.JournalEntryForm tbody.TableFooter button.JournalEntryTotal.HasErrors {
     background-color: #ffecec;
     outline: #cc8c8c solid 1px;
     color: #cc4c4c;
 }
 
-tbody.TableFooter button.JournalEntryTotal.Valid {
+.JournalEntryForm tbody.TableFooter button.JournalEntryTotal.Valid {
     background-color: #ecffec;
     outline: #4c884c solid 1px;
     color: #4c884c;
 }
 
-tbody.TableFooter button.JournalEntryTotal.Valid:hover {
+.JournalEntryForm tbody.TableFooter button.JournalEntryTotal.Valid:hover {
     background-color: #bceebc;
     color: #2c662c;
 }
 
-tbody.TableFooter button.JournalEntryTotal.Valid:active {
+.JournalEntryForm tbody.TableFooter button.JournalEntryTotal.Valid:active {
     background-color: #acddac;
 }
