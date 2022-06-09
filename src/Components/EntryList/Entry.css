@@ -1,8 +1,18 @@
-.EntryList .Entry td:not(:last-child) {
+.EntryList .Entry td {
+    padding: 10px;
+}
+
+.EntryList .Entry td:first-child,
+.EntryList .Entry td:nth-child(2) {
     border: 0px none black;
     border-right: 1px solid #00000033;
 }
 
 .EntryList .Entry tr:last-child {
     border-bottom: 1px solid #00000033;
+}
+
+.EntryList .Entry .col-dbt,
+.EntryList .Entry .col-cdt {
+    text-align: center;
 }

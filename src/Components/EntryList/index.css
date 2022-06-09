@@ -1,6 +1,11 @@
 @import "Entry.css";
 
-.EntryList thead>* {
+.EntryList thead tr:last-child>* {
     border: 0px none black;
     border-bottom: 1px solid #00000033;
+}
+
+.EntryList thead td {
+    text-align: center;
+    min-width: 80px;
 }

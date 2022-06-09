@@ -3,7 +3,11 @@ table {
 }
 
 
-table td>* {
+table td * {
     box-sizing: border-box;
     width: inherit;
+}
+
+* {
+    color: #505050;
 }

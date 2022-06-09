@@ -4,7 +4,7 @@
     border-width: 0px;
     border-bottom-color: #808080;
     border-bottom-style: solid;
-    color: #606060;
+    color: inherit;
     font-size: 15px;
     padding: 8px 0px 2px 2px;
 
@@ -57,9 +57,9 @@
 }
 
 .JournalEntryRow.Debit>.AmountInput>input {
-    padding-right: 70%;
+    padding-right: 65%;
 }
 
 .JournalEntryRow.Credit>.AmountInput>input {
-    padding-right: 20%;
+    padding-right: 15%;
 }

@@ -6,9 +6,12 @@ const EntryRow = function (accountTitle, amount) {
         className: 'EntryRow',
         innerHTML: `
             <tr>
-                <td></td>
-                <td>${accountTitle}</td>
-                <td>${amount}</td>
+                <td class='col-date'></td>
+                <td class='col-acct'>${accountTitle}</td>
+            ${amount >= 0 ?
+                `<td class='col-dbt'>${Math.abs(amount)}</td><td class='col-cdt'></td>` :
+                `<td class='col-dbt'></td><td class='col-cdt'>${Math.abs(amount)}</td>`
+            }
             </tr>
         `
     });
@@ -47,17 +50,15 @@ const EntryList = function (data = []) {
         innerHTML: `
             <thead class='TableHeader'>
                 <tr>
-                <td>Date</td>
-                <td>Account Title and Explanations</td>
-                <td>
-                    <table>
-                        <tr>Amount (Php)</tr>
-                        <tr>
-                            <td>Debit</td>
-                            <td>Credit</td>
-                        </tr>
-                    </table>
-                </td>
+                    <td></td>
+                    <td></td>
+                    <td colspan="2">Amount (Php)</td>
+                </tr>
+                <tr>
+                    <td>Date</td>
+                    <td>Account Title and Explanations</td>
+                    <td>Debit</td>
+                    <td>Credit</td>
                 </tr>
             </thead>
         `,
