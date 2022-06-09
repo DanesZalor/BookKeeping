@@ -30,7 +30,7 @@ const Entry = function (rows = [], date, summary) {
     }
 
     let THIS = new Component('tbody', {
-        className: 'Entry',
+        className: (sums.dbt == sums.cdt ? 'Entry' : 'Entry HasError'),
         Totals: { Debit: sums.dbt, Credit: sums.cdt },
     });
 
@@ -41,7 +41,7 @@ const Entry = function (rows = [], date, summary) {
 
     THIS.appendChild(new Component('tr', {
         className: "EntrySummary",
-        innerHTML: `<td></td><td>${summary}</td><td></td>`,
+        innerHTML: `<td></td><td>${summary}</td><td></td><td></td>`,
     }));
 
     return THIS;
@@ -85,7 +85,6 @@ const EntryList = function (data = []) {
             sums.dbt += entry.Totals.Debit;
             sums.cdt += entry.Totals.Credit;
         }
-
 
         THIS.appendChild(new Component('tbody', {
             className: 'EntryFooter',
