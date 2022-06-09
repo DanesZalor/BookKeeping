@@ -16,8 +16,8 @@ var je = new JournalEntryForm(
 );
 root.appendChild(je);
 
-/*
-;
+
+
 root.appendChild(new EntryList(
     [
         {
@@ -37,4 +37,4 @@ root.appendChild(new EntryList(
         },
 
     ]
-));*/
+));
