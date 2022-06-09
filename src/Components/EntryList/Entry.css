@@ -3,7 +3,7 @@
     border: 3px dashed #ff0000 !important;
 }
 
-.EntryList .Entry td {
+.EntryList td {
     padding: 10px;
 }
 
@@ -18,11 +18,22 @@
     border-bottom: 1px solid #00000033;
 }
 
-.EntryList .EntryRow .col-date {
+.EntryList .col-date {
     font-size: smaller;
+    border-right: 1px dotted #00000033;
 }
 
 .EntryList .col-dbt,
 .EntryList .col-cdt {
     text-align: right;
+}
+
+
+.EntryList .EntryRow.Credit td.col-acct {
+    padding-left: 8%;
+}
+
+.EntryList .EntrySummary td {
+    font-size: smaller;
+    font-weight: 200;
 }

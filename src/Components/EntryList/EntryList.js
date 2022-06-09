@@ -3,7 +3,7 @@ import { Component } from "../Component.js";
 const EntryRow = function (accountTitle, amount) {
 
     let THIS = new Component('tr', {
-        className: 'EntryRow',
+        className: amount >= 0 ? 'EntryRow Debit' : 'EntryRow Credit',
         innerHTML: `
             <tr>
                 <td class='col-date'></td>
@@ -41,7 +41,7 @@ const Entry = function (rows = [], date, summary) {
 
     THIS.appendChild(new Component('tr', {
         className: "EntrySummary",
-        innerHTML: `<td></td><td>${summary}</td><td></td><td></td>`,
+        innerHTML: `<td class='col-date'></td><td>(${summary})</td><td></td><td></td>`,
     }));
 
     return THIS;
