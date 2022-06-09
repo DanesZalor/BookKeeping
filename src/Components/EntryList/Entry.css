@@ -1,3 +1,8 @@
-.EntryList thead>* {
-    border: 1px solid black;
+.EntryList .Entry td:not(:last-child) {
+    border: 0px none black;
+    border-right: 1px solid #00000033;
+}
+
+.EntryList .Entry tr:last-child {
+    border-bottom: 1px solid #00000033;
 }

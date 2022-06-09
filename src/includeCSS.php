@@ -7,8 +7,7 @@
             $relpath = $directory.'/'.$file->getFilename();
             
             // file is css
-            if( str_ends_with($file->getFilename(), '.css'))
-                //echo $file->getFilename().'<br>';
+            if( str_ends_with($file->getFilename(), 'index.css'))
                 echo "<link rel=\"stylesheet\" href=\"${relpath}\">";
             
             else if( // file is directory and does not start with .

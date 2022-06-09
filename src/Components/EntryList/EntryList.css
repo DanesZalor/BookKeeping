@@ -1,9 +1,0 @@
-tbody td>*,
-tbody td>* {
-    box-sizing: border-box;
-    width: inherit;
-}
-
-tbody.EntryList {
-    border-collapse: collapse;
-}
