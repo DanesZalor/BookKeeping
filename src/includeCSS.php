@@ -1,5 +1,5 @@
 <?php
-    
+    /** Searches for index.css files through out the served directory */
     function searchForCSS($directory){
         
         foreach (new DirectoryIterator($directory) as $file){
@@ -7,7 +7,7 @@
             $relpath = $directory.'/'.$file->getFilename();
             
             // file is css
-            if( str_ends_with($file->getFilename(), 'index.css'))
+            if( $file->getFilename() == 'index.css')
                 echo "<link rel=\"stylesheet\" href=\"${relpath}\">";
             
             else if( // file is directory and does not start with .
