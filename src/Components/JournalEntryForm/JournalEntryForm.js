@@ -181,12 +181,11 @@ const JournalEntryForm = function (
 
     THIS.validate = function () {
 
-        let rows = THIS.getElementsByClassName('JournalEntryRow');
         let btnRes = THIS.getElementsByClassName('JournalEntryTotal')[0];
         let errors = 0;
 
         let total = 0;
-        for (let row of rows) {
+        for (let row of THIS.getElementsByClassName('JournalEntryRow')) {
             let rowvalidityres = row.validityCheck();
 
             errors += rowvalidityres.problem.length > 0 ? 1 : 0;
@@ -245,8 +244,7 @@ const JournalEntryForm = function (
         }
 
         let rowsData = []; { // get rows and their data
-            let rows = document.getElementsByClassName('JournalEntryRow');
-            for (let row of rows) {
+            for (let row of document.getElementsByClassName('JournalEntryRow')) {
                 let rd = row.getData();
                 rowsData.push({
                     account: rd.accountTitle,
@@ -258,6 +256,13 @@ const JournalEntryForm = function (
         let entrySummary = THIS.getElementsByClassName('JournalEntrySummary')[0].getValue();
 
         // use dateString, rowsData, entrySummary to enter into the database
+        let printstr = `${dateString}\n`;
+        for (let rd of rowsData)
+            printstr += `{${rd.account}, ${rd.amount}}\n`;
+
+        printstr += `Summary: ${summary}`;
+
+        alert(printstr);
     });
 
     for (let i = 0; i < data.length; i++) // add rows and shit

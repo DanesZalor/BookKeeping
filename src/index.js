@@ -35,7 +35,14 @@ root.appendChild(new EntryList(
             ],
             date: "2001-10-11",
             summary: "Payed the money I borrowed from Bob"
-        },
+        }, {
+            rows: [
+                { accountTitle: "Cash", amount: -1000 },
+                { accountTitle: "Accounts Payable - Bob", amount: 1200 },
+            ],
+            date: "2001-10-29",
+            summary: "Payed the money I borrowed from Bob"
+        }
 
     ]
 ));

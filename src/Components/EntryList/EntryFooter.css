@@ -1,6 +1,7 @@
 .EntryList .EntryFooter td {
     padding: 10px;
     border-top: 2px solid #00000033;
+    font-weight: 500;
 }
 
 .EntryList .EntryFooter td:first-child {

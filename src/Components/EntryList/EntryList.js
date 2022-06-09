@@ -13,7 +13,7 @@ const EntryRow = function (accountTitle, amount) {
                 `<td class='col-dbt'></td><td class='col-cdt'>${Math.abs(amount)}</td>`
             }
             </tr>
-        `
+        `,
     });
 
     return THIS;
@@ -21,8 +21,17 @@ const EntryRow = function (accountTitle, amount) {
 
 const Entry = function (rows = [], date, summary) {
 
+    let sums = { dbt: 0, cdt: 0 }
+    /** precalculate sums */{
+        for (let row of rows) {
+            if (row.amount > 0) sums.dbt += row.amount;
+            else if (row.amount < 0) sums.cdt += Math.abs(row.amount);
+        }
+    }
+
     let THIS = new Component('tbody', {
         className: 'Entry',
+        Totals: { Debit: sums.dbt, Credit: sums.cdt },
     });
 
     for (let row of rows)
@@ -70,22 +79,11 @@ const EntryList = function (data = []) {
         ));
 
     /*Add Footer*/{
-        let totalDbt = 0;
-        let totalCdt = 0;
+        let sums = { dbt: 0, cdt: 0 }
 
-        let colDbt = THIS.getElementsByClassName('col-dbt');
-        let colCdt = THIS.getElementsByClassName('col-cdt');
-
-        for (let cd of colDbt) {
-
-            if (!isNaN(parseFloat(cd.innerHTML)))
-                totalDbt += parseFloat(cd.innerHTML);
-        }
-
-        for (let cc of colCdt) {
-
-            if (!isNaN(parseFloat(cc.innerHTML)))
-                totalCdt += parseFloat(cc.innerHTML);
+        for (let entry of THIS.getElementsByClassName('Entry')) {
+            sums.dbt += entry.Totals.Debit;
+            sums.cdt += entry.Totals.Credit;
         }
 
 
@@ -94,8 +92,8 @@ const EntryList = function (data = []) {
             innerHTML: `
             <tr>
                 <td colspan="2">Total</td>
-                <td class="col-dbt">${totalDbt}</td>
-                <td class="col-cdt">${totalCdt}</td>
+                <td class="col-dbt">${sums.dbt}</td>
+                <td class="col-cdt">${sums.cdt}</td>
             </tr>
         `,
         }));
