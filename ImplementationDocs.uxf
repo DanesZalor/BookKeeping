@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>11</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>198</x>
+      <y>528</y>
+      <w>440</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>GET page
+-</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>209</x>
+      <y>561</y>
+      <w>209</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>&lt;Query/&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>220</x>
+      <y>594</y>
+      <w>187</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>From &lt;DatePicker/&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>220</x>
+      <y>638</y>
+      <w>187</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>To &lt;DatePicker/&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>220</x>
+      <y>682</y>
+      <w>187</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>&lt;button GET/&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>429</x>
+      <y>561</y>
+      <w>198</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>&lt;EntryList :table/&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>198</x>
+      <y>110</y>
+      <w>352</w>
+      <h>363</h>
+    </coordinates>
+    <panel_attributes>POST page
+-</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>209</x>
+      <y>143</y>
+      <w>330</w>
+      <h>319</h>
+    </coordinates>
+    <panel_attributes>&lt;JournalEntryForm : form/&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>220</x>
+      <y>220</y>
+      <w>308</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>&lt;JournalEntryRow : tr/&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>231</x>
+      <y>253</y>
+      <w>132</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>&lt;AccountInput
+: JEInput/&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>374</x>
+      <y>253</y>
+      <w>143</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>&lt;AmountInput
+: JEInput/&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>220</x>
+      <y>374</y>
+      <w>308</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>&lt;tr/&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>220</x>
+      <y>165</y>
+      <w>198</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=.
+&lt;JournalEntryRow_ContextMenu
+: ContextMenu /&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>220</x>
+      <y>319</y>
+      <w>308</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>&lt;JournalEntryRow: tr/&gt;
+2..n</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>231</x>
+      <y>396</y>
+      <w>154</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>&lt;JournalEntrySummary
+:textarea/&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>396</x>
+      <y>396</y>
+      <w>121</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>&lt;button type
+=submit/&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>440</x>
+      <y>583</y>
+      <w>176</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>&lt;Entry : tbody/&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>440</x>
+      <y>627</y>
+      <w>176</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>&lt;Entry : tbody/&gt;
+0..n
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>440</x>
+      <y>682</y>
+      <w>176</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>&lt;tbody/&gt;
+contains totals
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
