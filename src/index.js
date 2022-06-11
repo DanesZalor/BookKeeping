@@ -1,11 +1,10 @@
+/*
 import { JournalEntryForm } from "./Components/JournalEntryForm/JournalEntryForm.js";
 
 import { EntryList } from "./Components/EntryList/EntryList.js";
 
 
-const root = document.getElementById('root');
-
-
+/
 var je = new JournalEntryForm(
     [
         { account: 'Accounts Recievable', 'amount': 5000 },
@@ -15,7 +14,6 @@ var je = new JournalEntryForm(
     "Company X borrows supplies and some cash"
 );
 root.appendChild(je);
-
 
 
 root.appendChild(new EntryList(
@@ -45,4 +43,10 @@ root.appendChild(new EntryList(
         }
 
     ]
-));
+));*/
+
+import { App } from './Components/App.js';
+
+const root = document.getElementById('root');
+
+root.appendChild(new App());
