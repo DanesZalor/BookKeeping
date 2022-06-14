@@ -2,7 +2,10 @@
 
 Doing this project to learn vanilla javascript because React is so confusing atm.
 
-## Component-based programming
+### Reference
+- https://www.accountancyknowledge.com/wp-content/uploads/2020/09/Problem-1.-Journal-Entry-min.jpg.webp
+
+## Component-based programming (Front-End)
 ##### `Component.js`
 ```javascript
 /**
@@ -102,5 +105,80 @@ function searchForCSS($directory){
 }
 ```
 
-### Reference
-- https://www.accountancyknowledge.com/wp-content/uploads/2020/09/Problem-1.-Journal-Entry-min.jpg.webp
+
+
+## Backend
+
+### Setup
+```sql
+CREATE TABLE JournalEntry(
+    dateOfTransaction timestamp,
+    entrySummary varchar(500),
+    id SERIAL PRIMARY KEY
+);
+
+CREATE TABLE account(
+    accountName varchar(200),
+    PRIMARY KEY (accountName)
+);
+
+CREATE TABLE jerow(
+    accountTitle varchar(200),
+    amount float,
+    jeid int,
+    FOREIGN KEY (accountTitle) REFERENCES account(accountName),
+    PRIMARY KEY (jeid, accountTitle)
+);
+```
+
+For `jerow.amount`, positive values represents *debit* while negative; *credit*
+
+### Queries
+
+##### Registering an Account
+
+```sql
+INSERT INTO account(accountName) VALUES('Cash');
+```
+account titles in journal entry must be registered in the database to make journal entries more credible. Cause if we were to do the `AccountTitle` checking on the client-side, the back end might still be exploitable.
+
+
+##### Submitting a Journal Entry
+
+The process of registering a **Journal Entry** takes 2 steps:
+- insert into `journalentry`
+
+```sql
+INSERT INTO  journalentry (dateoftransaction, entrysummary)
+VALUES ('2001-09-11 08:13:12', '30k bank loan');
+```
+
+- add the rows into `jerow`
+
+first, get the `journalentry.id` foreign key that we just added
+```sql
+SELECT id FROM journalentry WHERE entrysummary='30k bank loan' AND dateoftransaction='2001-09-11 08:13:12';
+```
+
+```sql
+INSERT INTO jerow (accountTitle, amount, jeid)
+VALUES ('Cash', 30000, <theRetrievedKey>);
+
+INSERT INTO jerow (accountTitle, amount, jeid)
+VALUES ('Accounts Payable', -30000, <theRetrievedKey>);
+```
+
+##### Getting a Journal Entry
+```sql
+SELECT * FROM jerow WHERE jeid=<journalentry.id>
+```
+
+##### Getting the SUM of a JournalEntry
+```sql
+SELECT SUM(amount) FROM jerow WHERE jeid=1;
+```
+
+
+
+
+
