@@ -63,7 +63,6 @@ const Switch = function () {
                         date: "2001-10-29",
                         summary: "Payed the money I borrowed from Bob"
                     }
-
                 ]
             ));
             break;
