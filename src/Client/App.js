@@ -76,6 +76,19 @@ const Switch = function () {
                 "Company X borrows supplies and some cash"
             ));
             break;
+
+        case "/about":
+            THIS.appendChild(new Component('div', {
+                innerHTML: `
+                <h1>About</h1>
+                <p> Some description about this web app </p>
+                `
+            }));
+            break;
+        default:
+            THIS.appendChild(new Component('div', {
+                innerHTML: `<h1>404 Page not found</h1>${location.pathname} not found in the server`,
+            }));
     }
 
     return THIS;
