@@ -30,19 +30,24 @@ const Homepage = function () {
                     </tr>
                 </tbody>
             </table>
+            <div class="EntryListHolder"></div>
+            </div>
         `
     });
 
     let date_from = THIS.getElementsByClassName("FromDate")[0];
     let date_to = THIS.getElementsByClassName("ToDate")[0];
-    THIS.getElementsByClassName("QueryButton")[0].onclick = function () {
+    let entrylistholder = THIS.getElementsByClassName('EntryListHolder')[0];
 
+    THIS.getElementsByClassName("QueryButton")[0].onclick = function () {
+        entrylistholder.children[0].remove();
+        entrylistholder.appendChild(new EntryList());
     };
 
     let apiResponse = [];
     APIRequest('GET', 'api/entries/', null,
         (response) => {
-            THIS.appendChild(new EntryList(JSON.parse(response)));
+            entrylistholder.appendChild(new EntryList(JSON.parse(response)));
         });
 
     return THIS;

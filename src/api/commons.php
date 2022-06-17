@@ -27,8 +27,8 @@ function db_query($statement, $fetch_mode = PDO::FETCH_DEFAULT)
     }
 }
 
-/* implement later if we add accounts system for authentication
 $body = json_decode(file_get_contents('php://input'));
+/* implement later if we add accounts system for authentication
 
 $basicAuth = [
     "user" => array_key_exists('PHP_AUTH_USER', $_SERVER) ? $_SERVER['PHP_AUTH_USER'] : '',

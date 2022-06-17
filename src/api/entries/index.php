@@ -2,7 +2,35 @@
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
-    $entries = db_query("SELECT * FROM journalentry")->fetchAll(PDO::FETCH_ASSOC);
+    
+    $querystr = "SELECT * FROM journalentry";
+
+    function apnd0($num){
+        $str = strval($num); if(strlen($str)<2) $str = "0" . $str; return $str;
+    }
+
+    function convertToTimeStamp($datestr, $fallback){
+
+        $pD = date_parse($datestr);
+
+        if($datestr == "" || $datestr == null || ($pD['warning_count'] > 0 && $pD['error_count'] > 0)) return $fallback;
+
+        $pD['month'] = apnd0($pD['month']);
+        $pD['day'] = apnd0($pD['day']);
+        $pD['hour'] = apnd0($pD['hour']);
+        $pD['minute'] = apnd0($pD['minute']);
+        $pD['second'] = apnd0($pD['second']);
+
+        return "${pD['year']}-${pD['month']}-${pD['day']} ${pD['hour']}:${pD['minute']}:${pD['second']}";
+    }
+
+    $strdateto = convertToTimeStamp($body->dateto, '2050-01-01 00:00:00');
+    $strdatefrom = convertToTimeStamp($body->datefrom, '2000-01-01 00:00:00');
+    
+    $querystr = "SELECT * FROM journalentry WHERE dateoftransaction BETWEEN '${strdatefrom}' AND '${strdateto}'";
+    //printf($querystr);
+
+    $entries = db_query($querystr)->fetchAll(PDO::FETCH_ASSOC);
     
     $responsebody = [];
 
@@ -14,5 +42,23 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     }
 
     respond($responsebody, 200);
+}
+
+// might remove later
+else if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $entries = db_query("SELECT * FROM journalentry WHERE dateoftransaction BETWEEN '$body->datefrom' AND '$body->dateto'"
+    )->fetchAll(PDO::FETCH_ASSOC);
+    
+    $responsebody = [];
+
+    foreach($entries as $entry){
+        $rows = db_query("SELECT * FROM jerow WHERE jeid='".$entry['id']."'")->fetchAll(PDO::FETCH_ASSOC);
+
+        $entry['rows'] = $rows;
+        array_push($responsebody, $entry);
+    }
+
+    respond($responsebody, 200);
+
 }
 ?>
