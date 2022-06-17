@@ -1,6 +1,6 @@
-import { Component } from "./Component.js";
-import { Homepage } from './Homepage.js';
-import { JournalEntryForm } from './JournalEntryForm/JournalEntryForm.js';
+import { Component } from "./Components/Component.js";
+import { Homepage } from './Pages/Homepage.js';
+import { JournalEntryForm } from './Components/JournalEntryForm/JournalEntryForm.js';
 
 /**
  * 
