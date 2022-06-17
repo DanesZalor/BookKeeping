@@ -178,7 +178,11 @@ SELECT * FROM jerow WHERE jeid=<journalentry.id>
 SELECT SUM(amount) FROM jerow WHERE jeid=1;
 ```
 
-
+##### Getting all Journal Entries in between dates
+```sql
+SELECT * FROM journalentry WHERE dateoftransaction 
+BETWEEN '2001-09-10 00:00:00' AND '2001-12-31 23:59:59';
+```
 
 
 
