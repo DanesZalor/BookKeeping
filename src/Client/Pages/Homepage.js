@@ -3,9 +3,9 @@
  * renders the homepage that contains the ledger. The data will be queried and rendered accordingly
  */
 
-import { Component } from "./Component.js";
-import { APIRequest } from "./Commons.js";
-import { EntryList } from "./EntryList/EntryList.js";
+import { Component } from "../Components/Component.js";
+import { APIRequest } from "../Commons.js";
+import { EntryList } from "../Components/EntryList/EntryList.js";
 
 
 const Homepage = function () {
