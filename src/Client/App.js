@@ -1,5 +1,5 @@
 import { Component } from "./Component.js";
-import { EntryList } from './EntryList/EntryList.js';
+import { Homepage } from './Homepage.js';
 import { JournalEntryForm } from './JournalEntryForm/JournalEntryForm.js';
 
 /**
@@ -38,33 +38,7 @@ const Switch = function () {
 
     switch (location.pathname) {
         case "/":
-            THIS.appendChild(new EntryList(
-                [
-                    {
-                        rows: [
-                            { accountTitle: "Cash", amount: 11000 },
-                            { accountTitle: "Assets", amount: 1000 },
-                            { accountTitle: "Accounts Payable - Bob", amount: -12000 },
-                        ],
-                        date: "2001-09-11",
-                        summary: "Borrowed Money from Bob"
-                    }, {
-                        rows: [
-                            { accountTitle: "Cash", amount: -1000 },
-                            { accountTitle: "Accounts Payable - Bob", amount: 1000 },
-                        ],
-                        date: "2001-10-11",
-                        summary: "Payed the money I borrowed from Bob"
-                    }, {
-                        rows: [
-                            { accountTitle: "Cash", amount: -1000 },
-                            { accountTitle: "Accounts Payable - Bob", amount: 1200 },
-                        ],
-                        date: "2001-10-29",
-                        summary: "Payed the money I borrowed from Bob"
-                    }
-                ]
-            ));
+            THIS.appendChild(new Homepage());
             break;
         case "/post":
             THIS.appendChild(new JournalEntryForm(

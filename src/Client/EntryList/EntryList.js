@@ -1,13 +1,13 @@
 import { Component } from "../Component.js";
 
-const EntryRow = function (accountTitle, amount) {
+const EntryRow = function (accounttitle, amount) {
 
     let THIS = new Component('tr', {
         className: amount >= 0 ? 'EntryRow Debit' : 'EntryRow Credit',
         innerHTML: `
             <tr>
                 <td class='col-date'></td>
-                <td class='col-acct'>${accountTitle}</td>
+                <td class='col-acct'>${accounttitle}</td>
             ${amount >= 0 ?
                 `<td class='col-dbt'>${Math.abs(amount)}</td><td class='col-cdt'></td>` :
                 `<td class='col-dbt'></td><td class='col-cdt'>${Math.abs(amount)}</td>`
@@ -35,7 +35,7 @@ const Entry = function (rows = [], date, summary) {
     });
 
     for (let row of rows)
-        THIS.appendChild(new EntryRow(row.accountTitle, row.amount));
+        THIS.appendChild(new EntryRow(row.accounttitle, row.amount));
 
     THIS.getElementsByClassName('EntryRow')[0].getElementsByTagName('td')[0].innerHTML = date;
 
@@ -75,15 +75,15 @@ const EntryList = function (data = []) {
 
     for (let dt of data)
         THIS.appendChild(new Entry(
-            dt.rows, dt.date, dt.summary
+            dt.rows, dt.dateoftransaction, dt.entrysummary
         ));
 
     /*Add Footer*/{
         let sums = { dbt: 0, cdt: 0 }
 
         for (let entry of THIS.getElementsByClassName('Entry')) {
-            sums.dbt += entry.Totals.Debit;
-            sums.cdt += entry.Totals.Credit;
+            sums.dbt += parseFloat(entry.Totals.Debit);
+            sums.cdt += parseFloat(entry.Totals.Credit);
         }
 
         THIS.appendChild(new Component('tbody', {
