@@ -42,7 +42,7 @@ const Entry = function (rows = [], date, summary) {
     for (let entryrow of THIS.getElementsByClassName("EntryRow Debit"))
         THIS.prepend(entryrow);
 
-    THIS.getElementsByClassName('EntryRow')[0].getElementsByTagName('td')[0].innerHTML = date;
+    THIS.getElementsByClassName('EntryRow')[0].getElementsByTagName('td')[0].innerHTML = date.replaceAll(" ", "<br/>");
 
     THIS.appendChild(new Component('tr', {
         className: "EntrySummary",
