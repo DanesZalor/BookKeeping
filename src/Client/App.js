@@ -1,6 +1,6 @@
 import { Component } from "./Components/Component.js";
 import { Homepage } from './Pages/Homepage.js';
-import { JournalEntryForm } from './Components/JournalEntryForm/JournalEntryForm.js';
+import { Postpage } from "./Pages/Postpage.js";
 
 /**
  * 
@@ -41,14 +41,7 @@ const Switch = function () {
             THIS.appendChild(new Homepage());
             break;
         case "/post":
-            THIS.appendChild(new JournalEntryForm(
-                [
-                    { account: 'Accounts Recievable', 'amount': 5000 },
-                    { account: 'Cash', amount: -3000 },
-                    { account: 'Assets', amount: -2000 }
-                ],
-                "Company X borrows supplies and some cash"
-            ));
+            THIS.appendChild(new Postpage());
             break;
 
         case "/about":
@@ -66,10 +59,14 @@ const Switch = function () {
     }
 
     return THIS;
-}
+};
 
+const PageRouter = function (args) {
+
+};
 
 const App = function () {
+
     let THIS = new Component('div', {
         className: 'App',
     });
@@ -81,6 +78,12 @@ const App = function () {
     ));
 
     THIS.appendChild(new Switch());
+    /*
+    THIS.appendChild(new PageRouter([
+        { name: "Home", to: "/", component: new Homepage() },
+        { name: "Home", to: "/", component: new Homepage() },
+    ]));
+    */
     return THIS;
 }
 
