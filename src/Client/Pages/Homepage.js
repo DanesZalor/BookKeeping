@@ -41,8 +41,7 @@ const Homepage = function () {
 
     THIS.getElementsByClassName("QueryButton")[0].onclick = function () {
 
-        //entrylistholder.appendChild(new EntryList());
-        console.log(date_from.value + " 00:00:00" + " to " + date_to.value + " 23:59:59");
+        // have to use POST since GET methods doesnt send the body for some reason wtf?
         APIRequest('POST', 'api/entries/',
             { datefrom: date_from.value + " 00:00:00", dateto: date_to.value + " 23:59:59" },
             (response) => {
@@ -53,7 +52,6 @@ const Homepage = function () {
         );
     };
 
-    let apiResponse = [];
     APIRequest('GET', 'api/entries/', null,
         (response) => {
             entrylistholder.appendChild(new EntryList(JSON.parse(response)));
