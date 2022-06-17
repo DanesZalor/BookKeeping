@@ -1,7 +1,7 @@
 <?php require '../commons.php' ?>
 
 <?php
-if ($_SERVER['REQUEST_METHOD'] == "GET") {
+if ($_SERVER['REQUEST_METHOD'] == "GET" || $_SERVER['REQUEST_METHOD'] == 'POST') {
     
     $querystr = "SELECT * FROM journalentry";
 
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         return "${pD['year']}-${pD['month']}-${pD['day']} ${pD['hour']}:${pD['minute']}:${pD['second']}";
     }
 
-    $strdateto = convertToTimeStamp($body->dateto, '2050-01-01 00:00:00');
+    $strdateto = convertToTimeStamp($body->dateto, '2030-01-01 23:59:59');
     $strdatefrom = convertToTimeStamp($body->datefrom, '2000-01-01 00:00:00');
     
     $querystr = "SELECT * FROM journalentry WHERE dateoftransaction BETWEEN '${strdatefrom}' AND '${strdateto}'";
@@ -44,21 +44,4 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     respond($responsebody, 200);
 }
 
-// might remove later
-else if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $entries = db_query("SELECT * FROM journalentry WHERE dateoftransaction BETWEEN '$body->datefrom' AND '$body->dateto'"
-    )->fetchAll(PDO::FETCH_ASSOC);
-    
-    $responsebody = [];
-
-    foreach($entries as $entry){
-        $rows = db_query("SELECT * FROM jerow WHERE jeid='".$entry['id']."'")->fetchAll(PDO::FETCH_ASSOC);
-
-        $entry['rows'] = $rows;
-        array_push($responsebody, $entry);
-    }
-
-    respond($responsebody, 200);
-
-}
 ?>

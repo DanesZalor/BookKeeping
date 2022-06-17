@@ -16,11 +16,11 @@ const Homepage = function () {
                 <tbody>
                     <tr>
                         <td>From</td>
-                        <td><input type="date" class="FromDate"></input></td>
+                        <td><input type="date" class="FromDate" value="2000-01-01"/></td>
                     </tr>
                     <tr>
                         <td>To</td>
-                        <td><input type="date" class="ToDate"></input></td>
+                        <td><input type="date" class="ToDate" value="2030-01-01"/></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -40,8 +40,17 @@ const Homepage = function () {
     let entrylistholder = THIS.getElementsByClassName('EntryListHolder')[0];
 
     THIS.getElementsByClassName("QueryButton")[0].onclick = function () {
-        entrylistholder.children[0].remove();
-        entrylistholder.appendChild(new EntryList());
+
+        //entrylistholder.appendChild(new EntryList());
+        console.log(date_from.value + " 00:00:00" + " to " + date_to.value + " 23:59:59");
+        APIRequest('POST', 'api/entries/',
+            { datefrom: date_from.value + " 00:00:00", dateto: date_to.value + " 23:59:59" },
+            (response) => {
+                console.log("response!");
+                entrylistholder.children[0].remove();
+                entrylistholder.appendChild(new EntryList(JSON.parse(response)));
+            }
+        );
     };
 
     let apiResponse = [];
