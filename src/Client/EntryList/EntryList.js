@@ -4,6 +4,7 @@ const EntryRow = function (accounttitle, amount) {
 
     let THIS = new Component('tr', {
         className: amount >= 0 ? 'EntryRow Debit' : 'EntryRow Credit',
+        isDebit: amount > 0,
         innerHTML: `
             <tr>
                 <td class='col-date'></td>
@@ -36,6 +37,10 @@ const Entry = function (rows = [], date, summary) {
 
     for (let row of rows)
         THIS.appendChild(new EntryRow(row.accounttitle, row.amount));
+
+    // all #(EntryRow Debit) will be prepended
+    for (let entryrow of THIS.getElementsByClassName("EntryRow Debit"))
+        THIS.prepend(entryrow);
 
     THIS.getElementsByClassName('EntryRow')[0].getElementsByTagName('td')[0].innerHTML = date;
 
