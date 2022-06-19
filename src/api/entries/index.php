@@ -28,7 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET" || $_SERVER['REQUEST_METHOD'] == 'POST')
     $strdatefrom = convertToTimeStamp($body->datefrom, '2000-01-01 00:00:00');
     
     $querystr = "SELECT * FROM journalentry WHERE dateoftransaction BETWEEN '${strdatefrom}' AND '${strdateto}'";
-    //printf($querystr);
 
     $entries = db_query($querystr)->fetchAll(PDO::FETCH_ASSOC);
     
@@ -42,6 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] == "GET" || $_SERVER['REQUEST_METHOD'] == 'POST')
     }
 
     respond($responsebody, 200);
+}
+else {
+    respond("Invalid HTTP Method", 405);
 }
 
 ?>
