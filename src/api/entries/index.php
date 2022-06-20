@@ -1,6 +1,10 @@
 <?php require '../commons.php' ?>
 
 <?php
+
+/**
+ *  GET|POST. because my javascript APICall function for some reason cannot send a request body with GET
+ */
 if ($_SERVER['REQUEST_METHOD'] == "GET" || $_SERVER['REQUEST_METHOD'] == 'POST') {
     
     $querystr = "SELECT * FROM journalentry";
