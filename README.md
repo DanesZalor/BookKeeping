@@ -189,4 +189,5 @@ BETWEEN '2001-09-10 00:00:00' AND '2001-12-31 23:59:59';
 |endpoint|params|response|
 |-|-|-|
 |<sub>GET/POST</sub><br>`api/entries`|`datefrom:str`,<br> `dateto:str`|gets a list of entries with date spans|
-|<sub>POST</sub><br>`api/entries/post.php`||posts a new entry|
+|<sub>POST</sub><br>`api/entries/post.php`|`entrydesc: str`,<br> `dateoftransaction: timestamp`,<br> `rows: [{accounttitle:str, amount:float,...]` |posts a new entry|
+

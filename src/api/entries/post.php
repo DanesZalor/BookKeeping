@@ -4,6 +4,8 @@
 
 /**
  * @param body { entrydesc: str, dateoftransaction: timestamp, rows: array() }
+ * sample: entrydesc="description" dateoftransaction="2001-09-12 00:01:23" rows:='[{"accounttitle":"Cash", "amount":-2000}, {"accounttitle":"Accounts Recievable", "amount":2000}]'
+
  */
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
