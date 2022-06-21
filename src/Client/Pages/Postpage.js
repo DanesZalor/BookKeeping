@@ -10,7 +10,7 @@ const Postpage = function () {
 
     THIS.appendChild(new JournalEntryForm(
         [
-            { account: 'Accounts Recievable', 'amount': 5000 },
+            { account: 'Accounts Recievable', amount: 5000 },
             { account: 'Cash', amount: -3000 },
             { account: 'Assets', amount: -2000 }
         ],

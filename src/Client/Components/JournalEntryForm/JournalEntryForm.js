@@ -225,6 +225,10 @@ const JournalEntryForm = function (
     }; setInterval(THIS.updateTime, 1000);
 
 
+    THIS.getFormData = function () (
+
+    );
+
     THIS.getElementsByClassName("JournalEntryTotal")[0].addEventListener('click', function () {
 
         let dateString = ''; { // set date string YYYY-MM-DD HH:MM:SS      ex: "2022-05-26 02:00:27"
