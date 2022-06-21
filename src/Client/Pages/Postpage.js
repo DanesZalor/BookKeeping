@@ -1,5 +1,5 @@
 import { Component } from "../Components/Component.js";
-import { APIRequest } from "../Commons.js";
+import { APIRequest } from "../Commons/APIRequest.js";
 import { JournalEntryForm } from "../Components/JournalEntryForm/JournalEntryForm.js";
 
 const Postpage = function () {

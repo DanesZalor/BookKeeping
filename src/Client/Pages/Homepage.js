@@ -4,7 +4,8 @@
  */
 
 import { Component } from "../Components/Component.js";
-import { APIRequest, $_GET } from "../Commons.js";
+import { APIRequest } from "../Commons/APIRequest.js";
+import { $_GET } from "../Commons/Php.js";
 import { EntryList } from "../Components/EntryList/EntryList.js";
 
 
