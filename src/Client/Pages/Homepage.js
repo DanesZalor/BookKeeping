@@ -45,17 +45,16 @@ const Homepage = function () {
         APIRequest('GET', 'api/entries/',
             { date_from: date_from.value + " 00:00:00", date_to: date_to.value + " 23:59:59" },
             (response) => {
-                console.log("response!");
-                entrylistholder.children[0].remove();
+
+                while (entrylistholder.children.length > 0) entrylistholder.children[0].remove();
                 entrylistholder.appendChild(new EntryList(JSON.parse(response)));
             }
         );
     };
 
-    APIRequest('GET', 'api/entries/', null,
-        (response) => {
-            entrylistholder.appendChild(new EntryList(JSON.parse(response)));
-        });
+    THIS.getElementsByClassName("QueryButton")[0].click();
+
+
 
     return THIS;
 };

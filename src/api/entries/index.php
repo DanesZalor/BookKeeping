@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $strdateto = convertToTimeStamp($_GET['date_to'], '2030-01-01 23:59:59');
     $strdatefrom = convertToTimeStamp($_GET['date_from'], '2000-01-01 00:00:00');
     
-    $querystr = "SELECT * FROM journalentry WHERE dateoftransaction BETWEEN '${strdatefrom}' AND '${strdateto}'";
+    $querystr = "SELECT * FROM journalentry WHERE dateoftransaction BETWEEN '${strdatefrom}' AND '${strdateto}' ORDER BY dateoftransaction ASC";
 
     $entries = db_query($querystr)->fetchAll(PDO::FETCH_ASSOC);
     
