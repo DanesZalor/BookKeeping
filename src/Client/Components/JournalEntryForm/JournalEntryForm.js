@@ -225,13 +225,10 @@ const JournalEntryForm = function (
     }; setInterval(THIS.updateTime, 1000);
 
 
-    THIS.getFormData = function () (
+    THIS.getFormData = function () {
 
-    );
-
-    THIS.getElementsByClassName("JournalEntryTotal")[0].addEventListener('click', function () {
-
-        let dateString = ''; { // set date string YYYY-MM-DD HH:MM:SS      ex: "2022-05-26 02:00:27"
+        let formData = {};
+        { // set date string YYYY-MM-DD HH:MM:SS      ex: "2022-05-26 02:00:27"
 
             let currDate = new Date();
 
@@ -244,27 +241,33 @@ const JournalEntryForm = function (
             date.m = date.m < 10 ? "0" + date.m : date.m;
             date.d = date.d < 10 ? "0" + date.d : date.d;
 
-            dateString = `${date.y}-${date.m}-${date.d} ${date.hr}:${date.mn}:${date.ss}`;
+            formData.dateString = `${date.y}-${date.m}-${date.d} ${date.hr}:${date.mn}:${date.ss}`;
         }
 
-        let rowsData = []; { // get rows and their data
+        formData.rows = []; { // get rows and their data
             for (let row of document.getElementsByClassName('JournalEntryRow')) {
                 let rd = row.getData();
-                rowsData.push({
+                formData.rows.push({
                     account: rd.accountTitle,
                     amount: rd.amount * (rd.isDebit ? 1 : -1)
                 });
             }
         }
 
-        let entrySummary = THIS.getElementsByClassName('JournalEntrySummary')[0].getValue();
+        formData.entrySummary = THIS.getElementsByClassName('JournalEntrySummary')[0].getValue();
 
+        return formData;
+    };
+
+    THIS.getElementsByClassName("JournalEntryTotal")[0].addEventListener('click', function () {
+
+        let formData = THIS.getFormData();
         // use dateString, rowsData, entrySummary to enter into the database
-        let printstr = `${dateString}\n`;
-        for (let rd of rowsData)
+        let printstr = formData.dateString + "\n";
+        for (let rd of formData.rows)
             printstr += `{${rd.account}, ${rd.amount}}\n`;
 
-        printstr += `Summary: ${summary}`;
+        printstr += `Summary: ${formData.entrySummary}`;
 
         alert(printstr);
     });
