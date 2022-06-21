@@ -15,6 +15,15 @@ const APIRequest = (
 
     let request = new XMLHttpRequest();
 
+    if (requestMethod == 'GET') { // if GET;transfer the body to the url
+        url += '?';
+
+        for (let key in body)
+            url += key + "=\"" + body[key] + "\"&";
+    }
+
+    //console.log(url);
+
     request.open(requestMethod, url);
     //request.setRequestHeader("Authorization", "Basic " + btoa(`${user.username}:${user.password}`));
     request.send(JSON.stringify(body));

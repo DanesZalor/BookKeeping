@@ -5,7 +5,8 @@
 /**
  *  GET|POST. because my javascript APICall function for some reason cannot send a request body with GET
  */
-if ($_SERVER['REQUEST_METHOD'] == "GET" || $_SERVER['REQUEST_METHOD'] == 'POST') {
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     
     $querystr = "SELECT * FROM journalentry";
 
@@ -28,8 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET" || $_SERVER['REQUEST_METHOD'] == 'POST')
         return "${pD['year']}-${pD['month']}-${pD['day']} ${pD['hour']}:${pD['minute']}:${pD['second']}";
     }
 
-    $strdateto = convertToTimeStamp($body->dateto, '2030-01-01 23:59:59');
-    $strdatefrom = convertToTimeStamp($body->datefrom, '2000-01-01 00:00:00');
+    $strdateto = convertToTimeStamp($_GET['date_to'], '2030-01-01 23:59:59');
+    $strdatefrom = convertToTimeStamp($_GET['date_from'], '2000-01-01 00:00:00');
     
     $querystr = "SELECT * FROM journalentry WHERE dateoftransaction BETWEEN '${strdatefrom}' AND '${strdateto}'";
 

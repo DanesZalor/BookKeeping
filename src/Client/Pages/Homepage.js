@@ -42,8 +42,8 @@ const Homepage = function () {
     THIS.getElementsByClassName("QueryButton")[0].onclick = function () {
 
         // have to use POST since GET methods doesnt send the body for some reason wtf?
-        APIRequest('POST', 'api/entries/',
-            { datefrom: date_from.value + " 00:00:00", dateto: date_to.value + " 23:59:59" },
+        APIRequest('GET', 'api/entries/',
+            { date_from: date_from.value + " 00:00:00", date_to: date_to.value + " 23:59:59" },
             (response) => {
                 console.log("response!");
                 entrylistholder.children[0].remove();
