@@ -97,45 +97,42 @@ const JournalEntryForm = function (
     } else throw `JournalEntry.constructor(data) shape mismatch ${data}`;
 
 
-    let THIS = new Component('form', {
+    let THIS = new Component('table', {
         innerHTML: `
-        <table>
-            <thead class="TableHeader">
-                <tr class="header1">
-                    <td class="DateDisplay">
-                        ${new Date().toLocaleString()}
-                    </td>
-                    <td class="CurrencyDisplay">${currency}</td>
-                </tr>
-                <tr class="header2">
-                    <td>Account Titles</td>
-                    <td>
-                        <table>
-                        <tr>
-                            <td> Debit </td>
-                            <td> Credit </td>
-                        </tr>
-                        </table>
-                    </td>
-                </tr>
-            </thead>
-            <tbody class="TableBody">
-                <!-- add rows here -->
-            </tbody>
-            <tbody class="TableFooter">
-                <tr class="JournalEntryFooter">
-                    <td class="JournalEntryTotalTD">
-                        <button disabled=true class="JournalEntryTotal" type="submit">
-                            <span>Total</span>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>`,
+        <thead class="TableHeader">
+            <tr class="header1">
+                <td class="DateDisplay">
+                    ${new Date().toLocaleString()}
+                </td>
+                <td class="CurrencyDisplay">${currency}</td>
+            </tr>
+            <tr class="header2">
+                <td>Account Titles</td>
+                <td>
+                    <table>
+                    <tr>
+                        <td> Debit </td>
+                        <td> Credit </td>
+                    </tr>
+                    </table>
+                </td>
+            </tr>
+        </thead>
+        <tbody class="TableBody">
+            <!-- add rows here -->
+        </tbody>
+        <tbody class="TableFooter">
+            <tr class="JournalEntryFooter">
+                <td class="JournalEntryTotalTD">
+                    <button disabled=true class="JournalEntryTotal" type="submit">
+                        <span>Total</span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+        `,
         className: "JournalEntryForm",
-        ContextMenu: null,
-        onsubmit: function () { return THIS.validate(); },
-        method: "post",
+        ContextMenu: null
     });
 
     // Adding journalEntrySummary component
@@ -174,10 +171,7 @@ const JournalEntryForm = function (
         return THIS.getElementsByClassName('TableBody')[0].children.length;
     };
 
-    THIS.removeRow = function (jeRow) {
-        console.log("removeRow");
-        jeRow.remove();
-    };
+    THIS.removeRow = function (jeRow) { jeRow.remove(); };
 
     THIS.validate = function () {
 
@@ -218,17 +212,22 @@ const JournalEntryForm = function (
 
     }; setTimeout(THIS.validate, 50);
 
-    THIS.updateTime = function () {
+    // update the clock every second
+    setInterval(function () {
         let timedisplay = THIS.getElementsByClassName('DateDisplay')[0];
         timedisplay.innerHTML = new Date().toLocaleString();
+    }, 1000);
 
-    }; setInterval(THIS.updateTime, 1000);
 
-
+    // returns an object {dateString: timestamp, rows: array, entrySummary: string}
     THIS.getFormData = function () {
 
-        let formData = {};
-        { // set date string YYYY-MM-DD HH:MM:SS      ex: "2022-05-26 02:00:27"
+        let formData = {
+            dateString: "", rows: [],
+            entrySummary: THIS.getElementsByClassName('JournalEntrySummary')[0].getValue()
+        };
+
+        { // set date string YYYY-MM-DD HH:MM:SS      ex: "2022-05-26 02:00:27" (preceding 0s dont matter diay)
 
             let currDate = new Date();
 
@@ -238,13 +237,10 @@ const JournalEntryForm = function (
                 mn: currDate.getMinutes(), ss: currDate.getSeconds(),
             };
 
-            date.m = date.m < 10 ? "0" + date.m : date.m;
-            date.d = date.d < 10 ? "0" + date.d : date.d;
-
             formData.dateString = `${date.y}-${date.m}-${date.d} ${date.hr}:${date.mn}:${date.ss}`;
         }
 
-        formData.rows = []; { // get rows and their data
+        { // get rows and their data
             for (let row of document.getElementsByClassName('JournalEntryRow')) {
                 let rd = row.getData();
                 formData.rows.push({
@@ -254,11 +250,10 @@ const JournalEntryForm = function (
             }
         }
 
-        formData.entrySummary = THIS.getElementsByClassName('JournalEntrySummary')[0].getValue();
-
         return formData;
     };
 
+    /*
     THIS.getElementsByClassName("JournalEntryTotal")[0].addEventListener('click', function () {
 
         let formData = THIS.getFormData();
@@ -270,10 +265,12 @@ const JournalEntryForm = function (
         printstr += `Summary: ${formData.entrySummary}`;
 
         alert(printstr);
-    });
+    });*/
 
     for (let i = 0; i < data.length; i++) // add rows and shit
         THIS.addRow(new JournalEntryRow(data[i].account, data[i].amount));
+
+    THIS.getButton = () => { return THIS.getElementsByClassName("JournalEntryTotal")[0]; };
 
     return THIS;
 };
