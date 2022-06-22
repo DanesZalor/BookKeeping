@@ -132,6 +132,9 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
        respond($errorResponse,406);
 
 }
+else if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
+    
+}
 else {
     respond("Invalid HTTP Method", 405);
 }

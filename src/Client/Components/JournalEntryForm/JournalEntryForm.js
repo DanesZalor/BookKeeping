@@ -244,7 +244,7 @@ const JournalEntryForm = function (
             for (let row of document.getElementsByClassName('JournalEntryRow')) {
                 let rd = row.getData();
                 formData.rows.push({
-                    account: rd.accountTitle,
+                    accounttitle: rd.accountTitle,
                     amount: rd.amount * (rd.isDebit ? 1 : -1)
                 });
             }
@@ -252,20 +252,6 @@ const JournalEntryForm = function (
 
         return formData;
     };
-
-    /*
-    THIS.getElementsByClassName("JournalEntryTotal")[0].addEventListener('click', function () {
-
-        let formData = THIS.getFormData();
-        // use dateString, rowsData, entrySummary to enter into the database
-        let printstr = formData.dateString + "\n";
-        for (let rd of formData.rows)
-            printstr += `{${rd.account}, ${rd.amount}}\n`;
-
-        printstr += `Summary: ${formData.entrySummary}`;
-
-        alert(printstr);
-    });*/
 
     for (let i = 0; i < data.length; i++) // add rows and shit
         THIS.addRow(new JournalEntryRow(data[i].account, data[i].amount));

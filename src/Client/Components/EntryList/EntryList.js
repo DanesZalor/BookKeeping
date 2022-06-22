@@ -35,12 +35,16 @@ const Entry = function (rows = [], date, summary) {
         Totals: { Debit: sums.dbt, Credit: sums.cdt },
     });
 
+    if (rows.length <= 0) {
+        THIS.remove();
+    }
     for (let row of rows)
         THIS.appendChild(new EntryRow(row.accounttitle, row.amount));
 
     // all #(EntryRow Debit) will be prepended
     for (let entryrow of THIS.getElementsByClassName("EntryRow Debit"))
         THIS.prepend(entryrow);
+
 
     THIS.getElementsByClassName('EntryRow')[0].getElementsByTagName('td')[0].innerHTML = date.replaceAll(" ", "<br/>");
 
@@ -78,10 +82,17 @@ const EntryList = function (data = []) {
         `,
     });
 
-    for (let dt of data)
-        THIS.appendChild(new Entry(
-            dt.rows, dt.dateoftransaction, dt.entrysummary
-        ));
+    let warnAlert = false; // some entries cannot be displayed
+    for (let dt of data) {
+        if (dt.rows.length > 0)
+            THIS.appendChild(new Entry(
+                dt.rows, dt.dateoftransaction, dt.entrysummary
+            ));
+        else warnAlert = true;
+    }
+
+    if (warnAlert) alert("WARNING: some entries in the database cannot be displayed due to invalid data");
+
 
     /*Add Footer*/{
         let sums = { dbt: 0, cdt: 0 }
