@@ -1,14 +1,14 @@
 <?php
+/**
+ * Even if you host it on a WLAN address (like 192.168.254.108). the database connection should still
+ * be at localhost since it is php doing the database connection and thus be executed in the server.
+ */
+$_SESSION['db_host'] = "localhost"; 
+$_SESSION['db_name'] = "ledger";
+$_SESSION['db_user'] = "djdols";
+$_SESSION['db_port'] = "5432";
+$_SESSION['db_pass'] = "";
 
-
-if ($_SERVER['SERVER_NAME'] == "localhost") {
-    $_SESSION['db_host'] = "localhost";
-    $_SESSION['db_name'] = "ledger";
-    $_SESSION['db_user'] = "djdols";
-    $_SESSION['db_port'] = "5432";
-    $_SESSION['db_pass'] = "";
-} else {
-}
 
 
 function db_query($statement, $fetch_mode = PDO::FETCH_DEFAULT)
