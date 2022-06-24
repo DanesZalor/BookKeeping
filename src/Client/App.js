@@ -1,68 +1,50 @@
 import { Component } from "./Components/Component.js";
 import { Homepage } from './Pages/Homepage.js';
 import { Postpage } from "./Pages/Postpage.js";
+import { Aboutpage } from "./Pages/Aboutpage.js";
+import { Page404 } from "./Pages/404page.js";
+
 
 /**
  * 
- * @param {{text:string to:string}} args 
- * @returns HTMLElement
+ * @param {array} args ex: {text:"home", to:"/", htmlObj: Component Constructor}
  */
-const Header = function (args = { text: "default", to: "/" }) {
-
-    const HeaderLink = function (text, to) {
-        return new Component('td', {
-            className: 'HeaderLink',
-            innerHTML: `<a href=${to}>${text}</a>`
-        });
-    }
-
+const PageRouter = function (args) {
     let THIS = new Component('div', {
-        className: 'Header',
+        className: 'PageRouter',
         innerHTML: `
-            <table>
-                <tr></tr>
-            </table>
+        <div class="PageHeader">
+            <table><tr class="linksRow"></tr></table>
+        </div>
+        <div class="PageRenderer">
+        </div>
         `,
     });
 
-    for (let obj of arguments)
-        THIS.appendChild(new HeaderLink(obj.text, obj.to));
+    let linskHolder = THIS.getElementsByClassName('linksRow')[0];
 
+    for (let arg of args) {
+        linskHolder.appendChild(
+            new Component('a', { href: arg.to, innerHTML: arg.text })
+        );
+    }
 
-    return THIS;
-};
+    let pageHolder = THIS.getElementsByClassName('PageRenderer')[0];
 
-
-const Switch = function () {
-    let THIS = new Component('div', {});
-
-    switch (location.pathname) {
-        case "/":
-            THIS.appendChild(new Homepage());
+    let pathfound = false
+    for (let arg of args) {
+        if (location.pathname == arg.to) {
+            pathfound = true;
+            pageHolder.appendChild(new arg.htmlObj());
             break;
-        case "/post":
-            THIS.appendChild(new Postpage());
-            break;
+        }
+    }
 
-        case "/about":
-            THIS.appendChild(new Component('div', {
-                innerHTML: `
-                <h1>About</h1>
-                <p> Some description about this web app </p>
-                `
-            }));
-            break;
-        default:
-            THIS.appendChild(new Component('div', {
-                innerHTML: `<h1>404 Page not found</h1>${location.pathname} not found in the server`,
-            }));
+    if (!pathfound) {
+        pageHolder.appendChild(new Page404());
     }
 
     return THIS;
-};
-
-const PageRouter = function (args) {
-
 };
 
 const App = function () {
@@ -71,19 +53,12 @@ const App = function () {
         className: 'App',
     });
 
-    THIS.appendChild(new Header(
-        { text: "home", to: "/" },
-        { text: "new+", to: "/post" },
-        { text: "about", to: "/about" },
-    ));
-
-    THIS.appendChild(new Switch());
-    /*
     THIS.appendChild(new PageRouter([
-        { name: "Home", to: "/", component: new Homepage() },
-        { name: "Home", to: "/", component: new Homepage() },
+        { text: "ledger", to: "/", htmlObj: Homepage },
+        { text: "new entry", to: "/post", htmlObj: Postpage },
+        { text: "About", to: "/about", htmlObj: Aboutpage },
     ]));
-    */
+
     return THIS;
 }
 
